@@ -1,0 +1,2 @@
+::1 - - [29/Mar/2021:08:45:57 +0000] "GET /rest/api/subapp/geo/countries HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"
+::1 - - [29/Mar/2021:08:45:58 +0000] "GET /rest/api/subapp/option/rdo_macrocategory HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"
