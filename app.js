@@ -1,5 +1,6 @@
 const express = require('express')
 const sgMail = require('@sendgrid/mail')
+const path = require('path')
 const loaders = require('./loaders')
 const config = require('./config')
 
@@ -8,6 +9,7 @@ sgMail.setApiKey(config.env.sendGridKey)
 const startServer = async () => {
   const app = express()
 
+  app.use(express.static(path.join(__dirname, '/dist/spa')))
   await loaders.init(app)
 
   app.listen(config.env.port, (err) => {
