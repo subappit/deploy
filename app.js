@@ -12,6 +12,10 @@ const startServer = async () => {
   app.use(express.static(path.join(__dirname, '/dist/spa')))
   await loaders.init(app)
 
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, './dist/spa', 'index.html'))
+  })
+
   app.listen(config.env.port, (err) => {
     if (err) {
       console.log(err)
