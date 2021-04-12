@@ -51,7 +51,7 @@ const rdoSchema = new Schema({
     default: false
   },
   reference: {
-    type: Number,
+    type: String,
     required: true
   },
   requiredDocuments: {

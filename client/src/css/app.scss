@@ -1,0 +1,40 @@
+// app global css in SCSS form
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.q-header .q-tabs .q-tab__indicator {
+  opacity: 0;
+}
+
+.q-footer {
+  .Cookie--base {
+    .Cookie__button {
+      background: $secondary;
+      border: 2px solid $secondary;
+      &:hover {
+        transition: 0.3s;
+        background: $accent;
+        border: 2px solid $accent;
+      }
+    }
+    .Cookie__button--decline {
+      border: 2px solid $negative;
+      color: $negative;
+      &:hover {
+        cursor: pointer;
+        transition: 0.3s;
+        background: $negative;
+        color: #fff;
+      }
+    }
+  }
+
+}

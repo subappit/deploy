@@ -3,43 +3,47 @@ const route = require('express').Router()
 
 const multer = require('multer')
 const { v4: uuidv4 } = require('uuid')
-const path = require('path')
+const AWS = require('aws-sdk')
 const userController = require('../controllers/user')
 const isAuth = require('../middleware/is-auth')
+const config = require('../../config')
 
-const fileStorage = multer.diskStorage({
+const s3 = new AWS.S3({
+  accessKeyId: config.env.AWS_ID,
+  secretAccessKey: config.env.AWS_SECRET
+})
+
+const fileStorage = multer.memoryStorage({
   destination: (req, file, cb) => {
-    cb(null, './public/uploads')
-  },
-  filename: (req, file, cb) => {
-    if (file.originalname === 'images') {
-      cb(null, `${uuidv4()}.png`)
-    } else {
-      cb(null, `${uuidv4()}.pdf`)
-    }
+    cb(null, '')
   }
 })
 
-const fileFilter = (req, file, callback) => {
-  const ext = path.extname(file.originalname)
-  if (ext !== '.png' && ext !== '.jpg' && ext !== '.pdf' && ext !== '.jpeg') {
-    return callback(new Error('Formato file non supportato!'))
-  }
-  callback(null, true)
-}
-
-const multerUploader = multer({ storage: fileStorage, filter: fileFilter })
+const multerUploader = multer({ storage: fileStorage })
 const upload = multerUploader.array('file')
 
-route.post('/upload', (req, res) => {
-  upload(req, res, (err) => {
-    if (err instanceof multer.MulterError) {
-      console.log(err)
-    } else if (err) {
-      console.log(err)
+route.post('/upload', upload, async (req, res) => {
+  const files = []
+  // eslint-disable-next-line no-restricted-syntax
+  for (const file of req.files) {
+    const myFile = file.originalname.split('.')
+    const fileType = myFile[myFile.length - 1]
+    const params = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: `${uuidv4()}.${fileType}`,
+      Body: file.buffer
     }
-    return res.send(req.files)
-  })
+
+    try {
+      // eslint-disable-next-line no-await-in-loop
+      const data = await s3.upload(params).promise()
+      files.push(data)
+    } catch (err) {
+      console.log(err)
+      throw err
+    }
+  }
+  res.status(200).json({ files })
 })
 
 route.get('/all', isAuth, userController.fetchUsers)

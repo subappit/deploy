@@ -14,5 +14,8 @@ exports.env = {
   sendGridKey: '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',
   api: {
     prefix: '/rest/api/subapp'
-  }
+  },
+  AWS_ID: process.env.AWS_ID,
+  AWS_SECRET: process.env.AWS_SECRET,
+  AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME
 }

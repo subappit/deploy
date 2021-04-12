@@ -14,11 +14,5 @@ module.exports = () => {
   app.use('/email', emailRoute)
   app.use('/board', boardRoute)
 
-  /// catch 404 and forward to error handler
-  app.use((req, res, next) => {
-    const err = new Error('Not Found')
-    next(err)
-  })
-
   return app
 }

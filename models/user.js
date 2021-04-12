@@ -35,12 +35,18 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  /*
+  legalForm: {
+    type: String,
+    required: true
+  },
+  */
   SDICode: {
     type: String,
     required: true
   },
   vatNumber: {
-    type: Number,
+    type: String,
     required: true
   },
   fiscalCode: {
@@ -52,7 +58,7 @@ const userSchema = new Schema({
     required: true
   },
   postalCode: {
-    type: Number,
+    type: String,
     required: true
   },
   webSite: {
@@ -64,7 +70,7 @@ const userSchema = new Schema({
     required: true
   },
   telephoneNumber: {
-    type: Number,
+    type: String,
     required: true
   },
   rdos: {
@@ -136,10 +142,12 @@ const userSchema = new Schema({
     type: Date,
     default: null
   },
-  companyCategory: {
-    type: String,
-    required: true
-  },
+  /*
+ companyCategory: {
+   type: String,
+   required: true
+ },
+ */
   loadedRdos: {
     type: Array
   }
