@@ -1,8 +1,8 @@
 {
   "name": "subapp",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "description": "Concludi il tuo affare!",
+  "productName": "Subapp",
   "author": "antoda",
   "private": true,
   "scripts": {

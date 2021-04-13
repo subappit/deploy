@@ -352,11 +352,11 @@
             <q-tr :props="props">
               <q-td  key="description" :props="props">
                 <div>
-                  {{ props.row.file.originalname }} <span v-if="props.row.file.index != null"> n. {{ props.row.file.index+1 }}</span>
+                  {{ props.row.file.Key.split('.')[1] }} <span v-if="props.row.file.index != null"> n. {{ props.row.file.index+1 }}</span>
                 </div>
               </q-td>
               <q-td key="download" :props="props" >
-                <q-icon v-if="props.row.file.path" class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem" @click="downloadFile(props.row.file.path)"></q-icon>  </q-td>
+                <q-icon v-if="props.row.file.Key" class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem" @click="downloadFile(props.row.file.Key)"></q-icon>  </q-td>
             </q-tr>
           </template>
         </q-table>
@@ -443,7 +443,8 @@ export default {
       'createRdo',
       'uploadFile',
       'fetchRdos',
-      'sendMail'
+      'sendMail',
+      'fetchFile'
     ]),
     getData () {
       if (this.data.length > 0) this.data = []
@@ -626,9 +627,12 @@ export default {
       })
       return array
     },
-    downloadFile (path) {
-      const rootPath = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : '/'
-      window.open(rootPath + path)
+    async downloadFile (key) {
+      const obj = {
+        pathParam: key
+      }
+      const data = await this.fetchFile(obj)
+      window.open(data.url)
     }
   },
   computed: {

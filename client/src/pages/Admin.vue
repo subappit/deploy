@@ -163,7 +163,7 @@ export default {
         { name: 'isoFile', label: 'Iso File', align: 'center' },
         { name: 'fgasFile', label: 'FGas File', align: 'center' },
         { name: 'antimafiaFile', required: true, label: 'Antimafia File', align: 'center' },
-        { name: 'lendingFile', required: true, label: 'Prestazione File', align: 'center' },
+        { name: 'lendingFile', required: true, label: 'Presentazione File', align: 'center' },
         { name: 'certificateFile', required: true, label: 'Certificato o Visura Camerale File', align: 'center' },
         { name: 'durcRegolarityFile', required: true, label: 'Regolarità Durc File', align: 'center' },
         { name: 'delete', required: true, label: 'Elimina', align: 'center' }

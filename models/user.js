@@ -99,7 +99,7 @@ const userSchema = new Schema({
     required: true
   },
   lendingFile: {
-    type: Object, // prestazione
+    type: Object, // presentazione
     required: true
   },
   certificateFile: {

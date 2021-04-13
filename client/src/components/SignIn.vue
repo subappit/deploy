@@ -520,7 +520,7 @@
             </template>
           </q-input>
           <div class="desktop-only col-12 col-md-4"></div>
-          <div v-if="isEditing" class=" col-12 col-md-9 q-pt-md row">
+          <div v-if="false" class=" col-12 col-md-9 q-pt-md row">
             <div class="col-12 company-category">
               <div>
                 Ai sensi dell’art. 3 – aa, Decreto Legislativo n. 50/2016 e s.m.i., appartiene alla categoria:
@@ -570,7 +570,7 @@
               <q-radio dense v-model="termAndCondition" val="false" label="Non Accetto" />
             </div>
           </div>
-          <div class="col-12 col-md-9 q-pt-md">
+          <div v-if="false" class="col-12 col-md-9 q-pt-md">
             Ai sensi dell’art. 46 del D.P.R. 28 dicembre 2000 n. 445, la Ditta, consapevole delle sanzioni penali, previste dall’art. 76 del D.P.R. n. 445/2000, per le ipotesi di falsità in atti e dichiarazioni mendaci ivi indicate, dichiara:
             <ul>
               <li>di non trovarsi nelle condizioni previste dall’art. 80 del Decreto Legislativo 18 aprile 2016 n. 50 e s.m.i.</li>
@@ -756,7 +756,7 @@ export default {
         this.fgasFile = new File([''], 'Fgas')
       }
       this.antimafiaFile = new File([''], 'Antimafia')
-      this.lendingFile = new File([''], 'Prestazione')
+      this.lendingFile = new File([''], 'Presentazione')
       this.certificateFile = new File([''], 'Visura Camerale')
       this.durcRegolarityFile = new File([''], 'Durc')
     },
@@ -832,54 +832,55 @@ export default {
       if (this.antimafiaFile.size > 0) {
         formData.append('file', this.antimafiaFile, `antimafiaFile.${this.antimafiaFile.name.split('.')[1]}`)
         needUploadFile = true
-        if (this.isEditing && this.user.antimafiaFile && this.user.antimafiaFile.path) {
+        if (this.isEditing && this.user.antimafiaFile && this.user.antimafiaFile.Key) {
           fileToRemove.push(this.user.antimafiaFile.Key)
         }
       }
       if (this.lendingFile.size > 0) {
         formData.append('file', this.lendingFile, `lendingFile.${this.lendingFile.name.split('.')[1]}`)
         needUploadFile = true
-        if (this.isEditing && this.user.lendingFile && this.user.lendingFile.path) {
+        if (this.isEditing && this.user.lendingFile && this.user.lendingFile.Key) {
           fileToRemove.push(this.user.lendingFile.Key)
         }
       }
       if (this.certificateFile.size > 0) {
         formData.append('file', this.certificateFile, `certificateFile.${this.certificateFile.name.split('.')[1]}`)
         needUploadFile = true
-        if (this.isEditing && this.user.certificateFile && this.user.certificateFile.path) {
+        if (this.isEditing && this.user.certificateFile && this.user.certificateFile.Key) {
           fileToRemove.push(this.user.certificateFile.Key)
         }
       }
       if (this.durcRegolarityFile.size > 0) {
         formData.append('file', this.durcRegolarityFile, `durcRegolarityFile.${this.durcRegolarityFile.name.split('.')[1]}`)
         needUploadFile = true
-        if (this.isEditing && this.user.durcRegolarityFile && this.user.durcRegolarityFile.path) {
+        if (this.isEditing && this.user.durcRegolarityFile && this.user.durcRegolarityFile.Key) {
           fileToRemove.push(this.user.durcRegolarityFile.Key)
         }
       }
       if (this.soaFile && this.soaFile.size > 0) {
         formData.append('file', this.soaFile, `soaFile.${this.soaFile.name.split('.')[1]}`)
         needUploadFile = true
-        if (this.isEditing && this.user.soaFile && this.user.soaFile.path) {
+        if (this.isEditing && this.user.soaFile && this.user.soaFile.Key) {
           fileToRemove.push(this.user.soaFile.Key)
         }
       }
       if (this.isoFile && this.isoFile.size > 0) {
         formData.append('file', this.isoFile, `isoFile.${this.isoFile.name.split('.')[1]}`)
         needUploadFile = true
-        if (this.isEditing && this.user.isoFile && this.user.isoFile.path) {
+        if (this.isEditing && this.user.isoFile && this.user.isoFile.Key) {
           fileToRemove.push(this.user.isoFile.Key)
         }
       }
       if (this.fgasFile && this.fgasFile.size > 0) {
         formData.append('file', this.fgasFile, `fgasFile.${this.fgasFile.name.split('.')[1]}`)
         needUploadFile = true
-        if (this.isEditing && this.user.fgasFile && this.user.fgasFile.path) {
+        if (this.isEditing && this.user.fgasFile && this.user.fgasFile.Key) {
           fileToRemove.push(this.user.fgasFile.Key)
         }
       }
       if (needUploadFile) {
         if (fileToRemove.length > 0) {
+          console.log('filetoRemove', fileToRemove)
           const obj = {
             pathParam: this.user._id,
             body: fileToRemove

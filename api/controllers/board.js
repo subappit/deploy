@@ -109,12 +109,12 @@ exports.deleteRdo = (req, res, next) => {
                 error.statusCode = 500
                 throw error
             }
-            clearFile(rdo.cmeFile.path)
+            clearFile(rdo.cmeFile.Key)
             rdo.images.forEach((image) => {
-                clearFile(image.path)
+                clearFile(image.Key)
             })
             rdo.technicalFiles.forEach((techFile) => {
-                clearFile(techFile.path)
+                clearFile(techFile.Key)
             })
             return Rdo.findByIdAndRemove(rdoId)
         })
