@@ -833,49 +833,49 @@ export default {
         formData.append('file', this.antimafiaFile, `antimafiaFile.${this.antimafiaFile.name.split('.')[1]}`)
         needUploadFile = true
         if (this.isEditing && this.user.antimafiaFile && this.user.antimafiaFile.path) {
-          fileToRemove.push(this.user.antimafiaFile.path)
+          fileToRemove.push(this.user.antimafiaFile.Key)
         }
       }
       if (this.lendingFile.size > 0) {
         formData.append('file', this.lendingFile, `lendingFile.${this.lendingFile.name.split('.')[1]}`)
         needUploadFile = true
         if (this.isEditing && this.user.lendingFile && this.user.lendingFile.path) {
-          fileToRemove.push(this.user.lendingFile.path)
+          fileToRemove.push(this.user.lendingFile.Key)
         }
       }
       if (this.certificateFile.size > 0) {
         formData.append('file', this.certificateFile, `certificateFile.${this.certificateFile.name.split('.')[1]}`)
         needUploadFile = true
         if (this.isEditing && this.user.certificateFile && this.user.certificateFile.path) {
-          fileToRemove.push(this.user.certificateFile.path)
+          fileToRemove.push(this.user.certificateFile.Key)
         }
       }
       if (this.durcRegolarityFile.size > 0) {
         formData.append('file', this.durcRegolarityFile, `durcRegolarityFile.${this.durcRegolarityFile.name.split('.')[1]}`)
         needUploadFile = true
         if (this.isEditing && this.user.durcRegolarityFile && this.user.durcRegolarityFile.path) {
-          fileToRemove.push(this.user.durcRegolarityFile.path)
+          fileToRemove.push(this.user.durcRegolarityFile.Key)
         }
       }
       if (this.soaFile && this.soaFile.size > 0) {
         formData.append('file', this.soaFile, `soaFile.${this.soaFile.name.split('.')[1]}`)
         needUploadFile = true
         if (this.isEditing && this.user.soaFile && this.user.soaFile.path) {
-          fileToRemove.push(this.user.soaFile.path)
+          fileToRemove.push(this.user.soaFile.Key)
         }
       }
       if (this.isoFile && this.isoFile.size > 0) {
         formData.append('file', this.isoFile, `isoFile.${this.isoFile.name.split('.')[1]}`)
         needUploadFile = true
         if (this.isEditing && this.user.isoFile && this.user.isoFile.path) {
-          fileToRemove.push(this.user.isoFile.path)
+          fileToRemove.push(this.user.isoFile.Key)
         }
       }
       if (this.fgasFile && this.fgasFile.size > 0) {
         formData.append('file', this.fgasFile, `fgasFile.${this.fgasFile.name.split('.')[1]}`)
         needUploadFile = true
         if (this.isEditing && this.user.fgasFile && this.user.fgasFile.path) {
-          fileToRemove.push(this.user.fgasFile.path)
+          fileToRemove.push(this.user.fgasFile.Key)
         }
       }
       if (needUploadFile) {
