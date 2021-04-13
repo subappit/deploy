@@ -31,25 +31,25 @@ const update = (req, res, next, loggedIn) => {
 
 const clearAllFile = (user) => {
   if (user.soaFile) {
-    clearFile(user.soaFile.path)
+    clearFile(user.soaFile.Key, s3)
   }
   if (user.isoFile) {
-    clearFile(user.isoFile.path)
+    clearFile(user.isoFile.Key, s3)
   }
   if (user.fgasFile) {
-    clearFile(user.fgasFile.path)
+    clearFile(user.fgasFile.Key, s3)
   }
   if (user.antimafiaFile) {
-    clearFile(user.antimafiaFile.path)
+    clearFile(user.antimafiaFile.Key, s3)
   }
   if (user.lendingFile) {
-    clearFile(user.lendingFile.path)
+    clearFile(user.lendingFile.Key, s3)
   }
   if (user.certificateFile) {
-    clearFile(user.certificateFile.path)
+    clearFile(user.certificateFile.Key, s3)
   }
   if (user.durcRegolarityFile) {
-    clearFile(user.durcRegolarityFile.path)
+    clearFile(user.durcRegolarityFile.Key, s3)
   }
 }
 
