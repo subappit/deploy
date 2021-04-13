@@ -36,7 +36,7 @@ exports.signup = (req, res, next) => {
           // TODO inviare mail a tutino dicendo di riprovare a inviare la mail a questo utente.
           console.error(error)
         })
-      res.status(200).json({ message: 'Ci siamo quasi! Controlla la mail per scoprire i prossimi passi da seguire per completare la registrazione.', user })
+      res.status(200).json({ user })
     })
     .catch((err) => {
       if (!err.statusCode) {

@@ -204,6 +204,10 @@ export default {
     },
     signupSuccess () {
       setTimeout(() => {
+        this.$q.notify({
+          type: 'positive',
+          message: 'Ci siamo quasi! Controlla la mail per scoprire i prossimi passi da seguire per completare la registrazione.'
+        })
         this.openModal('login', 'accedi', false, this.loginClassObj, false)
       }, 1000)
     },

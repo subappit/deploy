@@ -3,4 +3,7 @@
 
 /.idea/
 
+/dist/
+
+
 .eslintrc.js

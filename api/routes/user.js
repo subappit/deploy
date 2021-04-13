@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable */
 const route = require('express').Router()
 
 const multer = require('multer')
@@ -24,18 +24,16 @@ const upload = multerUploader.array('file')
 
 route.post('/upload', upload, async (req, res) => {
   const files = []
-  // eslint-disable-next-line no-restricted-syntax
   for (const file of req.files) {
     const myFile = file.originalname.split('.')
     const fileType = myFile[myFile.length - 1]
     const params = {
       Bucket: process.env.AWS_BUCKET_NAME,
-      Key: `${uuidv4()}.${fileType}`,
+      Key: `${uuidv4()}.${myFile[0]}.${fileType}`,
       Body: file.buffer
     }
 
     try {
-      // eslint-disable-next-line no-await-in-loop
       const data = await s3.upload(params).promise()
       files.push(data)
     } catch (err) {
