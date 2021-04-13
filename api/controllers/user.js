@@ -2,6 +2,15 @@
 const User = require('../../models/user')
 const { clearFile } = require('../../utils/utils')
 const Rdo = require('../../models/rdo')
+const AWS = require('aws-sdk')
+const config = require('../../config')
+
+const s3 = new AWS.S3({
+  accessKeyId: config.env.AWS_ID,
+  secretAccessKey: config.env.AWS_SECRET,
+  signatureVersion: 'v4',
+  region: 'eu-west-3'
+})
 
 const update = (req, res, next, loggedIn) => {
   const { userId } = req.params
@@ -137,4 +146,18 @@ exports.deleteUserFiles = (req, res, next) => {
       }
       next(err)
     })
+}
+
+exports.getFile = async (req, res, next) => {
+  const { fileId } = req.params
+   const url = await s3.getSignedUrl('getObject', {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: fileId
+  })
+  if(!url){
+    const error = new Error('Impossibile trovare il file.')
+    error.statusCode = 500
+    throw error
+  }
+  res.status(200).json({url})
 }

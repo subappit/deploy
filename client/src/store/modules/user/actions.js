@@ -30,5 +30,9 @@ export default {
   async deleteUser ({ commit }, { pathParam }) {
     const { data } = await UserService.delete('/' + pathParam)
     return data
+  },
+  async fetchFile ({ commit }, { pathParam }) {
+    const { data } = await UserService.get('/file/' + pathParam)
+    return data
   }
 }

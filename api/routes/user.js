@@ -10,7 +10,9 @@ const config = require('../../config')
 
 const s3 = new AWS.S3({
   accessKeyId: config.env.AWS_ID,
-  secretAccessKey: config.env.AWS_SECRET
+  secretAccessKey: config.env.AWS_SECRET,
+  signatureVersion: 'v4',
+  region: 'eu-west-3'
 })
 
 const fileStorage = multer.memoryStorage({
@@ -50,5 +52,6 @@ route.post('/:userId', userController.updateRegisteringUser) // l'unica route se
 route.get('/:userId', isAuth, userController.fetchUser)
 route.delete('/:userId', isAuth, userController.deleteUser)
 route.post('/:userId/deletefiles', isAuth, userController.deleteUserFiles)
+route.get('/file/:fileId', isAuth, userController.getFile)
 
 module.exports = route

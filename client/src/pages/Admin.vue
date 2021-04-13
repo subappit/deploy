@@ -61,33 +61,33 @@
             <q-btn push class="bg-secondary text-white" :disable="props.row.user.payed"  @click="openConfirmDialog(props.row.user,'Sicuro di voler attivare l\'abbonamento di due anni?', confirmUser, undefined, 2)">Attiva</q-btn>
           </q-td>
           <q-td  key="soaFile" :props="props">
-            <q-icon v-if="props.row.user.soaFile" class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem" @click="downloadFile(props.row.user.soaFile.Location)"></q-icon>
+            <q-icon v-if="props.row.user.soaFile" class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem" @click="downloadFile(props.row.user.soaFile.Key)"></q-icon>
             <q-icon class="text-negative" v-else name="remove"></q-icon>
           </q-td>
           <q-td  key="isoFile" :props="props" >
-            <q-icon v-if="props.row.user.isoFile" class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem" @click="downloadFile(props.row.user.isoFile.Location)"></q-icon>
+            <q-icon v-if="props.row.user.isoFile" class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem" @click="downloadFile(props.row.user.isoFile.Key)"></q-icon>
             <q-icon class="text-negative" v-else name="remove"></q-icon>
           </q-td>
           <q-td  key="fgasFile" :props="props">
-            <q-icon v-if="props.row.user.fgasFile" class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem" @click="downloadFile(props.row.user.fgasFile.Location)"></q-icon>
+            <q-icon v-if="props.row.user.fgasFile" class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem" @click="downloadFile(props.row.user.fgasFile.Key)"></q-icon>
             <q-icon class="text-negative" v-else name="remove"></q-icon>
           </q-td>
           <q-td  key="antimafiaFile" :props="props" v-if="props.row.user.antimafiaFile">
-            <q-icon class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem" @click="downloadFile(props.row.user.antimafiaFile.Location)"></q-icon>
+            <q-icon class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem" @click="downloadFile(props.row.user.antimafiaFile.Key)"></q-icon>
           </q-td>
           <q-td  key="lendingFile" :props="props" v-if="props.row.user.lendingFile">
-            <q-icon class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem" @click="downloadFile(props.row.user.lendingFile.Location)"></q-icon>
+            <q-icon class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem" @click="downloadFile(props.row.user.lendingFile.Key)"></q-icon>
           </q-td>
           <q-td  key="certificateFile" :props="props" v-if="props.row.user.certificateFile">
             <div class="flex column items-center full-width" >
               <div class="text-negative text-center" style="font-weight: bold;">{{getDaysLeftToEndFile(props.row.user.certificateDate, props.row.user)}}</div>
-              <q-icon class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem;" @click="downloadFile(props.row.user.certificateFile.Location)"></q-icon>
+              <q-icon class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem;" @click="downloadFile(props.row.user.certificateFile.Key)"></q-icon>
             </div>
           </q-td>
           <q-td  key="durcRegolarityFile" :props="props" v-if="props.row.user.durcRegolarityFile">
             <div class="flex column items-center full-width" >
               <div class="text-negative text-center" style="font-weight: bold;">{{getDaysLeftToEndFile(props.row.user.durcRegolarityDate, props.row.user)}}</div>
-              <q-icon class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem;" @click="downloadFile(props.row.user.durcRegolarityFile.Location)"></q-icon>
+              <q-icon class="text-accent cursor-pointer" name="file_download" style="font-size: 2rem;" @click="downloadFile(props.row.user.durcRegolarityFile.Key)"></q-icon>
             </div>
           </q-td>
           <q-td key="delete" :props="props" >
@@ -182,7 +182,8 @@ export default {
     ...mapActions([
       'fetchUsers',
       'updateLoggedUser',
-      'deleteUser'
+      'deleteUser',
+      'fetchFile'
     ]),
     async editSelectedUserSuccess () {
       await this.loadUsers()
@@ -218,8 +219,12 @@ export default {
       this.selectedUser = user
       this.openModal('sign-in', 'MODIFICA UTENTE - VISTA ADMIN', true, this.viewProfileClassObj, true)
     },
-    downloadFile (path) {
-      window.open(path)
+    async downloadFile (key) {
+      const obj = {
+        pathParam: key
+      }
+      const data = await this.fetchFile(obj)
+      window.open(data.url)
     },
     confirmUser (user) {
       if (user) {
