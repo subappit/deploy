@@ -579,7 +579,7 @@
               <li>di conoscere i limiti previsti dalla disciplina del subappalto</li>
             </ul>
           </div>
-          <div class="col-12 col-md-9 q-pb-md">
+          <div v-if="false" class="col-12 col-md-9 q-pb-md">
             <div class="q-gutter-sm">
               <q-radio dense v-model="compDeclaration" val="true" label="Si" />
               <q-radio dense v-model="compDeclaration" val="false" label="No" />
@@ -608,7 +608,7 @@
             <q-btn v-if="step > 1" flat color="primary" @click="$refs.stepper.previous()" label="Indietro" class="q-ml-sm" />
           </div>
           <div>
-            <q-btn type="submit" :disable="(termAndCondition === 'false' || regulation === 'false' || compDeclaration !== 'true') && step === 3"
+            <q-btn type="submit" :disable="(termAndCondition === 'false' || regulation === 'false') && step === 3"
                    color="primary" :label="getBtnLabel" />
           </div>
         </q-stepper-navigation>
