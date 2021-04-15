@@ -29,27 +29,38 @@ const update = (req, res, next, loggedIn) => {
     })
 }
 
-const clearAllFile = (user) => {
+const clearAllFile = async (user) => {
   if (user.soaFile) {
-    clearFile(user.soaFile.Key)
+    await clearFile(user.soaFile.Key)
   }
   if (user.isoFile) {
-    clearFile(user.isoFile.Key)
+    await clearFile(user.isoFile.Key)
   }
   if (user.fgasFile) {
-    clearFile(user.fgasFile.Key)
+    await clearFile(user.fgasFile.Key)
   }
   if (user.antimafiaFile) {
-    clearFile(user.antimafiaFile.Key)
+    await clearFile(user.antimafiaFile.Key)
   }
   if (user.lendingFile) {
-    clearFile(user.lendingFile.Key)
+    await clearFile(user.lendingFile.Key)
   }
   if (user.certificateFile) {
-    clearFile(user.certificateFile.Key)
+    await clearFile(user.certificateFile.Key)
   }
   if (user.durcRegolarityFile) {
-    clearFile(user.durcRegolarityFile.Key)
+    await clearFile(user.durcRegolarityFile.Key)
+  }
+  if(user.loadedRdos.length > 0) {
+    for(let rdo of user.loadedRdos) {
+      await clearFile(rdo.cmeFile.Key)
+      for (let image of  rdo.images ) {
+        await clearFile(image.Key)
+      }
+      for (let technicalFile of rdo.technicalFiles ) {
+        await clearFile(technicalFile.Key)
+      }
+    }
   }
 }
 
