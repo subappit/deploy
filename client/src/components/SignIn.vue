@@ -830,49 +830,63 @@ export default {
       let needUploadFile = false
       const fileToRemove = []
       if (this.antimafiaFile.size > 0) {
-        formData.append('file', this.antimafiaFile, `antimafiaFile.${this.antimafiaFile.name.split('.')[1]}`)
+        const antimafiaFileSlipt = this.antimafiaFile.name.split('.')
+        const antimafiaFileType = antimafiaFileSlipt[antimafiaFileSlipt.length - 1]
+        formData.append('file', this.antimafiaFile, `antimafiaFile.${antimafiaFileType}`)
         needUploadFile = true
         if (this.isEditing && this.user.antimafiaFile && this.user.antimafiaFile.Key) {
           fileToRemove.push(this.user.antimafiaFile.Key)
         }
       }
       if (this.lendingFile.size > 0) {
-        formData.append('file', this.lendingFile, `lendingFile.${this.lendingFile.name.split('.')[1]}`)
+        const lendingFileSlipt = this.lendingFile.name.split('.')
+        const lendingFileType = lendingFileSlipt[lendingFileSlipt.length - 1]
+        formData.append('file', this.lendingFile, `lendingFile.${lendingFileType}`)
         needUploadFile = true
         if (this.isEditing && this.user.lendingFile && this.user.lendingFile.Key) {
           fileToRemove.push(this.user.lendingFile.Key)
         }
       }
       if (this.certificateFile.size > 0) {
-        formData.append('file', this.certificateFile, `certificateFile.${this.certificateFile.name.split('.')[1]}`)
+        const certificateFileSlipt = this.certificateFile.name.split('.')
+        const certificateFileType = certificateFileSlipt[certificateFileSlipt.length - 1]
+        formData.append('file', this.certificateFile, `certificateFile.${certificateFileType}`)
         needUploadFile = true
         if (this.isEditing && this.user.certificateFile && this.user.certificateFile.Key) {
           fileToRemove.push(this.user.certificateFile.Key)
         }
       }
       if (this.durcRegolarityFile.size > 0) {
-        formData.append('file', this.durcRegolarityFile, `durcRegolarityFile.${this.durcRegolarityFile.name.split('.')[1]}`)
+        const durcRegolarityFileSlipt = this.durcRegolarityFile.name.split('.')
+        const durcRegolarityFileType = durcRegolarityFileSlipt[durcRegolarityFileSlipt.length - 1]
+        formData.append('file', this.durcRegolarityFile, `durcRegolarityFile.${durcRegolarityFileType}`)
         needUploadFile = true
         if (this.isEditing && this.user.durcRegolarityFile && this.user.durcRegolarityFile.Key) {
           fileToRemove.push(this.user.durcRegolarityFile.Key)
         }
       }
       if (this.soaFile && this.soaFile.size > 0) {
-        formData.append('file', this.soaFile, `soaFile.${this.soaFile.name.split('.')[1]}`)
+        const soaFileSlipt = this.soaFile.name.split('.')
+        const soaFileType = soaFileSlipt[soaFileSlipt.length - 1]
+        formData.append('file', this.soaFile, `soaFile.${soaFileType}`)
         needUploadFile = true
         if (this.isEditing && this.user.soaFile && this.user.soaFile.Key) {
           fileToRemove.push(this.user.soaFile.Key)
         }
       }
       if (this.isoFile && this.isoFile.size > 0) {
-        formData.append('file', this.isoFile, `isoFile.${this.isoFile.name.split('.')[1]}`)
+        const isoFileSlipt = this.isoFile.name.split('.')
+        const isoFileType = isoFileSlipt[isoFileSlipt.length - 1]
+        formData.append('file', this.isoFile, `isoFile.${isoFileType}`)
         needUploadFile = true
         if (this.isEditing && this.user.isoFile && this.user.isoFile.Key) {
           fileToRemove.push(this.user.isoFile.Key)
         }
       }
       if (this.fgasFile && this.fgasFile.size > 0) {
-        formData.append('file', this.fgasFile, `fgasFile.${this.fgasFile.name.split('.')[1]}`)
+        const fgasFileSlipt = this.fgasFile.name.split('.')
+        const fgasFileType = fgasFileSlipt[fgasFileSlipt.length - 1]
+        formData.append('file', this.fgasFile, `fgasFile.${fgasFileType}`)
         needUploadFile = true
         if (this.isEditing && this.user.fgasFile && this.user.fgasFile.Key) {
           fileToRemove.push(this.user.fgasFile.Key)

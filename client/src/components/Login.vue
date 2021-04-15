@@ -24,7 +24,7 @@
           />
         </template>
       </q-input>
-      <div>
+      <div class="q-mt-lg q-pt-lg">
         <q-btn push
                :ripple="false"
                class="full-width"
