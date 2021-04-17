@@ -17,8 +17,6 @@ export default class user {
     this.pec = ''
     this.telephoneNumber = ''
     this.rdos = []
-    this.imports = []
-    this.regionsOfInterest = []
     this.soaFile = {}
     this.isoFile = {}
     this.fgasFile = {}
@@ -32,7 +30,6 @@ export default class user {
     this.biennial = false
     this.subscriptionDate = null
     this.blocked = false
-    this.companyCategory = ''
     this.loadedRdos = []
   }
 }

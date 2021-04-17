@@ -61,21 +61,7 @@
                    class="col-12 col-md-3"
                    reactive-rules name="pec"
                    :rules="[ (val) => isValid('pec', val, $v.user) ]" />
-<!--
-          <q-select v-model="user.legalForm"
-                    :options="legalFormOptions"
-                    name="legalForm"
-                    :disable="isEditing && !isAdmin"
-                    outlined
-                    class="col-12 col-md-3"
-                    option-dense
-                    label="Forma Giuridica *"
-                    reactive-rules
-                    :rules="[ (val) => isValid('legalForm', val, $v.user) ]"
-                    transition-show="scale"
-                    transition-hide="scale"
-          />
--->
+
           <q-input v-model="user.companyName"
                    outlined
                    type="text"
@@ -318,10 +304,9 @@
           <!--riga-->
           <q-select @input="getCatRdoOption"
                     class="col-12 col-md-3 order-8"
-                    multiple
                     use-chips
                     outlined option-dense
-                    v-model="rdosMacrocategories"
+                    v-model="firstRdosMacrocategory"
                     :options="macroRdo" option-label="description"
                     label="Macrocategoria"
                     name="macrocategory"
@@ -330,17 +315,17 @@
                     emit-value
                     map-options
                     reactive-rules
-                    :rules="[ (val) => isValid('rdosMacrocategories', val, $v) ]"
+                    :rules="[ (val) => isValid('firstRdosMacrocategory', val, $v) ]"
           />
 
           <q-select @input="getSubcatRdoOption"
                     class="col-12 col-md-3 order-9"
-                    :disable="!rdosMacrocategories.length>0"
-                    :readonly="!rdosMacrocategories.length>0"
+                    :disable="!firstRdosMacrocategory"
+                    :readonly="!firstRdosMacrocategory"
                     outlined
                     :options="catRdo" option-label="description"
                     :options-dense="true"
-                    v-model="rdosCategories"
+                    v-model="firstRdosCategories"
                     label="Categoria"
                     multiple use-chips
                     name="category"
@@ -349,16 +334,16 @@
                     transition-show="scale"
                     transition-hide="scale"
                     reactive-rules
-                    :rules="[ (val) => isValid('rdosCategories', val, $v) ]"
+                    :rules="[ (val) => isValid('firstRdosCategories', val, $v) ]"
           />
 
           <q-select class="col-12 col-md-3 order-10"
-                    :disable="!rdosCategories.length>0"
-                    :readonly="!rdosCategories.length>0"
+                    :disable="!firstRdosCategories.length>0"
+                    :readonly="!firstRdosCategories.length>0"
                     outlined
                     :options="subRdo" option-label="description"
                     :options-dense="true"
-                    v-model="rdosSubcategories"
+                    v-model="firstRdosSubcategories"
                     label="Sottocategoria"
                     multiple use-chips
                     name="subcategory"
@@ -367,7 +352,7 @@
                     transition-show="scale"
                     transition-hide="scale"
                     reactive-rules
-                    :rules="[ (val) => isValid('rdosSubcategories', val, $v) ]"
+                    :rules="[ (val) => isValid('firstRdosSubcategories', val, $v) ]"
           />
           <!--riga-->
           <div class="col-12 col-md-3 q-pt-md order-11">
@@ -661,9 +646,9 @@ export default {
       soaToggle: false,
       isoToggle: false,
       fgasToggle: false,
-      rdosCategories: [],
-      rdosMacrocategories: [],
-      rdosSubcategories: [],
+      firstRdosCategories: [],
+      firstRdosMacrocategory: null,
+      firstRdosSubcategories: [],
       regulation: 'false',
       termAndCondition: 'false',
       compDeclaration: ''
@@ -708,17 +693,17 @@ export default {
 
       let macroOpt = []
       macroOpt = this.loadEditProfileOptions('macroRdo', macroOpt)
-      this.rdosMacrocategories = macroOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
+      this.firstRdosMacrocategory = macroOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
       await this.getCatRdoOption()
 
       let catOpt = []
       catOpt = this.loadEditProfileOptions('catRdo', catOpt)
-      this.rdosCategories = catOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
+      this.firstRdosCategories = catOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
       await this.getSubcatRdoOption()
 
       let subOpt = []
       subOpt = this.loadEditProfileOptions('subRdo', subOpt)
-      this.rdosSubcategories = subOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
+      this.firstRdosSubcategories = subOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
     },
     loadEditProfileOptions (key, array) {
       this.user.rdos.forEach((rdo) => {
@@ -792,7 +777,8 @@ export default {
       const tempDurcRegolarityDate = this.user.durcRegolarityDate
       if ((!this.$v.$invalid && this.step === 3) || (!this.$v.$invalid && this.step === 2 && this.isEditing)) {
         this.step = 1
-        this.user.rdos = this.rdosSubcategories
+        console.log(this.firstRdosSubcategories)
+        this.user.rdos = this.firstRdosSubcategories
         this.$q.loading.show()
         try {
           this.user.certificateDate = date.extractDate(this.user.certificateDate, 'DD/MM/YYYY')
@@ -943,16 +929,17 @@ export default {
       await this.getCities(this.user.province._id)
     },
     async getCatRdoOption () {
-      if (this.rdosMacrocategories && this.rdosMacrocategories.length === 0) {
-        this.rdosCategories = []
-        this.rdosSubcategories = []
+      if (!this.firstRdosMacrocategory) {
+        this.firstRdosCategories = []
+        this.firstRdosSubcategories = []
+      } else {
+        const queryparams = { rdomacroId: this.firstRdosMacrocategory._id }
+        await this.getCatRdo(queryparams)
       }
-      const queryparams = { rdomacroId: this.rdosMacrocategories.map((rdoMacro) => { return rdoMacro._id }) }
-      await this.getCatRdo(queryparams)
     },
     async getSubcatRdoOption () {
-      if (this.rdosCategories && this.rdosCategories.length === 0) this.rdosSubcategories = []
-      const queryparams = { rdocatId: this.rdosCategories.map((rdoCat) => { return rdoCat._id }) }
+      if (this.firstRdosCategories && this.firstRdosCategories.length === 0) this.firstRdosSubcategories = []
+      const queryparams = { rdocatId: this.firstRdosCategories.map((rdoCat) => { return rdoCat._id }) }
       await this.getSubRdo(queryparams)
     }
   },
@@ -993,6 +980,12 @@ export default {
     showAlert (newValue, oldValue) {
       if (oldValue !== newValue) {
         this.alert = newValue
+      }
+    },
+    firstRdosMacrocategory (newValue, oldValue) {
+      if (oldValue !== newValue) {
+        this.firstRdosCategories = []
+        this.firstRdosSubcategories = []
       }
     }
   },
@@ -1065,13 +1058,13 @@ export default {
           required
         }
       },
-      rdosSubcategories: {
+      firstRdosSubcategories: {
         required
       },
-      rdosMacrocategories: {
+      firstRdosMacrocategory: {
         required
       },
-      rdosCategories: {
+      firstRdosCategories: {
         required
       },
       durcRegolarityFile: {
