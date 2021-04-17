@@ -499,8 +499,8 @@
           />
 
           <div v-if="needSecondRdo" class="desktop-only col-12 col-md-3 flex">
-            <q-btn v-if="!needThirdRdo && !isEditing" flat color="secondary" icon-right="add" label="Aggiungi RDO" @click="needThirdRdo = true" />
-            <q-btn v-if="needSecondRdo && !isEditing" flat color="negative" icon-right="remove" label="Rimuovi RDO" @click="needSecondRdo = false"/>
+            <q-btn v-if="!needThirdRdo  && !isEditing" flat color="secondary" icon-right="add" label="Aggiungi RDO" @click="needThirdRdo = true" />
+            <q-btn v-if="needSecondRdo  && !isEditing" flat color="negative" icon-right="remove" label="Rimuovi RDO" @click="needSecondRdo = false"/>
           </div>
           <div v-if="needThirdRdo" class="col-12 col-md-3 q-pt-md order-7">
             Richieste di offerta *
@@ -605,7 +605,7 @@
           />
 
           <div v-if="needThirdRdo" class="desktop-only col-12 col-md-3 flex">
-            <q-btn v-if="needThirdRdo" flat color="negative" icon-right="remove" label="Rimuovi RDO" @click="needThirdRdo = false"/>
+            <q-btn v-if="needThirdRdo && !isEditing" flat color="negative" icon-right="remove" label="Rimuovi RDO" @click="needThirdRdo = false"/>
           </div>
           <!--riga-->
           <div class="col-12 col-md-3 q-pt-md order-15">
@@ -927,23 +927,26 @@ export default {
 
       let macroOpt = []
       macroOpt = this.loadEditProfileOptions('macroRdo', macroOpt)
-      this.firstRdosMacrocategory = macroOpt[0]
+      console.log(macroOpt)
+      debugger
+      this.firstRdosMacrocategory = macroOpt.find((item) => { return item.position === 'first' }).macro
       await this.getFirstCatRdoOption()
       this.firstImports = this.user.rdos.first.imports
       this.firstRegionsOfInterest = this.user.rdos.first.regionsOfInterest
+
       if (this.user.rdos.second) {
-        this.secondRdosMacrocategory = macroOpt[1]
+        this.secondRdosMacrocategory = macroOpt.find((item) => { return item.position === 'second' }).macro
         await this.getSecondCatRdoOption()
         this.secondImports = this.user.rdos.second.imports
         this.secondRegionsOfInterest = this.user.rdos.second.regionsOfInterest
         this.needSecondRdo = true
       }
       if (this.user.rdos.third) {
-        this.thirdRdosMacrocategory = macroOpt[2]
+        this.thirdRdosMacrocategory = macroOpt.find((item) => { return item.position === 'third' }).macro
         await this.getThirdCatRdoOption()
         this.thirdImports = this.user.rdos.third.imports
         this.thirdRegionsOfInterest = this.user.rdos.third.regionsOfInterest
-        this.needSecondRdo = false
+        this.needThirdRdo = true
       }
       let catOpt = []
       catOpt = this.loadEditProfileOptions('firstCatRdo', catOpt)
@@ -979,12 +982,19 @@ export default {
       Object.entries(this.user.rdos).forEach((obj) => {
         obj[1].subCategory.forEach((rdo) => {
           this[key].forEach((item) => {
-            if (key === 'macroRdo') {
-              if (item._id === rdo.macrocategory) {
-                array.push(item)
-              }
-            }
             if (obj[0] === 'first') {
+              if (key === 'macroRdo') {
+                if (item._id === rdo.macrocategory) {
+                  const oggetto = {
+                    position: obj[0],
+                    macro: item
+                  }
+                  const isFound = array.some((macro) => { return macro.position === 'first' })
+                  if (!isFound || array.length === 0) {
+                    array.push(oggetto)
+                  }
+                }
+              }
               if (key === 'firstCatRdo') {
                 if (item._id === rdo.category) {
                   array.push(item)
@@ -996,6 +1006,18 @@ export default {
                 }
               }
             } else if (obj[0] === 'second') {
+              if (key === 'macroRdo') {
+                if (item._id === rdo.macrocategory) {
+                  const oggetto = {
+                    position: obj[0],
+                    macro: item
+                  }
+                  const isFound = array.some((macro) => { return macro.position === 'second' })
+                  if (!isFound || array.length === 0) {
+                    array.push(oggetto)
+                  }
+                }
+              }
               if (key === 'secondCatRdo') {
                 if (item._id === rdo.category) {
                   array.push(item)
@@ -1007,6 +1029,18 @@ export default {
                 }
               }
             } else if (obj[0] === 'third') {
+              if (key === 'macroRdo') {
+                if (item._id === rdo.macrocategory) {
+                  const oggetto = {
+                    position: obj[0],
+                    macro: item
+                  }
+                  const isFound = array.some((macro) => { return macro.position === 'third' })
+                  if (!isFound || array.length === 0) {
+                    array.push(oggetto)
+                  }
+                }
+              }
               if (key === 'thirdCatRdo') {
                 if (item._id === rdo.category) {
                   array.push(item)
