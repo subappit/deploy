@@ -927,8 +927,7 @@ export default {
 
       let macroOpt = []
       macroOpt = this.loadEditProfileOptions('macroRdo', macroOpt)
-      console.log(macroOpt)
-      debugger
+
       this.firstRdosMacrocategory = macroOpt.find((item) => { return item.position === 'first' }).macro
       await this.getFirstCatRdoOption()
       this.firstImports = this.user.rdos.first.imports
