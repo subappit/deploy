@@ -17,7 +17,7 @@
               <img src="">
         </q-carousel-slide>
         <q-carousel-slide class="text-center column flex flex-center overflow-hidden" :name="2">
-              <div class="text-h2 main_line animation_2" style="font-size:65px;">PERCHÈ <span :style="'color:'+theme_color">SUBAPP</span>?</div><br><br><br>
+              <div class="text-h2 main_line animation_2" style="font-size:65px;">PERCHÉ <span :style="'color:'+theme_color">SUBAPP</span>?</div><br><br><br>
               <div class="text-h4 second-line animation_1"> <br>A differenza di altre piattaforme, con SubApp le imprese appaltatrici ricercano imprese organizzate ed in regola con la documentazione, in grado di eseguire appalti pubblici e privati.</div><br><br><br>
         </q-carousel-slide>
       </q-carousel>

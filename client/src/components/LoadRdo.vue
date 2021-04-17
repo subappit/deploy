@@ -3,7 +3,7 @@
     <div class="row wrap justify-center content-center q-pt-lg no-margin q-gutter-x-md q-gutter-y-xs">
 
       <q-input   outlined
-                 :disable="selectedRdo != null"
+                 :disable="true"
                  v-model="rdo.contractor"
                  type="text"
                  label="Appaltatore *"
@@ -106,6 +106,11 @@
               </q-date>
             </q-popup-proxy>
           </q-icon>
+          <q-icon class="desktop-only text-secondary" name="info">
+            <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
+              Termine entro il quale presentare l'offerta (massimo 30 giorni)
+            </q-tooltip>
+          </q-icon>
         </template>
       </q-input>
 
@@ -186,7 +191,6 @@
                 outlined
                 class="col-12 col-md-3"
                 option-dense
-                multiple
                 label="Importi *"
                 use-chips
                 transition-show="scale"
@@ -199,7 +203,6 @@
 
       <q-select @input="getCatRdoOption"
                 class="col-12 col-md-3"
-                multiple
                 use-chips
                 outlined option-dense
                 :disable="selectedRdo != null"
@@ -216,14 +219,14 @@
 
       <q-select @input="getSubcatRdoOption"
                 class="col-12 col-md-3"
-                :disable="!rdosMacrocategories.length>0 || selectedRdo != null"
-                :readonly="!rdosMacrocategories.length>0 || selectedRdo != null"
+                :disable="rdosMacrocategories == null || selectedRdo != null"
+                :readonly="rdosMacrocategories == null || selectedRdo != null"
                 outlined
                 :options="catRdo" option-label="description"
                 :options-dense="true"
                 v-model="rdosCategories"
                 label="Categoria RDO"
-                multiple use-chips
+                use-chips
                 name="category"
                 emit-value
                 map-options
@@ -233,14 +236,14 @@
                 :rules="[ (val) => isValid('rdosCategories', val, $v) ]"/>
 
       <q-select class="col-12 col-md-3"
-                :disable="!rdosCategories.length>0 || selectedRdo != null"
-                :readonly="!rdosCategories.length>0 || selectedRdo != null"
+                :disable="rdosCategories == null || selectedRdo != null"
+                :readonly="rdosCategories == null || selectedRdo != null"
                 outlined
                 :options="subRdo" option-label="description"
                 :options-dense="true"
                 v-model="rdosSubcategories"
                 label="Sottocategoria RDO"
-                multiple use-chips
+                use-chips
                 name="subcategory"
                 emit-value
                 map-options
@@ -316,7 +319,7 @@
         <template v-slot:append>
           <q-icon class="desktop-only text-secondary" name="info">
             <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
-              Contatto del responsabile al quale poter eventualmente richiedere maggiori informazioni
+              Contatto del responsabile al quale poter eventualmente richiedere maggiori informazioni. Può essere un recapito telefonico o un indirizzo email.
             </q-tooltip>
           </q-icon>
         </template>
@@ -403,9 +406,9 @@ export default {
   data () {
     return {
       rdo: new Rdo(),
-      rdosCategories: [],
-      rdosMacrocategories: [],
-      rdosSubcategories: [],
+      rdosCategories: null,
+      rdosMacrocategories: null,
+      rdosSubcategories: null,
       isValid: validator.isValid,
       imports: imports,
       country: undefined,
@@ -473,17 +476,19 @@ export default {
       await this.getRegions(this.country._id)
     },
     async getCatRdoOption () {
-      if (this.rdosMacrocategories && this.rdosMacrocategories.length === 0) {
-        this.rdosCategories = []
-        this.rdosSubcategories = []
+      if (this.rdosMacrocategories == null) {
+        this.rdosCategories = null
+        this.rdosSubcategories = null
+      } else {
+        const queryparams = { rdomacroId: this.rdosMacrocategories._id }
+        await this.getCatRdo(queryparams)
       }
-      const queryparams = { rdomacroId: this.rdosMacrocategories.map((rdoMacro) => { return rdoMacro._id }) }
-      await this.getCatRdo(queryparams)
     },
     async getSubcatRdoOption () {
-      if (this.rdosCategories && this.rdosCategories.length === 0) this.rdosSubcategories = []
-      const queryparams = { rdocatId: this.rdosCategories.map((rdoCat) => { return rdoCat._id }) }
-      await this.getSubRdo(queryparams)
+      if (this.rdosCategories == null) { this.rdosSubcategories = null } else {
+        const queryparams = { rdocatId: this.rdosCategories._id }
+        await this.getSubRdo(queryparams)
+      }
     },
     async loadRdo () {
       if (!this.$v.$invalid) {
@@ -536,7 +541,9 @@ export default {
     },
     calendarDataScadenza (date) {
       const currentTime = new Date()
-      return date >= currentTime.toLocaleDateString('fr-CA').replaceAll('-', '/')
+      const expirationTime = new Date()
+      this.addMonths(expirationTime, 1)
+      return (date >= currentTime.toLocaleDateString('fr-CA').replaceAll('-', '/') && date <= expirationTime.toLocaleDateString('fr-CA').replaceAll('-', '/'))
     },
     calendarDataInizio (date) {
       let dataScadenza
@@ -569,6 +576,14 @@ export default {
     resetEndDate () {
       this.endDate = undefined
     },
+    addMonths (date, months) {
+      var d = date.getDate()
+      date.setMonth(date.getMonth() + +months)
+      if (date.getDate() !== d) {
+        date.setDate(0)
+      }
+      return date
+    },
     async inviaRibasso () {
       this.$q.loading.show()
       const infoRibassoEmail = {
@@ -592,46 +607,44 @@ export default {
     },
     async loadSelectedRdo () {
       this.rdo = JSON.parse(JSON.stringify(this.selectedRdo)) // to avoid reference
-
       this.expirationDate = new Date(this.rdo.expirationDate).toLocaleDateString('fr')
       this.startDate = new Date(this.rdo.startDate).toLocaleDateString('fr')
       this.endDate = new Date(this.rdo.endDate).toLocaleDateString('fr')
 
-      let macroOpt = []
+      let macroOpt = null
       macroOpt = this.loadSelectedRdoOptions('macroRdo', macroOpt)
-      this.rdosMacrocategories = macroOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
+      this.rdosMacrocategories = macroOpt
       await this.getCatRdoOption()
 
-      let catOpt = []
+      let catOpt = null
       catOpt = this.loadSelectedRdoOptions('catRdo', catOpt)
-      this.rdosCategories = catOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
+      this.rdosCategories = catOpt
       await this.getSubcatRdoOption()
 
-      let subOpt = []
+      let subOpt = null
       subOpt = this.loadSelectedRdoOptions('subRdo', subOpt)
-      this.rdosSubcategories = subOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
+      this.rdosSubcategories = subOpt
     },
-    loadSelectedRdoOptions (key, array) {
-      this.rdo.rdos.forEach((rdo) => {
-        this[key].forEach((item) => {
-          if (key === 'macroRdo') {
-            if (item._id === rdo.macrocategory) {
-              array.push(item)
-            }
+    loadSelectedRdoOptions (key, option) {
+      this[key].forEach((item) => {
+        if (key === 'macroRdo') {
+          if (item._id === this.rdo.rdos.macrocategory) {
+            option = item
           }
-          if (key === 'catRdo') {
-            if (item._id === rdo.category) {
-              array.push(item)
-            }
+        }
+        if (key === 'catRdo') {
+          if (item._id === this.rdo.rdos.category) {
+            option = item
           }
-          if (key === 'subRdo') {
-            if (item._id === rdo._id) {
-              array.push(item)
-            }
+        }
+        if (key === 'subRdo') {
+          if (item._id === this.rdo.rdos._id) {
+            option = item
           }
-        })
+        }
       })
-      return array
+
+      return option
     },
     async downloadFile (key) {
       const obj = {
@@ -654,6 +667,7 @@ export default {
   async created () {
     if (this.selectedRdo) {
       await this.getMacroRdo()
+
       await this.loadSelectedRdo()
       this.getData()
     } else {

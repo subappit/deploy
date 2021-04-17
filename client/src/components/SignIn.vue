@@ -19,7 +19,7 @@
         title="Informazioni generali"
         icon="settings"
         :done="step > 1">
-        <div class="row wrap justify-center content-center no-padding no-margin q-gutter-x-md q-gutter-y-md">
+        <div class="row wrap justify-center content-center no-padding no-margin q-gutter-x-md q-gutter-y-lg">
           <q-input   outlined
                      v-model="user.username"
                      type="text"
@@ -469,10 +469,14 @@
               </template>
             </q-file>
           </div>
-          <q-input class="col-12 col-md-2 order-21" label="Data Scadenza" :rules="[ (val) => isValid('certificateDate', val, $v.user) ]" outlined v-model="user.certificateDate" mask="##/##/####">
+          <q-input  @click="$refs.qDateCertificateProxy.show()"
+                    onkeydown="return false"
+                    class="col-12 col-md-2 order-21" label="Data Scadenza"
+                    :rules="[ (val) => isValid('certificateDate', val, $v.user) ]"
+                    outlined v-model="user.certificateDate" mask="##/##/####">
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                <q-popup-proxy ref="qDateCertificateProxy" transition-show="scale" transition-hide="scale">
                   <q-date :locale="currentLocale" v-model="user.certificateDate" :options="calendarOptionCertificate"  mask="DD/MM/YYYY">
                     <div class="row items-center justify-end q-gutter-sm">
                       <q-btn label="Annulla" color="primary" flat v-close-popup />
@@ -505,10 +509,14 @@
               </template>
             </q-file>
           </div>
-          <q-input class="col-12 col-md-2 order-24" label="Data Scadenza" :rules="[ (val) => isValid('durcRegolarityDate', val, $v.user) ]" outlined v-model="user.durcRegolarityDate" mask="##/##/####">
+          <q-input  @click="$refs.qDateDurcProxy.show()"
+                    onkeydown="return false"
+                    class="col-12 col-md-2 order-24" label="Data Scadenza"
+                    :rules="[ (val) => isValid('durcRegolarityDate', val, $v.user) ]"
+                    outlined v-model="user.durcRegolarityDate" mask="##/##/####">
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                <q-popup-proxy ref="qDateDurcProxy" transition-show="scale" transition-hide="scale">
                   <q-date :locale="currentLocale" v-model="user.durcRegolarityDate" :options="calendarOptionDurc"  mask="DD/MM/YYYY">
                     <div class="row items-center justify-end q-gutter-sm">
                       <q-btn label="Annulla" color="primary" flat v-close-popup />
@@ -1034,7 +1042,7 @@ export default {
           isPostalCode: validator.isPostalCode
         },
         webSite: {
-          isWebSite: validator.isWebSite
+          isWebSite: this.user.webSite !== '' ? validator.isWebSite : true
         },
         pec: {
           email,

@@ -38,6 +38,10 @@ exports.rdo_subcat = (req, res, next) => {
   const query = req.query && req.query.rdocatId ? { category: req.query.rdocatId } : null
   Rdo_subcategory.find(query).sort('description')
     .then((subRdo) => {
+      subRdo = subRdo.sort((a, b) => a.description.localeCompare(b.description, undefined, {
+        numeric: true,
+        sensitivity: 'base'
+      }))
       res.status(200).json({
         subRdo
       })

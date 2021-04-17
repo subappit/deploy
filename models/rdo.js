@@ -4,7 +4,7 @@ const moongose = require('mongoose')
 const { Schema } = moongose
 const rdoSchema = new Schema({
   rdos: {
-    type: Array,
+    type: Object,
     required: true
   },
   imports: {

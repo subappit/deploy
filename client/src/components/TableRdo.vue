@@ -37,19 +37,19 @@
             {{rdo.description}}
           </div>
         </q-td>-->
-        <q-td :auto-width="true" key="contractor" :props="props">
-          {{ props.row.rdo.contractor }}
+        <q-td :auto-width="true" key="macroCategory" :props="props">
+          {{ props.row.rdo.rdos.descMacro }}
         </q-td>
-        <q-td :auto-width="true" key="rdos" :props="props">
-          {{ props.row.rdo.description }}
-        </q-td>
-        <q-td :auto-width="true" key="regionOfInterest" :props="props">
-          {{ props.row.rdo.regionOfInterest.description }}
+        <q-td style="white-space: normal" :auto-width="true" key="subCategory" :props="props">
+          {{ props.row.rdo.rdos.description }}
         </q-td>
         <q-td :auto-width="true" key="imports" :props="props">
           <div v-for="(item, index) in props.row.rdo.imports" :key="index" >
             {{item}}
           </div>
+        </q-td>
+        <q-td :auto-width="true" key="regionOfInterest" :props="props">
+          {{ props.row.rdo.regionOfInterest.description }}
         </q-td>
         <q-td :auto-width="true" key="expirationDate" :props="props">
           {{ date.formatDate(props.row.rdo.expirationDate, 'DD-MM-YYYY') }}
@@ -76,10 +76,10 @@ export default {
     return {
       search: '',
       columns: [
-        { name: 'contractor', required: true, label: 'Appaltatore', align: 'center' },
-        { name: 'rdos', required: true, label: 'Descrizione', align: 'center' },
-        { name: 'regionOfInterest', required: true, label: 'Regione', align: 'center' },
+        { name: 'macroCategory', required: true, label: 'Macrocategoria', align: 'center' },
+        { name: 'subCategory', required: true, label: 'Subcategoria', align: 'center' },
         { name: 'imports', required: true, label: 'Importo', align: 'center' },
+        { name: 'regionOfInterest', required: true, label: 'Regione', align: 'center' },
         { name: 'expirationDate', required: true, label: 'Scadenza', align: 'center' },
         { name: 'viewRdo', required: true, label: 'Visualizza RDO', align: 'center' }
       ],

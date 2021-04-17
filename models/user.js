@@ -62,8 +62,7 @@ const userSchema = new Schema({
     required: true
   },
   webSite: {
-    type: String,
-    required: true
+    type: String
   },
   pec: {
     type: String,
