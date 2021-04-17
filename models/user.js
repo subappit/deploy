@@ -68,19 +68,9 @@ const userSchema = new Schema({
     required: true
   },
   rdos: {
-    type: Array,
+    type: Object,
     required: true
   },
-  /*
-  imports: {
-    type: Array,
-    required: true
-  },
-  regionsOfInterest: {
-    type: Array,
-    required: true
-  },
-   */
   soaFile: {
     type: Object
   },

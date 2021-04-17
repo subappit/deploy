@@ -363,7 +363,7 @@
           </div>
           <div class="desktop-only col-12 col-md-3"></div>
           <!--riga-->
-          <q-select v-model="user.imports"
+          <q-select v-model="firstImports"
                     :options="imports"
                     name="imports"
                     outlined
@@ -375,14 +375,14 @@
                     transition-show="scale"
                     transition-hide="scale"
                     reactive-rules
-                    :rules="[ (val) => isValid('imports', val, $v.user) ]"
+                    :rules="[ (val) => isValid('firstImports', val, $v) ]"
           />
 
           <q-select  class="col-12 col-md-3 order-14"
                      :disable="!regions.length>0" :readonly="!regions.length>0"
                      outlined
                      :options-dense="true" :options="regions" option-label="description"
-                     v-model="user.regionsOfInterest"
+                     v-model="firstRegionsOfInterest"
                      label="Regioni di interesse *"
                      multiple
                      use-chips
@@ -391,7 +391,7 @@
                      transition-show="scale"
                      transition-hide="scale"
                      reactive-rules
-                     :rules="[ (val) => isValid('regionsOfInterest', val, $v.user) ]"
+                     :rules="[ (val) => isValid('firstRegionsOfInterest', val, $v) ]"
           />
 
           <div class="desktop-only col-12 col-md-3"></div>
@@ -617,6 +617,8 @@ export default {
       user: new User(),
       // legalFormOptions: legalFormOptions,
       imports: imports,
+      firstImports: [],
+      firstRegionsOfInterest: [],
       compCatOptions: compCatOptions,
       step: 1,
       alert: false,
@@ -777,8 +779,13 @@ export default {
       const tempDurcRegolarityDate = this.user.durcRegolarityDate
       if ((!this.$v.$invalid && this.step === 3) || (!this.$v.$invalid && this.step === 2 && this.isEditing)) {
         this.step = 1
-        console.log(this.firstRdosSubcategories)
-        this.user.rdos = this.firstRdosSubcategories
+        if (this.firstRdosSubcategories && this.firstRdosSubcategories.length > 0) {
+          this.user.rdos.first = {}
+          this.user.rdos.first.subCategory = this.firstRdosSubcategories
+          this.user.rdos.first.imports = this.firstImports
+          this.user.rdos.first.regionsOfInterest = this.firstRegionsOfInterest
+        }
+        console.log('user', this.user)
         this.$q.loading.show()
         try {
           this.user.certificateDate = date.extractDate(this.user.certificateDate, 'DD/MM/YYYY')
@@ -1045,12 +1052,6 @@ export default {
           required: this.isEditing ? false : required,
           isPassword: this.isEditing ? true : validator.isPassword
         },
-        imports: {
-          required
-        },
-        regionsOfInterest: {
-          required
-        },
         durcRegolarityDate: {
           required
         },
@@ -1065,6 +1066,12 @@ export default {
         required
       },
       firstRdosCategories: {
+        required
+      },
+      firstImports: {
+        required
+      },
+      firstRegionsOfInterest: {
         required
       },
       durcRegolarityFile: {

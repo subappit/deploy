@@ -16,7 +16,7 @@ export default class user {
     this.webSite = ''
     this.pec = ''
     this.telephoneNumber = ''
-    this.rdos = []
+    this.rdos = {}
     this.soaFile = {}
     this.isoFile = {}
     this.fgasFile = {}
