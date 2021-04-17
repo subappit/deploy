@@ -35,12 +35,6 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  /*
-  legalForm: {
-    type: String,
-    required: true
-  },
-  */
   SDICode: {
     type: String,
     required: true
@@ -73,15 +67,7 @@ const userSchema = new Schema({
     required: true
   },
   rdos: {
-    type: Array,
-    required: true
-  },
-  imports: {
-    type: Array,
-    required: true
-  },
-  regionsOfInterest: {
-    type: Array,
+    type: Object,
     required: true
   },
   soaFile: {
@@ -141,12 +127,6 @@ const userSchema = new Schema({
     type: Date,
     default: null
   },
-  /*
- companyCategory: {
-   type: String,
-   required: true
- },
- */
   loadedRdos: {
     type: Array
   }
