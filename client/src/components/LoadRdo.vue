@@ -623,12 +623,12 @@ export default {
       await this.getCatRdoOption()
 
       let catOpt = null
-      catOpt = this.loadSelectedRdoOptions('catRdo', catOpt)
+      catOpt = this.loadSelectedRdoOptions('firstCatRdo', catOpt)
       this.rdosCategories = catOpt
       await this.getSubcatRdoOption()
 
       let subOpt = null
-      subOpt = this.loadSelectedRdoOptions('subRdo', subOpt)
+      subOpt = this.loadSelectedRdoOptions('firstSubRdo', subOpt)
       this.rdosSubcategories = subOpt
     },
     loadSelectedRdoOptions (key, option) {
@@ -638,12 +638,12 @@ export default {
             option = item
           }
         }
-        if (key === 'catRdo') {
+        if (key === 'firstCatRdo') {
           if (item._id === this.rdo.rdos.category) {
             option = item
           }
         }
-        if (key === 'subRdo') {
+        if (key === 'firstSubRdo') {
           if (item._id === this.rdo.rdos._id) {
             option = item
           }
