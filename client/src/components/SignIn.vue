@@ -394,8 +394,7 @@
                      :rules="[ (val) => isValid('firstRegionsOfInterest', val, $v) ]"
           />
           <div class="desktop-only col-12 col-md-3">
-            <q-btn v-if="!needSecondRdo" flat color="secondary" icon-right="add" label="Aggiungi RDO" @click="needSecondRdo = true"/>
-            <q-btn v-if="needSecondRdo" flat color="negative" icon-right="remove" label="Rimuovi RDO" @click="needSecondRdo = false"/>
+            <q-btn v-if="!needSecondRdo && !isEditing" flat color="secondary" icon-right="add" label="Aggiungi RDO" @click="needSecondRdo = true"/>
           </div>
           <div v-if="needSecondRdo" class="col-12 col-md-3 q-pt-md order-7">
             Richieste di offerta *
@@ -499,9 +498,9 @@
                      :rules="[ (val) => isValid('secondRegionsOfInterest', val, $v) ]"
           />
 
-          <div v-if="needSecondRdo" class="desktop-only col-12 col-md-3">
-            <q-btn v-if="!needThirdRdo" flat color="secondary" icon-right="add" label="Aggiungi RDO" @click="needThirdRdo = true" />
-            <q-btn v-if="needThirdRdo" flat color="negative" icon-right="remove" label="Rimuovi RDO" @click="needThirdRdo = false" />
+          <div v-if="needSecondRdo" class="desktop-only col-12 col-md-3 flex">
+            <q-btn v-if="!needThirdRdo && !isEditing" flat color="secondary" icon-right="add" label="Aggiungi RDO" @click="needThirdRdo = true" />
+            <q-btn v-if="needSecondRdo && !isEditing" flat color="negative" icon-right="remove" label="Rimuovi RDO" @click="needSecondRdo = false"/>
           </div>
           <div v-if="needThirdRdo" class="col-12 col-md-3 q-pt-md order-7">
             Richieste di offerta *
@@ -605,7 +604,9 @@
                      :rules="[ (val) => isValid('thirdRegionsOfInterest', val, $v) ]"
           />
 
-          <div v-if="needThirdRdo" class="desktop-only col-12 col-md-3"></div>
+          <div v-if="needThirdRdo" class="desktop-only col-12 col-md-3 flex">
+            <q-btn v-if="needThirdRdo" flat color="negative" icon-right="remove" label="Rimuovi RDO" @click="needThirdRdo = false"/>
+          </div>
           <!--riga-->
           <div class="col-12 col-md-3 q-pt-md order-15">
             Iscrizione White List o Dichiarazione Antimafia *
@@ -926,36 +927,98 @@ export default {
 
       let macroOpt = []
       macroOpt = this.loadEditProfileOptions('macroRdo', macroOpt)
-      this.firstRdosMacrocategory = macroOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
-      await this.getCatRdoOption()
-
+      this.firstRdosMacrocategory = macroOpt[0]
+      await this.getFirstCatRdoOption()
+      this.firstImports = this.user.rdos.first.imports
+      this.firstRegionsOfInterest = this.user.rdos.first.regionsOfInterest
+      if (this.user.rdos.second) {
+        this.secondRdosMacrocategory = macroOpt[1]
+        await this.getSecondCatRdoOption()
+        this.secondImports = this.user.rdos.second.imports
+        this.secondRegionsOfInterest = this.user.rdos.second.regionsOfInterest
+        this.needSecondRdo = true
+      }
+      if (this.user.rdos.third) {
+        this.thirdRdosMacrocategory = macroOpt[2]
+        await this.getThirdCatRdoOption()
+        this.thirdImports = this.user.rdos.third.imports
+        this.thirdRegionsOfInterest = this.user.rdos.third.regionsOfInterest
+        this.needSecondRdo = false
+      }
       let catOpt = []
-      catOpt = this.loadEditProfileOptions('catRdo', catOpt)
+      catOpt = this.loadEditProfileOptions('firstCatRdo', catOpt)
       this.firstRdosCategories = catOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
-      await this.getSubcatRdoOption()
-
+      await this.getFirstSubcatRdoOption()
+      if (this.user.rdos.second) {
+        catOpt = []
+        catOpt = this.loadEditProfileOptions('secondCatRdo', catOpt)
+        this.secondRdosCategories = catOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
+        await this.getSecondSubcatRdoOption()
+      }
+      if (this.user.rdos.third) {
+        catOpt = []
+        catOpt = this.loadEditProfileOptions('thirdCatRdo', catOpt)
+        this.thirdRdosCategories = catOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
+        await this.getThirdSubcatRdoOption()
+      }
       let subOpt = []
-      subOpt = this.loadEditProfileOptions('subRdo', subOpt)
+      subOpt = this.loadEditProfileOptions('firstSubRdo', subOpt)
       this.firstRdosSubcategories = subOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
+      if (this.user.rdos.second) {
+        subOpt = []
+        subOpt = this.loadEditProfileOptions('secondSubRdo', subOpt)
+        this.secondRdosSubcategories = subOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
+      }
+      if (this.user.rdos.third) {
+        subOpt = []
+        subOpt = this.loadEditProfileOptions('thirdSubRdo', subOpt)
+        this.thirdRdosSubcategories = subOpt.filter((item, i, ar) => ar.indexOf(item) === i) // unique
+      }
     },
     loadEditProfileOptions (key, array) {
-      this.user.rdos.forEach((rdo) => {
-        this[key].forEach((item) => {
-          if (key === 'macroRdo') {
-            if (item._id === rdo.macrocategory) {
-              array.push(item)
+      Object.entries(this.user.rdos).forEach((obj) => {
+        obj[1].subCategory.forEach((rdo) => {
+          this[key].forEach((item) => {
+            if (key === 'macroRdo') {
+              if (item._id === rdo.macrocategory) {
+                array.push(item)
+              }
             }
-          }
-          if (key === 'catRdo') {
-            if (item._id === rdo.category) {
-              array.push(item)
+            if (obj[0] === 'first') {
+              if (key === 'firstCatRdo') {
+                if (item._id === rdo.category) {
+                  array.push(item)
+                }
+              }
+              if (key === 'firstSubRdo') {
+                if (item._id === rdo._id) {
+                  array.push(item)
+                }
+              }
+            } else if (obj[0] === 'second') {
+              if (key === 'secondCatRdo') {
+                if (item._id === rdo.category) {
+                  array.push(item)
+                }
+              }
+              if (key === 'secondSubRdo') {
+                if (item._id === rdo._id) {
+                  array.push(item)
+                }
+              }
+            } else if (obj[0] === 'third') {
+              if (key === 'thirdCatRdo') {
+                if (item._id === rdo.category) {
+                  array.push(item)
+                }
+              }
+              if (key === 'thirdSubRdo') {
+                if (item._id === rdo._id) {
+                  array.push(item)
+                }
+              }
             }
-          }
-          if (key === 'subRdo') {
-            if (item._id === rdo._id) {
-              array.push(item)
-            }
-          }
+          })
         })
       })
       return array

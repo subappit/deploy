@@ -222,7 +222,7 @@
                 :disable="rdosMacrocategories == null || selectedRdo != null"
                 :readonly="rdosMacrocategories == null || selectedRdo != null"
                 outlined
-                :options="catRdo" option-label="description"
+                :options="firstCatRdo" option-label="description"
                 :options-dense="true"
                 v-model="rdosCategories"
                 label="Categoria RDO"
@@ -239,7 +239,7 @@
                 :disable="rdosCategories == null || selectedRdo != null"
                 :readonly="rdosCategories == null || selectedRdo != null"
                 outlined
-                :options="subRdo" option-label="description"
+                :options="firstSubRdo" option-label="description"
                 :options-dense="true"
                 v-model="rdosSubcategories"
                 label="Sottocategoria RDO"
@@ -480,14 +480,20 @@ export default {
         this.rdosCategories = null
         this.rdosSubcategories = null
       } else {
-        const queryparams = { rdomacroId: this.rdosMacrocategories._id }
-        await this.getCatRdo(queryparams)
+        const obj = {
+          queryparams: { rdomacroId: this.rdosMacrocategories._id },
+          order: 'first'
+        }
+        await this.getCatRdo(obj)
       }
     },
     async getSubcatRdoOption () {
       if (this.rdosCategories == null) { this.rdosSubcategories = null } else {
-        const queryparams = { rdocatId: this.rdosCategories._id }
-        await this.getSubRdo(queryparams)
+        const obj = {
+          queryparams: { rdocatId: this.rdosCategories._id },
+          order: 'first'
+        }
+        await this.getSubRdo(obj)
       }
     },
     async loadRdo () {
@@ -658,9 +664,9 @@ export default {
     ...mapGetters({
       macroRdo: 'macroRdo',
       userLogged: 'user',
-      catRdo: 'catRdo',
+      firstCatRdo: 'firstCatRdo',
       regions: 'regions',
-      subRdo: 'subRdo',
+      firstSubRdo: 'firstSubRdo',
       countries: 'countries'
     })
   },
