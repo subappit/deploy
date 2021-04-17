@@ -7,8 +7,12 @@ export default {
     // inital state
     return {
       macroRdo: [],
-      catRdo: [],
-      subRdo: []
+      firstCatRdo: [],
+      secondCatRdo: [],
+      thirdCatRdo: [],
+      firstSubRdo: [],
+      secondSubRdo: [],
+      thirdSubRdo: []
     }
   },
   mutations: optionMutations,

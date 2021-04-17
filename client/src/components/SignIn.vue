@@ -302,7 +302,7 @@
           <div class="desktop-only col-12 col-md-3"></div>
           <div class="desktop-only col-12 col-md-3"></div>
           <!--riga-->
-          <q-select @input="getCatRdoOption"
+          <q-select @input="getFirstCatRdoOption"
                     class="col-12 col-md-3 order-8"
                     use-chips
                     outlined option-dense
@@ -318,12 +318,12 @@
                     :rules="[ (val) => isValid('firstRdosMacrocategory', val, $v) ]"
           />
 
-          <q-select @input="getSubcatRdoOption"
+          <q-select @input="getFirstSubcatRdoOption"
                     class="col-12 col-md-3 order-9"
                     :disable="!firstRdosMacrocategory"
                     :readonly="!firstRdosMacrocategory"
                     outlined
-                    :options="catRdo" option-label="description"
+                    :options="firstCatRdo" option-label="description"
                     :options-dense="true"
                     v-model="firstRdosCategories"
                     label="Categoria"
@@ -341,7 +341,7 @@
                     :disable="!firstRdosCategories.length>0"
                     :readonly="!firstRdosCategories.length>0"
                     outlined
-                    :options="subRdo" option-label="description"
+                    :options="firstSubRdo" option-label="description"
                     :options-dense="true"
                     v-model="firstRdosSubcategories"
                     label="Sottocategoria"
@@ -393,8 +393,219 @@
                      reactive-rules
                      :rules="[ (val) => isValid('firstRegionsOfInterest', val, $v) ]"
           />
+          <div class="desktop-only col-12 col-md-3">
+            <q-btn v-if="!needSecondRdo" flat color="secondary" icon-right="add" label="Aggiungi RDO" @click="needSecondRdo = true"/>
+            <q-btn v-if="needSecondRdo" flat color="negative" icon-right="remove" label="Rimuovi RDO" @click="needSecondRdo = false"/>
+          </div>
+          <div v-if="needSecondRdo" class="col-12 col-md-3 q-pt-md order-7">
+            Richieste di offerta *
+          </div>
+          <div v-if="needSecondRdo" class="desktop-only col-12 col-md-3"></div>
+          <div v-if="needSecondRdo" class="desktop-only col-12 col-md-3"></div>
+          <q-select v-if="needSecondRdo"
+                    @input="getSecondCatRdoOption"
+                    class="col-12 col-md-3 order-8"
+                    use-chips
+                    outlined option-dense
+                    v-model="secondRdosMacrocategory"
+                    :options="macroRdo" option-label="description"
+                    label="Macrocategoria"
+                    name="macrocategory"
+                    transition-show="scale"
+                    transition-hide="scale"
+                    emit-value
+                    map-options
+                    reactive-rules
+                    :rules="[ (val) => isValid('secondRdosMacrocategory', val, $v) ]"
+          />
 
-          <div class="desktop-only col-12 col-md-3"></div>
+          <q-select v-if="needSecondRdo"
+                    @input="getSecondSubcatRdoOption"
+                    class="col-12 col-md-3 order-9"
+                    :disable="!secondRdosMacrocategory"
+                    :readonly="!secondRdosMacrocategory"
+                    outlined
+                    :options="secondCatRdo" option-label="description"
+                    :options-dense="true"
+                    v-model="secondRdosCategories"
+                    label="Categoria"
+                    multiple use-chips
+                    name="category"
+                    emit-value
+                    map-options
+                    transition-show="scale"
+                    transition-hide="scale"
+                    reactive-rules
+                    :rules="[ (val) => isValid('secondRdosCategories', val, $v) ]"
+          />
+
+          <q-select v-if="needSecondRdo"
+                    class="col-12 col-md-3 order-10"
+                    :disable="!secondRdosCategories.length>0"
+                    :readonly="!secondRdosCategories.length>0"
+                    outlined
+                    :options="secondSubRdo" option-label="description"
+                    :options-dense="true"
+                    v-model="secondRdosSubcategories"
+                    label="Sottocategoria"
+                    multiple use-chips
+                    name="subcategory"
+                    emit-value
+                    map-options
+                    transition-show="scale"
+                    transition-hide="scale"
+                    reactive-rules
+                    :rules="[ (val) => isValid('secondRdosSubcategories', val, $v) ]"
+          />
+          <!--riga-->
+          <div v-if="needSecondRdo" class="col-12 col-md-3 q-pt-md order-11">
+            Importi *
+          </div>
+          <div v-if="needSecondRdo" class="col-12 col-md-3 q-pt-md order-13">
+            Regioni di interesse *
+          </div>
+          <div v-if="needSecondRdo" class="desktop-only col-12 col-md-3"></div>
+          <!--riga-->
+          <q-select v-if="needSecondRdo"
+                    v-model="secondImports"
+                    :options="imports"
+                    name="imports"
+                    outlined
+                    class="col-12 col-md-3 order-12"
+                    option-dense
+                    multiple
+                    label="Importi *"
+                    use-chips
+                    transition-show="scale"
+                    transition-hide="scale"
+                    reactive-rules
+                    :rules="[ (val) => isValid('secondImports', val, $v) ]"
+          />
+
+          <q-select  v-if="needSecondRdo"
+                     class="col-12 col-md-3 order-14"
+                     :disable="!regions.length>0" :readonly="!regions.length>0"
+                     outlined
+                     :options-dense="true" :options="regions" option-label="description"
+                     v-model="secondRegionsOfInterest"
+                     label="Regioni di interesse *"
+                     multiple
+                     use-chips
+                     emit-value
+                     map-options
+                     transition-show="scale"
+                     transition-hide="scale"
+                     reactive-rules
+                     :rules="[ (val) => isValid('secondRegionsOfInterest', val, $v) ]"
+          />
+
+          <div v-if="needSecondRdo" class="desktop-only col-12 col-md-3">
+            <q-btn v-if="!needThirdRdo" flat color="secondary" icon-right="add" label="Aggiungi RDO" @click="needThirdRdo = true" />
+            <q-btn v-if="needThirdRdo" flat color="negative" icon-right="remove" label="Rimuovi RDO" @click="needThirdRdo = false" />
+          </div>
+          <div v-if="needThirdRdo" class="col-12 col-md-3 q-pt-md order-7">
+            Richieste di offerta *
+          </div>
+          <div v-if="needThirdRdo" class="desktop-only col-12 col-md-3"></div>
+          <div v-if="needThirdRdo" class="desktop-only col-12 col-md-3"></div>
+          <q-select v-if="needThirdRdo"
+                    @input="getThirdCatRdoOption"
+                    class="col-12 col-md-3 order-8"
+                    use-chips
+                    outlined option-dense
+                    v-model="thirdRdosMacrocategory"
+                    :options="macroRdo" option-label="description"
+                    label="Macrocategoria"
+                    name="macrocategory"
+                    transition-show="scale"
+                    transition-hide="scale"
+                    emit-value
+                    map-options
+                    reactive-rules
+                    :rules="[ (val) => isValid('thirdRdosMacrocategory', val, $v) ]"
+          />
+
+          <q-select v-if="needThirdRdo"
+                    @input="getThirdSubcatRdoOption"
+                    class="col-12 col-md-3 order-9"
+                    :disable="!thirdRdosMacrocategory"
+                    :readonly="!thirdRdosMacrocategory"
+                    outlined
+                    :options="thirdCatRdo" option-label="description"
+                    :options-dense="true"
+                    v-model="thirdRdosCategories"
+                    label="Categoria"
+                    multiple use-chips
+                    name="category"
+                    emit-value
+                    map-options
+                    transition-show="scale"
+                    transition-hide="scale"
+                    reactive-rules
+                    :rules="[ (val) => isValid('thirdRdosCategories', val, $v) ]"
+          />
+
+          <q-select v-if="needThirdRdo"
+                    class="col-12 col-md-3 order-10"
+                    :disable="!thirdRdosCategories.length>0"
+                    :readonly="!thirdRdosCategories.length>0"
+                    outlined
+                    :options="thirdSubRdo" option-label="description"
+                    :options-dense="true"
+                    v-model="thirdRdosSubcategories"
+                    label="Sottocategoria"
+                    multiple use-chips
+                    name="subcategory"
+                    emit-value
+                    map-options
+                    transition-show="scale"
+                    transition-hide="scale"
+                    reactive-rules
+                    :rules="[ (val) => isValid('thirdRdosSubcategories', val, $v) ]"
+          />
+          <!--riga-->
+          <div v-if="needThirdRdo"  class="col-12 col-md-3 q-pt-md order-11">
+            Importi *
+          </div>
+          <div v-if="needThirdRdo"  class="col-12 col-md-3 q-pt-md order-13">
+            Regioni di interesse *
+          </div>
+          <div v-if="needThirdRdo"  class="desktop-only col-12 col-md-3"></div>
+          <!--riga-->
+          <q-select v-if="needThirdRdo"
+                    v-model="thirdImports"
+                    :options="imports"
+                    name="imports"
+                    outlined
+                    class="col-12 col-md-3 order-12"
+                    option-dense
+                    multiple
+                    label="Importi *"
+                    use-chips
+                    transition-show="scale"
+                    transition-hide="scale"
+                    reactive-rules
+                    :rules="[ (val) => isValid('thirdImports', val, $v) ]"
+          />
+
+          <q-select  v-if="needThirdRdo"
+                     class="col-12 col-md-3 order-14"
+                     :disable="!regions.length>0" :readonly="!regions.length>0"
+                     outlined
+                     :options-dense="true" :options="regions" option-label="description"
+                     v-model="thirdRegionsOfInterest"
+                     label="Regioni di interesse *"
+                     multiple
+                     use-chips
+                     emit-value
+                     map-options
+                     transition-show="scale"
+                     transition-hide="scale"
+                     reactive-rules
+                     :rules="[ (val) => isValid('thirdRegionsOfInterest', val, $v) ]"
+          />
+
+          <div v-if="needThirdRdo" class="desktop-only col-12 col-md-3"></div>
           <!--riga-->
           <div class="col-12 col-md-3 q-pt-md order-15">
             Iscrizione White List o Dichiarazione Antimafia *
@@ -617,8 +828,6 @@ export default {
       user: new User(),
       // legalFormOptions: legalFormOptions,
       imports: imports,
-      firstImports: [],
-      firstRegionsOfInterest: [],
       compCatOptions: compCatOptions,
       step: 1,
       alert: false,
@@ -651,6 +860,20 @@ export default {
       firstRdosCategories: [],
       firstRdosMacrocategory: null,
       firstRdosSubcategories: [],
+      firstImports: [],
+      firstRegionsOfInterest: [],
+      secondRdosCategories: [],
+      secondRdosMacrocategory: null,
+      secondRdosSubcategories: [],
+      secondImports: [],
+      secondRegionsOfInterest: [],
+      thirdRdosCategories: [],
+      thirdRdosMacrocategory: null,
+      thirdRdosSubcategories: [],
+      thirdImports: [],
+      needSecondRdo: false,
+      needThirdRdo: false,
+      thirdRegionsOfInterest: [],
       regulation: 'false',
       termAndCondition: 'false',
       compDeclaration: ''
@@ -785,7 +1008,18 @@ export default {
           this.user.rdos.first.imports = this.firstImports
           this.user.rdos.first.regionsOfInterest = this.firstRegionsOfInterest
         }
-        console.log('user', this.user)
+        if (this.secondRdosSubcategories && this.secondRdosSubcategories.length > 0) {
+          this.user.rdos.second = {}
+          this.user.rdos.second.subCategory = this.secondRdosSubcategories
+          this.user.rdos.second.imports = this.secondImports
+          this.user.rdos.second.regionsOfInterest = this.secondRegionsOfInterest
+        }
+        if (this.thirdRdosSubcategories && this.thirdRdosSubcategories.length > 0) {
+          this.user.rdos.third = {}
+          this.user.rdos.third.subCategory = this.thirdRdosSubcategories
+          this.user.rdos.third.imports = this.thirdImports
+          this.user.rdos.third.regionsOfInterest = this.thirdRegionsOfInterest
+        }
         this.$q.loading.show()
         try {
           this.user.certificateDate = date.extractDate(this.user.certificateDate, 'DD/MM/YYYY')
@@ -935,19 +1169,71 @@ export default {
       if (this.user.city) this.user.city = undefined
       await this.getCities(this.user.province._id)
     },
-    async getCatRdoOption () {
+    async getFirstCatRdoOption () {
       if (!this.firstRdosMacrocategory) {
         this.firstRdosCategories = []
         this.firstRdosSubcategories = []
       } else {
-        const queryparams = { rdomacroId: this.firstRdosMacrocategory._id }
-        await this.getCatRdo(queryparams)
+        const obj = {
+          order: 'first',
+          queryparams: { rdomacroId: this.firstRdosMacrocategory._id }
+        }
+        await this.getCatRdo(obj)
       }
     },
-    async getSubcatRdoOption () {
-      if (this.firstRdosCategories && this.firstRdosCategories.length === 0) this.firstRdosSubcategories = []
-      const queryparams = { rdocatId: this.firstRdosCategories.map((rdoCat) => { return rdoCat._id }) }
-      await this.getSubRdo(queryparams)
+    async getSecondCatRdoOption () {
+      if (!this.secondRdosMacrocategory) {
+        this.secondRdosCategories = []
+        this.secondRdosSubcategories = []
+      } else {
+        const obj = {
+          order: 'second',
+          queryparams: { rdomacroId: this.secondRdosMacrocategory._id }
+        }
+        await this.getCatRdo(obj)
+      }
+    },
+    async getThirdCatRdoOption () {
+      if (!this.thirdRdosMacrocategory) {
+        this.thirdRdosCategories = []
+        this.thirdRdosSubcategories = []
+      } else {
+        const obj = {
+          order: 'third',
+          queryparams: { rdomacroId: this.thirdRdosMacrocategory._id }
+        }
+        await this.getCatRdo(obj)
+      }
+    },
+    async getFirstSubcatRdoOption () {
+      if (this.firstRdosCategories && this.firstRdosCategories.length === 0) {
+        this.firstRdosSubcategories = []
+      }
+      const obj = {
+        order: 'first',
+        queryparams: { rdocatId: this.firstRdosCategories.map((rdoCat) => { return rdoCat._id }) }
+      }
+      await this.getSubRdo(obj)
+    },
+    async getSecondSubcatRdoOption () {
+      if (this.secondRdosCategories && this.secondRdosCategories.length === 0) {
+        this.secondRdosSubcategories = []
+      }
+      const obj = {
+        order: 'second',
+        queryparams: { rdocatId: this.secondRdosCategories.map((rdoCat) => { return rdoCat._id }) }
+      }
+      await this.getSubRdo(obj)
+    },
+    async getThirdSubcatRdoOption () {
+      if (this.thirdRdosCategories && this.thirdRdosCategories.length === 0) {
+        this.thirdRdosSubcategories = []
+      }
+      const obj = {
+        order: 'third',
+        queryparams: { rdocatId: this.thirdRdosCategories.map((rdoCat) => { return rdoCat._id }) }
+      }
+      await this.getSubRdo(obj)
     }
   },
   async mounted () {
@@ -970,8 +1256,12 @@ export default {
       provinces: 'provinces',
       cities: 'cities',
       macroRdo: 'macroRdo',
-      catRdo: 'catRdo',
-      subRdo: 'subRdo'
+      firstCatRdo: 'firstCatRdo',
+      secondCatRdo: 'secondCatRdo',
+      thirdCatRdo: 'thirdCatRdo',
+      firstSubRdo: 'firstSubRdo',
+      secondSubRdo: 'secondSubRdo',
+      thirdSubRdo: 'thirdSubRdo'
     }),
     getBtnLabel () {
       if (this.step === 2 && this.isEditing) {
@@ -1073,6 +1363,36 @@ export default {
       },
       firstRegionsOfInterest: {
         required
+      },
+      secondRdosSubcategories: {
+        required: !this.needSecondRdo ? false : required
+      },
+      secondRdosMacrocategory: {
+        required: !this.needSecondRdo ? false : required
+      },
+      secondRdosCategories: {
+        required: !this.needSecondRdo ? false : required
+      },
+      secondImports: {
+        required: !this.needSecondRdo ? false : required
+      },
+      secondRegionsOfInterest: {
+        required: !this.needSecondRdo ? false : required
+      },
+      thirdRdosSubcategories: {
+        required: !this.needThirdRdo ? false : required
+      },
+      thirdRdosMacrocategory: {
+        required: !this.needThirdRdo ? false : required
+      },
+      thirdRdosCategories: {
+        required: !this.needThirdRdo ? false : required
+      },
+      thirdImports: {
+        required: !this.needThirdRdo ? false : required
+      },
+      thirdRegionsOfInterest: {
+        required: !this.needThirdRdo ? false : required
       },
       durcRegolarityFile: {
         required

@@ -8,14 +8,17 @@ export default {
     commit('SET_MACRORDO', data.macroRdo)
     return data
   },
-  async getCatRdo ({ commit }, rdomacroId) {
-    const { data } = await OptionService.get('/rdo_category?' + querystring.stringify(rdomacroId))
-    commit('SET_CATRDO', data.catRdo)
+  async getCatRdo ({ commit }, { queryparams, order }) {
+    const { data } = await OptionService.get('/rdo_category?' + querystring.stringify(queryparams))
+    data.order = order
+    commit('SET_CATRDO', data)
     return data
   },
-  async getSubRdo ({ commit }, rdocatId) {
-    const { data } = await OptionService.get('/rdo_subcategory?' + querystring.stringify(rdocatId))
-    commit('SET_SUBRDO', data.subRdo)
+  async getSubRdo ({ commit }, { queryparams, order }) {
+    const { data } = await OptionService.get('/rdo_subcategory?' + querystring.stringify(queryparams))
+    data.order = order
+    commit('SET_SUBRDO', data)
     return data
   }
+
 }

@@ -2,10 +2,22 @@ export default {
   macroRdo (store) {
     return store.macroRdo
   },
-  catRdo (store) {
-    return store.catRdo
+  firstCatRdo (store) {
+    return store.firstCatRdo
   },
-  subRdo (store) {
-    return store.subRdo
+  secondCatRdo (store) {
+    return store.secondCatRdo
+  },
+  thirdCatRdo (store) {
+    return store.thirdCatRdo
+  },
+  firstSubRdo (store) {
+    return store.firstSubRdo
+  },
+  secondSubRdo (store) {
+    return store.secondSubRdo
+  },
+  thirdSubRdo (store) {
+    return store.thirdSubRdo
   }
 }
