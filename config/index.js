@@ -7,8 +7,6 @@ if (!envFound) {
   throw new Error('⚠️  Couldn\'t find .env file  ⚠️')
 }
 
-console.log('nonnt', process.env.MONGODB_URI)
-
 exports.env = {
   port: parseInt(process.env.PORT, 10),
   databaseURL: process.env.MONGODB_URI,
