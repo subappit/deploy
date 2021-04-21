@@ -3,9 +3,41 @@ const Rdo = require('../../models/rdo')
 const User = require('../../models/user')
 const { clearFile } = require('../../utils/utils')
 
+exports.findFilteredRdos = (req, res, next) => {
+
+  const query = {
+    "regionOfInterest._id" : req.query.regionOfInterestId,
+    "rdos._id" : req.query.rdoId,
+    "imports" : req.query.imports
+  }
+
+  console.log(query)
+  Rdo.find( query).sort('createdAt')
+    .then((rdos) => {
+      if (rdos && rdos.length>0) {
+        res.status(200).json({
+          rdos
+        })
+      }
+      else {
+        res.status(200)
+          .json({
+            message: 'Nessuna RDO trovata corrispondente ai parametri da te scelti in fase di registrazione',
+            rdos: []
+          })
+      }
+
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500
+      }
+      next(err)
+    })
+}
 
 exports.findAllRdos = (req, res, next) => {
-  Rdo.find(req.query).sort('createdAt')
+  Rdo.find().sort('createdAt')
     .then((rdos) => {
       res.status(200).json({
         rdos
