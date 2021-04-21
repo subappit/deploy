@@ -984,13 +984,13 @@ export default {
             if (obj[0] === 'first') {
               if (key === 'macroRdo') {
                 if (item._id === rdo.macrocategory) {
-                  const oggetto = {
+                  const tmpObj = {
                     position: obj[0],
                     macro: item
                   }
                   const isFound = array.some((macro) => { return macro.position === 'first' })
                   if (!isFound || array.length === 0) {
-                    array.push(oggetto)
+                    array.push(tmpObj)
                   }
                 }
               }
@@ -1007,13 +1007,13 @@ export default {
             } else if (obj[0] === 'second') {
               if (key === 'macroRdo') {
                 if (item._id === rdo.macrocategory) {
-                  const oggetto = {
+                  const tmpObj = {
                     position: obj[0],
                     macro: item
                   }
                   const isFound = array.some((macro) => { return macro.position === 'second' })
                   if (!isFound || array.length === 0) {
-                    array.push(oggetto)
+                    array.push(tmpObj)
                   }
                 }
               }
@@ -1030,13 +1030,13 @@ export default {
             } else if (obj[0] === 'third') {
               if (key === 'macroRdo') {
                 if (item._id === rdo.macrocategory) {
-                  const oggetto = {
+                  const tmpObj = {
                     position: obj[0],
                     macro: item
                   }
                   const isFound = array.some((macro) => { return macro.position === 'third' })
                   if (!isFound || array.length === 0) {
-                    array.push(oggetto)
+                    array.push(tmpObj)
                   }
                 }
               }
