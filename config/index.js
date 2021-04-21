@@ -10,8 +10,8 @@ if (!envFound) {
 exports.env = {
   port: parseInt(process.env.PORT, 10),
   databaseURL: process.env.MONGODB_URI,
-  accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
-  sendGridKey: process.env.SEND_GRID_KEY,
+  accessTokenSecret: 'jsdruyifwerkhghasrfiwedariosdbeqwhrfvdanto',
+  sendGridKey: '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',
   api: {
     prefix: '/rest/api/subapp'
   },
