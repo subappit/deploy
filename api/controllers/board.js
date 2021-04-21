@@ -4,14 +4,11 @@ const User = require('../../models/user')
 const { clearFile } = require('../../utils/utils')
 
 exports.findFilteredRdos = (req, res, next) => {
-
   const query = {
     "regionOfInterest._id" : req.query.regionOfInterestId,
     "rdos._id" : req.query.rdoId,
     "imports" : req.query.imports
   }
-
-  console.log(query)
   Rdo.find( query).sort('createdAt')
     .then((rdos) => {
       if (rdos && rdos.length>0) {
