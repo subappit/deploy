@@ -36,5 +36,19 @@ input[type=number] {
       }
     }
   }
+}
 
+.tab-rdo {
+  .q-tabs__content {
+    .q-tab__label {
+      font-size: 1.2rem;
+    }
+    .q-tab {
+      &:hover {
+        .q-focus-helper {
+          background: none;
+        }
+      }
+    }
+  }
 }

@@ -13,18 +13,13 @@
 
       <div v-if="(selectedRdo != null && rdo.user._id != userLogged._id && !userLogged.admin)"
            class="col-12 col-md-3">
-        <div>Ribasso del <span style="color: #29ABF4; font-weight: bold">{{ribasso}}%</span></div>
-        <template>
-          <q-slider
-            v-model="ribasso"
-            :min="0"
-            :max="100"
-            :step="1"
-            label
-            :label-value="ribasso + '%'"
-            color="accent"
-          />
-        </template>
+        <q-input outlined
+                 v-model="ribasso"
+                 class="col-12 col-md-3"
+                 mask="###"
+                 label="Ribasso in percentuale %"
+                 :rules="[ (val) => isValid('ribasso', val, $v) ]"
+        />
       </div>
 
       <div v-if="!(selectedRdo != null  && rdo.user._id != userLogged._id && !userLogged.admin)"  class="desktop-only col-md-3"></div>
@@ -384,7 +379,7 @@
                 label="Invia Ribasso"
                 color="secondary"
                 @click="inviaRibasso"
-                type='submit'/>
+        />
       </div>
 
     </div>
@@ -425,7 +420,7 @@ export default {
         monthsShort: 'Gen_Feb_Mar_Apr_Mag_Giu_Lug_Ago_Set_Ott_Nov_Dic'.split('_'),
         firstDayOfWeek: 0
       },
-      ribasso: 0,
+      ribasso: null,
       columns: [
         { name: 'description', label: 'File', align: 'center' },
         { name: 'download', label: 'Download', align: 'center' }
@@ -592,25 +587,27 @@ export default {
       return date
     },
     async inviaRibasso () {
-      this.$q.loading.show()
-      const infoRibassoEmail = {
-        to: this.rdo.user.username,
-        from: 'dario.cascone93@gmail.com',
-        subject: 'Ricezione offerta per RDO: ' + this.rdo.description,
-        html: 'Spett.le ' + this.rdo.contractor + ', <br/>' +
-          'l\'operatore economico <strong>' + this.userLogged.companyName + '</strong> ha inviato la seguente offerta: <br/>' +
-          'Ribasso: <strong>' + this.ribasso + '%</strong><br/>' +
-          'Note: ' + this.rdo.peculiarity + '<br/>' + this.rdo.requiredDocuments + '<br/><br/>' +
-          'Di seguito trova i link ai file relativi all\'azienda: <br/>' +
-          '<a target="_blank" href="http://localhost:3000/' + this.rdo.user.durcRegolarityFile.path + '">Regolarità Durc</a><br/>' +
-          '<a target="_blank" href="http://localhost:3000/' + this.rdo.user.certificateFile.path + '">Certificato o Visura Camerale</a><br/>' +
-          '<a target="_blank" href="http://localhost:3000/' + this.rdo.user.lendingFile.path + '">Presentazione</a><br/>' +
-          '<a target="_blank" href="http://localhost:3000/' + this.rdo.user.antimafiaFile.path + '">Dichiarazione sostitutiva antimafia</a><br/>' +
-          '<br/>Distinti Saluti,<br/>' +
-          '<span style="color:#29ABF4">Subapp.it s.r.l.s</span>'
+      if (!this.$v.$invalid) {
+        this.$q.loading.show()
+        const infoRibassoEmail = {
+          to: this.rdo.user.username,
+          from: 'dario.cascone93@gmail.com',
+          subject: 'Ricezione offerta per RDO: ' + this.rdo.description,
+          html: 'Spett.le ' + this.rdo.contractor + ', <br/>' +
+            'l\'operatore economico <strong>' + this.userLogged.companyName + '</strong> ha inviato la seguente offerta: <br/>' +
+            'Ribasso: <strong>' + this.ribasso + '%</strong><br/>' +
+            'Note: ' + this.rdo.peculiarity + '<br/>' + this.rdo.requiredDocuments + '<br/><br/>' +
+            'Di seguito trova i link ai file relativi all\'azienda: <br/>' +
+            '<a target="_blank" href="http://localhost:3000/' + this.rdo.user.durcRegolarityFile.path + '">Regolarità Durc</a><br/>' +
+            '<a target="_blank" href="http://localhost:3000/' + this.rdo.user.certificateFile.path + '">Certificato o Visura Camerale</a><br/>' +
+            '<a target="_blank" href="http://localhost:3000/' + this.rdo.user.lendingFile.path + '">Presentazione</a><br/>' +
+            '<a target="_blank" href="http://localhost:3000/' + this.rdo.user.antimafiaFile.path + '">Dichiarazione sostitutiva antimafia</a><br/>' +
+            '<br/>Distinti Saluti,<br/>' +
+            '<span style="color:#29ABF4">Subapp.it s.r.l.s</span>'
+        }
+        await this.sendMail(infoRibassoEmail)
+        this.$q.loading.hide()
       }
-      await this.sendMail(infoRibassoEmail)
-      this.$q.loading.hide()
     },
     async loadSelectedRdo () {
       this.rdo = JSON.parse(JSON.stringify(this.selectedRdo)) // to avoid reference
@@ -691,8 +688,8 @@ export default {
   async mounted () {
     if (!this.selectedRdo) {
       this.rdo.contractor = this.userLogged.companyName
-      this.$v.$touch()
     }
+    this.$v.$touch()
   },
   validations () {
     return {
@@ -717,9 +714,6 @@ export default {
           required
         }
       },
-      country: {
-        required
-      },
       rdosSubcategories: {
         required
       },
@@ -739,7 +733,14 @@ export default {
         required
       },
       cmeFile: {
-        required
+        required: !this.selectedRdo ? required : false
+      },
+      ribasso: {
+        required: this.selectedRdo ? required : false,
+        isRibasso: this.selectedRdo ? validator.isRibasso : false
+      },
+      country: {
+        required: !this.selectedRdo ? required : false
       }
     }
   }

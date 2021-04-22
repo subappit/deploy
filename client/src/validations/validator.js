@@ -15,6 +15,14 @@ export default {
     return false
   },
 
+  isRibasso: (param) => {
+    if (param) {
+      const pattern = new RegExp('^[1-9][0-9]?$|^100$')
+      return pattern.test(param)
+    }
+    return false
+  },
+
   isVatNumber: (param) => {
     if (param) {
       const pattern = new RegExp('^[0-9]{11}$')
@@ -126,6 +134,11 @@ export default {
         case 'reference':
           if (!validator[input].isTelephoneOrEmail) {
             return 'Contatto: ' + val + ' non valido!'
+          }
+          break
+        case 'ribasso':
+          if (!validator[input].isRibasso) {
+            return 'Ribasso: ' + val + ' non valido!'
           }
           break
       }

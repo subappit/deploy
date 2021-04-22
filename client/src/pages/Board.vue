@@ -1,7 +1,8 @@
 <template>
-  <q-page>
-    <div class="q-py-lg">
+  <q-page v-if="userLogged">
+    <div class="q-py-lg tab-rdo">
       <q-tabs
+        v-if="!userLogged.admin"
         v-model="tab"
         class="text-secondary"
         active-color="primary"
@@ -14,6 +15,7 @@
         <q-tab name="yourRdos" label="Rdo da te caricate" />
       </q-tabs>
 
+      <h5 v-if="userLogged.admin" class="text-center no-margin">Lista RDO vista ADMIN</h5>
       <div>
         <q-tab-panels
           v-model="tab"
@@ -28,7 +30,7 @@
                 <table-rdo @resetSelectedRdo="selectedRdo= null" @openSelectedRdo="openSelectedRdo" @openModal="openModal('load-rdo', 'Carica RDO', true, loadRdoClassObj, false)" :allRdos="true" :filtered="false"></table-rdo>
               </div>
             </div>
-            <div v-if="(userLogged && boardFilteredRdosLoaded)" >
+            <div v-if="(!userLogged.admin && boardFilteredRdosLoaded)" >
               <div class="q-pa-lg">
                 <table-rdo @resetSelectedRdo="selectedRdo= null" @openSelectedRdo="openSelectedRdo" @openModal="openModal('load-rdo', 'Carica RDO', true, loadRdoClassObj, false)" :allRdos="true" :filtered="true"></table-rdo>
               </div>
@@ -36,7 +38,7 @@
             <div v-if="userLogged.admin && !boardRdosLoaded" class="flex column justify-center items-center q-pt-xl" >
               <h5 class="text-center no-margin q-pb-lg">Nessuna RDO trovata</h5>
             </div>
-            <div v-if="userLogged && !boardFilteredRdosLoaded" class="flex column justify-center items-center q-pt-xl" >
+            <div v-if="!userLogged.admin && !boardFilteredRdosLoaded" class="flex column justify-center items-center q-pt-xl" >
               <h5 class="text-center no-margin q-pb-lg">Nessuna RDO trovata corrispondente ai parametri da te scelti in fase di registrazione</h5>
             </div>
             <modal :selected-rdo="selectedRdo" :class-obj="classObj" :modal.sync="modal" :is-maximized="isMaximized" :component="modalComponent" :title="modalTitle"/>
@@ -94,25 +96,17 @@ export default {
     },
     async loadBoard () {
       this.$q.loading.show()
-      if (!this.userLogged.admin) {
+      if (this.userLogged && !this.userLogged.admin) {
         await this.fetchFilteredRdos(this.getFilters())
         this.boardFilteredRdosLoaded = this.boardFilteredRdos.length > 0
-      } else {
+      } else if (this.userLogged && this.userLogged.admin) {
         await this.fetchAllRdos()
         this.boardRdosLoaded = this.boardRdos.length > 0
       }
       this.$q.loading.hide()
     },
     getFilters () {
-      const rdoIdsFirst = []
-      const importsFirst = []
-      const rofIdsFirst = []
-      const rdoIdsSecond = []
-      const importsSecond = []
-      const rofIdsSecond = []
-      const rdoIdsThird = []
-      const importsThird = []
-      const rofIdsThird = []
+      const rdoIdsFirst = [], importsFirst = [], rofIdsFirst = [], rdoIdsSecond = [], importsSecond = [], rofIdsSecond = [], rdoIdsThird = [], importsThird = [], rofIdsThird = []
       Object.entries(this.userLogged.rdos).forEach((obj) => {
         if (obj[0] === 'first') {
           obj[1].subCategory.forEach((rdo) => {
@@ -189,6 +183,14 @@ export default {
       handler (newVal, oldVal) {
         if (newVal.length !== oldVal.length) {
           this.boardFilteredRdosLoaded = newVal.length > 0
+        }
+      }
+    },
+    userLogged: {
+      deep: true,
+      handler (newVal, oldVal) {
+        if (newVal != null) {
+          this.loadBoard()
         }
       }
     }
