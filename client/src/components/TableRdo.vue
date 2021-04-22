@@ -16,7 +16,8 @@
         </template>
       </q-input>
       <div  class="q-ml-auto">
-        <q-btn push
+        <q-btn v-if="!allRdos"
+               push
                :ripple="false"
                label="Carica RDO"
                @click="loadRdo()"
@@ -43,10 +44,8 @@
         <q-td style="white-space: normal" :auto-width="true" key="subCategory" :props="props">
           {{ props.row.rdo.rdos.description }}
         </q-td>
-        <q-td :auto-width="true" key="imports" :props="props">
-          <div v-for="(item, index) in props.row.rdo.imports" :key="index" >
-            {{item}}
-          </div>
+        <q-td :auto-width="true" key="import" :props="props">
+          {{ props.row.rdo.import }}
         </q-td>
         <q-td :auto-width="true" key="regionOfInterest" :props="props">
           {{ props.row.rdo.regionOfInterest.description }}
@@ -71,14 +70,14 @@ import { date } from 'quasar'
 
 export default {
   name: 'TableRdo',
-  props: ['allRdos'],
+  props: ['allRdos', 'filtered'],
   data () {
     return {
       search: '',
       columns: [
         { name: 'macroCategory', required: true, label: 'Macrocategoria', align: 'center' },
         { name: 'subCategory', required: true, label: 'Subcategoria', align: 'center' },
-        { name: 'imports', required: true, label: 'Importo', align: 'center' },
+        { name: 'import', required: true, label: 'Importo', align: 'center' },
         { name: 'regionOfInterest', required: true, label: 'Regione', align: 'center' },
         { name: 'expirationDate', required: true, label: 'Scadenza', align: 'center' },
         { name: 'viewRdo', required: true, label: 'Visualizza RDO', align: 'center' }
@@ -90,7 +89,6 @@ export default {
   methods: {
     ...mapActions([
       'deleteRdo',
-      'fetchRdos',
       'fetchUser'
     ]),
     getData (data) {
@@ -157,7 +155,8 @@ export default {
   computed: {
     ...mapGetters({
       userLogged: 'user',
-      boardRdos: 'boardRdos'
+      boardRdos: 'boardRdos',
+      boardFilteredRdos: 'boardFilteredRdos'
     }),
     filter () {
       return {
@@ -170,12 +169,21 @@ export default {
       this.getData(this.userLogged.loadedRdos)
       this.columns.push({ name: 'deleteRdo', required: true, label: 'Elimina RDO', align: 'center' })
     } else {
-      const filteredRdos = this.boardRdos.filter((rdo) => { return rdo.user._id !== this.userLogged._id })
+      const filteredRdos = !this.filtered ? this.boardRdos.filter((rdo) => { return rdo.user._id !== this.userLogged._id }) : this.boardFilteredRdos.filter((rdo) => { return rdo.user._id !== this.userLogged._id })
       this.getData(filteredRdos)
     }
   },
   watch: {
     boardRdos: {
+      deep: true,
+      handler (newVal, oldVal) {
+        if (this.allRdos) {
+          const filteredRdos = newVal.filter((rdo) => { return rdo.user._id !== this.userLogged._id })
+          this.getData(filteredRdos)
+        }
+      }
+    },
+    boardFilteredRdos: {
       deep: true,
       handler (newVal, oldVal) {
         if (this.allRdos) {

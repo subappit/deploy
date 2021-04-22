@@ -4,26 +4,56 @@ const User = require('../../models/user')
 const { clearFile } = require('../../utils/utils')
 
 exports.findFilteredRdos = (req, res, next) => {
-  const query = {
-    "regionOfInterest._id" : req.query.regionOfInterestId,
-    "rdos._id" : req.query.rdoId,
-    "imports" : req.query.imports
+    const allFilteredRdo = []
+    const queryFirst = {
+      "regionOfInterest._id" : req.query.regionOfInterestIdFirst,
+      "rdos._id" : req.query.rdoIdFirst,
+      "import" : req.query.importsFirst
   }
-  Rdo.find( query).sort('createdAt')
-    .then((rdos) => {
-      if (rdos && rdos.length>0) {
-        res.status(200).json({
-          rdos
-        })
-      }
-      else {
-        res.status(200)
-          .json({
-            message: 'Nessuna RDO trovata corrispondente ai parametri da te scelti in fase di registrazione',
-            rdos: []
-          })
-      }
+  const querySecond = {}
+  const queryThird = {}
+  const querySecondNeedeed = req.query.regionOfInterestIdSecond != null ? true : false
+  if (querySecondNeedeed) {
+      querySecond["regionOfInterest._id"]= req.query.regionOfInterestIdSecond,
+       querySecond["rdos._id"] = req.query.rdoIdSecond,
+      querySecond["import"] = req.query.importsSecond
+  }
+    const queryThirdNeedeed = req.query.regionOfInterestIdThird != null ? true : false
+    if (queryThirdNeedeed) {
+        queryThird["regionOfInterest._id"] = req.query.regionOfInterestIdThird,
+            queryThird["rdos._id"] = req.query.rdoIdThird,
+            queryThird["import"] = req.query.importsThird
 
+    }
+  Rdo.find(queryFirst).sort('createdAt')
+    .then((rdos) => {
+        rdos.forEach((rdo) => {
+            allFilteredRdo.push(rdo)
+        })
+        console.log('querySecondNeedeed', querySecondNeedeed)
+        if(querySecondNeedeed) {
+            Rdo.find(querySecond).sort('createdAt')
+                .then((rdos) => {
+                rdos.forEach((rdo) => {
+                    allFilteredRdo.push(rdo)
+                })
+                if(queryThirdNeedeed) {
+                    Rdo.find(queryThird).sort('createdAt')
+                        .then((rdos) => {
+                            rdos.forEach((rdo) => {
+                                allFilteredRdo.push(rdo)
+                            })
+                            return res.status(200).json({
+                                rdos: allFilteredRdo
+                            })
+                        })
+                } else {
+                    return res.status(200).json({rdos: allFilteredRdo.flat()})
+                }
+            })
+        } else {
+            return res.status(200).json({rdos: allFilteredRdo})
+        }
     })
     .catch((err) => {
       if (!err.statusCode) {
@@ -76,7 +106,7 @@ exports.insertRdo = (req, res, next) => {
       })
     })
     .then(() => {
-      res.status(200).json({ message: 'Rdo caricata con successo!', rdo: rdo })
+      res.status(200).json({ rdo: rdo })
     })
     .catch((err) => {
         if (!err.statusCode) {

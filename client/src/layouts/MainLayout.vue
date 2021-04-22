@@ -34,8 +34,6 @@
                       <div class="text-h6 q-mb-xs q-ml-sm">Impostazioni</div>
                       <q-btn v-if="user && user.admin" class="no-padding" flat color="primary" size="md" label="Admin" @click="openAdminConsole" icon="admin_panel_settings" />
                       <q-btn flat  color="primary" size="md" v-if="user && !user.admin" label="profilo" @click="editProfile" icon="perm_identity" />
-                      <q-btn flat  color="primary" size="md" v-if="user && !user.admin" label="RDO caricate" :disable="user && user.blocked"  @click="goToUserRdos" icon="list" >
-                      </q-btn>
                     </div>
                     <q-separator vertical inset class="q-mx-md" />
 
@@ -230,11 +228,6 @@ export default {
     openBoard () {
       if (this.$route.name !== 'board') {
         this.$router.push('/board')
-      }
-    },
-    goToUserRdos () {
-      if (this.$route.name !== 'userRdos') {
-        this.$router.push('/userRdos')
       }
     },
     refreshAos () {

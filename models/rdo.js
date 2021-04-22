@@ -7,8 +7,8 @@ const rdoSchema = new Schema({
     type: Object,
     required: true
   },
-  imports: {
-    type: Array,
+  import: {
+    type: String,
     required: true
   },
   regionOfInterest: {

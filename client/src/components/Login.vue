@@ -65,8 +65,9 @@ export default {
       if (!this.$v.$invalid) {
         this.$q.loading.show()
         await this.login(this.user)
-        this.$q.loading.hide()
+        await this.$router.push('/board')
         this.$emit('loginSuccess', false)
+        this.$q.loading.hide()
       }
     }
   },

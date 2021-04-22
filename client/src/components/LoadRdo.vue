@@ -184,10 +184,10 @@
                 transition-show="scale"
                 transition-hide="scale"/>
 
-      <q-select v-model="rdo.imports"
+      <q-select v-model="rdo.import"
                 :options="imports"
                 :disable="selectedRdo != null"
-                name="imports"
+                name="import"
                 outlined
                 class="col-12 col-md-3"
                 option-dense
@@ -196,7 +196,7 @@
                 transition-show="scale"
                 transition-hide="scale"
                 reactive-rules
-                :rules="[ (val) => isValid('imports', val, $v.rdo) ]"/>
+                :rules="[ (val) => isValid('import', val, $v.rdo) ]"/>
 
       <div v-if="selectedRdo" class="desktop-only col-md-3"></div>
       <!-- Riga -->
@@ -476,25 +476,22 @@ export default {
       await this.getRegions(this.country._id)
     },
     async getCatRdoOption () {
-      if (this.rdosMacrocategories == null) {
-        this.rdosCategories = null
-        this.rdosSubcategories = null
-      } else {
-        const obj = {
-          queryparams: { rdomacroId: this.rdosMacrocategories._id },
-          order: 'first'
-        }
-        await this.getCatRdo(obj)
+      this.rdosCategories = null
+      this.rdosSubcategories = null
+
+      const obj = {
+        queryparams: { rdomacroId: this.rdosMacrocategories._id },
+        order: 'first'
       }
+      await this.getCatRdo(obj)
     },
     async getSubcatRdoOption () {
-      if (this.rdosCategories == null) { this.rdosSubcategories = null } else {
-        const obj = {
-          queryparams: { rdocatId: this.rdosCategories._id },
-          order: 'first'
-        }
-        await this.getSubRdo(obj)
+      this.rdosSubcategories = null
+      const obj = {
+        queryparams: { rdocatId: this.rdosCategories._id },
+        order: 'first'
       }
+      await this.getSubRdo(obj)
     },
     async loadRdo () {
       if (!this.$v.$invalid) {
@@ -513,6 +510,10 @@ export default {
         await this.fetchUser(obj)
         await this.fetchRdos()
         this.$emit('loadRdoSuccess', false)
+        this.$q.notify({
+          type: 'positive',
+          message: 'Rdo caricata con successo!'
+        })
         this.$q.loading.hide()
       }
     },
@@ -696,7 +697,7 @@ export default {
   validations () {
     return {
       rdo: {
-        imports: {
+        import: {
           required
         },
         regionOfInterest: {

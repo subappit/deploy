@@ -1225,7 +1225,6 @@ export default {
       }
       if (needUploadFile) {
         if (fileToRemove.length > 0) {
-          console.log('filetoRemove', fileToRemove)
           const obj = {
             pathParam: this.user._id,
             body: fileToRemove

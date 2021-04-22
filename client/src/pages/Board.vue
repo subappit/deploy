@@ -1,35 +1,68 @@
 <template>
-<q-page>
-  <div v-if="userLogged && boardRdosLoaded" >
-    <h5 class="text-center">Lista RDO di tuo interesse</h5>
-    <div class="q-px-lg">
-      <table-rdo @resetSelectedRdo="selectedRdo= null" @openSelectedRdo="openSelectedRdo" @openModal="openModal('load-rdo', 'Carica RDO', true, loadRdoClassObj, false)" :allRdos="true"></table-rdo>
+  <q-page>
+    <div class="q-py-lg">
+      <q-tabs
+        v-model="tab"
+        class="text-secondary"
+        active-color="primary"
+        indicator-color="accent"
+        dense
+        narrow-indicator
+        align="justify"
+      >
+        <q-tab name="rdos" label="RDO di tuo interesse" />
+        <q-tab name="yourRdos" label="Rdo da te caricate" />
+      </q-tabs>
+
+      <div>
+        <q-tab-panels
+          v-model="tab"
+          animated
+          transition-prev="scale"
+          transition-next="scale"
+          class="full-width"
+        >
+          <q-tab-panel name="rdos">
+            <div v-if="(userLogged.admin && boardRdosLoaded)" >
+              <div class="q-pa-lg">
+                <table-rdo @resetSelectedRdo="selectedRdo= null" @openSelectedRdo="openSelectedRdo" @openModal="openModal('load-rdo', 'Carica RDO', true, loadRdoClassObj, false)" :allRdos="true" :filtered="false"></table-rdo>
+              </div>
+            </div>
+            <div v-if="(userLogged && boardFilteredRdosLoaded)" >
+              <div class="q-pa-lg">
+                <table-rdo @resetSelectedRdo="selectedRdo= null" @openSelectedRdo="openSelectedRdo" @openModal="openModal('load-rdo', 'Carica RDO', true, loadRdoClassObj, false)" :allRdos="true" :filtered="true"></table-rdo>
+              </div>
+            </div>
+            <div v-if="userLogged.admin && !boardRdosLoaded" class="flex column justify-center items-center q-pt-xl" >
+              <h5 class="text-center no-margin q-pb-lg">Nessuna RDO trovata</h5>
+            </div>
+            <div v-if="userLogged && !boardFilteredRdosLoaded" class="flex column justify-center items-center q-pt-xl" >
+              <h5 class="text-center no-margin q-pb-lg">Nessuna RDO trovata corrispondente ai parametri da te scelti in fase di registrazione</h5>
+            </div>
+            <modal :selected-rdo="selectedRdo" :class-obj="classObj" :modal.sync="modal" :is-maximized="isMaximized" :component="modalComponent" :title="modalTitle"/>
+          </q-tab-panel>
+
+          <q-tab-panel name="yourRdos">
+            <user-rdos></user-rdos>
+          </q-tab-panel>
+        </q-tab-panels>
+      </div>
     </div>
-  </div>
-  <div v-if="userLogged && !boardRdosLoaded" class="flex column justify-center items-center q-pt-xl" >
-    <h5 class="text-center no-margin q-pb-lg">Ancora nessuna richiesta di offerta caricata.</h5>
-    <q-btn push
-             :ripple="false"
-             label="Carica RDO"
-             class="q-pa-xs"
-             @click="openModal('load-rdo', 'Carica RDO', true, loadRdoClassObj, false)"
-             color="secondary"
-    />
-  </div>
-  <modal :selected-rdo="selectedRdo" :class-obj="classObj" :modal.sync="modal" :is-maximized="isMaximized" :component="modalComponent" :title="modalTitle"/>
-</q-page>
+  </q-page>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import TableRdo from 'components/TableRdo'
 import Modal from 'components/Modal'
+import UserRdos from 'components/UserRdos'
 
 export default {
   name: 'Board',
-  components: { TableRdo, Modal },
+  components: { UserRdos, TableRdo, Modal },
   data () {
     return {
+      tab: 'rdos',
       loadRdoClassObj: {
         'q-pa-none': true
       },
@@ -39,12 +72,14 @@ export default {
       modal: false,
       classObj: {},
       boardRdosLoaded: true,
+      boardFilteredRdosLoaded: true,
       selectedRdo: null
     }
   },
   methods: {
     ...mapActions([
-      'fetchRdos'
+      'fetchFilteredRdos',
+      'fetchAllRdos'
     ]),
     openModal (component, title, isMaximized, classObj) {
       this.modalComponent = component
@@ -59,15 +94,85 @@ export default {
     },
     async loadBoard () {
       this.$q.loading.show()
-      await this.fetchRdos()
+      if (!this.userLogged.admin) {
+        await this.fetchFilteredRdos(this.getFilters())
+        this.boardFilteredRdosLoaded = this.boardFilteredRdos.length > 0
+      } else {
+        await this.fetchAllRdos()
+        this.boardRdosLoaded = this.boardRdos.length > 0
+      }
       this.$q.loading.hide()
-      this.boardRdosLoaded = this.boardRdos.length > 0
+    },
+    getFilters () {
+      const rdoIdsFirst = []
+      const importsFirst = []
+      const rofIdsFirst = []
+      const rdoIdsSecond = []
+      const importsSecond = []
+      const rofIdsSecond = []
+      const rdoIdsThird = []
+      const importsThird = []
+      const rofIdsThird = []
+      Object.entries(this.userLogged.rdos).forEach((obj) => {
+        if (obj[0] === 'first') {
+          obj[1].subCategory.forEach((rdo) => {
+            rdoIdsFirst.push(rdo._id)
+          })
+          obj[1].imports.forEach((imp) => {
+            importsFirst.push(imp)
+          })
+          obj[1].regionsOfInterest.forEach((rof) => {
+            rofIdsFirst.push(rof._id)
+          })
+        }
+        if (obj[0] === 'second') {
+          obj[1].subCategory.forEach((rdo) => {
+            rdoIdsSecond.push(rdo._id)
+          })
+          obj[1].imports.forEach((imp) => {
+            importsSecond.push(imp)
+          })
+          obj[1].regionsOfInterest.forEach((rof) => {
+            rofIdsSecond.push(rof._id)
+          })
+        }
+        if (obj[0] === 'third') {
+          obj[1].subCategory.forEach((rdo) => {
+            rdoIdsThird.push(rdo._id)
+          })
+          obj[1].imports.forEach((imp) => {
+            importsThird.push(imp)
+          })
+          obj[1].regionsOfInterest.forEach((rof) => {
+            rofIdsThird.push(rof._id)
+          })
+        }
+      })
+      const obj = {
+        queryparams: {
+          regionOfInterestIdFirst: rofIdsFirst,
+          rdoIdFirst: rdoIdsFirst,
+          importsFirst: importsFirst
+        }
+      }
+      if (rdoIdsSecond.length > 0) {
+        obj.queryparams.regionOfInterestIdSecond = rofIdsSecond
+        obj.queryparams.rdoIdSecond = rdoIdsSecond
+        obj.queryparams.importsSecond = importsSecond
+      }
+      if (rdoIdsThird.length > 0) {
+        obj.queryparams.regionOfInterestIdThird = rofIdsThird
+        obj.queryparams.rdoIdThird = rdoIdsThird
+        obj.queryparams.importsThird = importsThird
+      }
+      return obj
     }
   },
   computed: {
     ...mapGetters({
       userLogged: 'user',
-      boardRdos: 'boardRdos'
+      boardRdos: 'boardRdos',
+      boardFilteredRdos: 'boardFilteredRdos'
     })
   },
   watch: {
@@ -76,6 +181,14 @@ export default {
       handler (newVal, oldVal) {
         if (newVal.length !== oldVal.length) {
           this.boardRdosLoaded = newVal.length > 0
+        }
+      }
+    },
+    boardFilteredRdos: {
+      deep: true,
+      handler (newVal, oldVal) {
+        if (newVal.length !== oldVal.length) {
+          this.boardFilteredRdosLoaded = newVal.length > 0
         }
       }
     }
@@ -87,5 +200,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

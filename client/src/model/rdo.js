@@ -1,7 +1,7 @@
 export default class rdo {
   constructor () {
     this.rdos = null
-    this.imports = null
+    this.import = null
     this.regionOfInterest = undefined
     this.expirationDate = undefined
     this.user = {}

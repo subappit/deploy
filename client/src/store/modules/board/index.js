@@ -6,7 +6,8 @@ export default {
   state () {
     // inital state
     return {
-      boardRdos: []
+      boardRdos: [],
+      boardFilteredRdos: []
     }
   },
   mutations: boardMutations,
