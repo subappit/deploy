@@ -185,18 +185,12 @@ export default {
           this.boardFilteredRdosLoaded = newVal.length > 0
         }
       }
-    },
-    userLogged: {
-      deep: true,
-      handler (newVal, oldVal) {
-        if (newVal != null) {
-          this.loadBoard()
-        }
-      }
     }
   },
   async mounted () {
-    await this.loadBoard()
+    setTimeout(async () => {
+      await this.loadBoard()
+    }, 200)
   }
 }
 </script>
