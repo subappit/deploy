@@ -18,8 +18,15 @@
                  class="col-12 col-md-3"
                  mask="###"
                  label="Ribasso in percentuale %"
-                 :rules="[ (val) => isValid('ribasso', val, $v) ]"
-        />
+                 :rules="[ (val) => isValid('ribasso', val, $v) ]">
+        <template v-slot:append>
+          <q-icon class="desktop-only text-secondary" name="info">
+            <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
+              Il ribasso inserito sarà inteso come scontistica da applicare ai prezzi aggiudicati e pubblicati dall'appaltatore. <br>Qualora i prezzi facciano riferimento a più tipologie di lavori, forniture e servizi, è opportuno offrire un ribasso medio
+            </q-tooltip>
+          </q-icon>
+        </template>
+        </q-input>
       </div>
 
       <div v-if="!(selectedRdo != null  && rdo.user._id != userLogged._id && !userLogged.admin)"  class="desktop-only col-md-3"></div>
@@ -253,7 +260,7 @@
         <q-file
           v-if="!selectedRdo"
           v-model="cmeFile"
-          label="Carica quì il CME *"
+          label="Carica quì le informazioni economiche *"
           accept=".pdf"
           outlined
           use-chips
@@ -261,6 +268,15 @@
         >
           <template v-slot:prepend>
             <q-icon name="attach_file" />
+          </template>
+
+          <template v-slot:append>
+            <q-icon class="desktop-only text-secondary" name="info">
+              <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
+                Inserire riepiloghi prezzi o computi già scontati del ribasso praticato al Committente, e sui quali sarà formulato il ribasso da parte dei soggetti interessati. <br>
+                Qualora i prezzi facciano riferimento a più tipologie di lavori, forniture e servizi, si riceverà un ribasso medio.
+              </q-tooltip>
+            </q-icon>
           </template>
         </q-file>
 
@@ -283,7 +299,7 @@
           <template v-slot:append>
             <q-icon class="desktop-only text-secondary" name="info">
               <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
-                Per caricare più di un'immagine, selezionale contemporaneamente
+                Inserisci foto dello stato dei luoghi
               </q-tooltip>
             </q-icon>
           </template>
@@ -307,7 +323,7 @@
           <template v-slot:append>
             <q-icon class="desktop-only text-secondary" name="info">
               <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
-                Per caricare più di un file, selezionali contemporaneamente
+               Potrai inserire altri file tecnici, utili alla formulazione dell'offerta (es. progetti, relazioni, etc...)
               </q-tooltip>
             </q-icon>
           </template>
