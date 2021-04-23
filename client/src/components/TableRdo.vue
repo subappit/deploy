@@ -56,7 +56,7 @@
         <q-td :auto-width="true" key="viewRdo" :props="props">
           <q-icon style="font-size: 2rem;" name="search" @click="openRdo(props.row.rdo)" class="text-accent cursor-pointer"></q-icon>
         </q-td>
-        <q-td v-if="!allRdos" :auto-width="true" key="deleteRdo" :props="props">
+        <q-td v-if="!allRdos || userLogged.admin" :auto-width="true" key="deleteRdo" :props="props">
           <q-icon style="font-size: 2rem;" name="delete_forever" class="text-negative cursor-pointer" @click="cancelRdo(props.row.rdo)"></q-icon>
         </q-td>
       </q-tr>
@@ -92,7 +92,8 @@ export default {
   methods: {
     ...mapActions([
       'deleteRdo',
-      'fetchUser'
+      'fetchUser',
+      'fetchAllRdos'
     ]),
     getData (data) {
       if (this.data.length > 0) this.data = []
@@ -112,15 +113,22 @@ export default {
     },
     async cancelRdo (rdo) {
       this.$q.loading.show()
+      const userId = !this.userLogged.admin ? this.userLogged._id : rdo.user._id
       const objDelete = {
-        pathParam: rdo._id + '/' + this.userLogged._id
+        pathParam: rdo._id + '/' + userId
       }
       const objUser = {
-        pathParam: this.userLogged._id
+        pathParam: userId
       }
       await this.deleteRdo(objDelete)
-      await this.fetchUser(objUser)
-      this.getData(this.userLogged.loadedRdos)
+      if (!this.userLogged.admin) {
+        await this.fetchUser(objUser)
+        this.getData(this.userLogged.loadedRdos)
+      } else {
+        await this.fetchAllRdos()
+        const filteredRdos = !this.filtered ? this.boardRdos.filter((rdo) => { return rdo.user._id !== this.userLogged._id }) : this.boardFilteredRdos.filter((rdo) => { return rdo.user._id !== this.userLogged._id })
+        this.getData(filteredRdos)
+      }
       this.$q.loading.hide()
     },
     customFilter (rows, terms) {
@@ -168,7 +176,7 @@ export default {
     }
   },
   mounted () {
-    if (!this.allRdos) {
+    if (!this.allRdos || this.userLogged.admin) {
       this.getData(this.userLogged.loadedRdos)
       this.columns.push({ name: 'deleteRdo', required: true, label: 'Elimina RDO', align: 'center' })
     } else {
