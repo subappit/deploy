@@ -280,8 +280,14 @@
           <template v-slot:prepend>
             <q-icon name="attach_file" />
           </template>
+          <template v-slot:append>
+            <q-icon class="desktop-only text-secondary" name="info">
+              <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
+                Per caricare più di un'immagine, selezionale contemporaneamente
+              </q-tooltip>
+            </q-icon>
+          </template>
         </q-file>
-
       </div>
 
       <div class="col-12 col-md-3">
@@ -297,6 +303,13 @@
         >
           <template v-slot:prepend>
             <q-icon name="attach_file" />
+          </template>
+          <template v-slot:append>
+            <q-icon class="desktop-only text-secondary" name="info">
+              <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
+                Per caricare più di un file, selezionali contemporaneamente
+              </q-tooltip>
+            </q-icon>
           </template>
         </q-file>
 

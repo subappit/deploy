@@ -9,7 +9,7 @@
       :filter="filter"
       :filter-method="customFilter"
       separator="cell"
-      pagination.sync="pagination"
+      :pagination="pagination"
     >
       <template v-slot:top="props">
         <div class="col-2 q-table__title">Lista utenti</div>
@@ -112,6 +112,9 @@ export default {
   components: { ConfirmDialog, Modal },
   data () {
     return {
+      pagination: {
+        rowsPerPage: 0
+      },
       subscriptionPeriod: null,
       haveToBlock: false,
       message: undefined,

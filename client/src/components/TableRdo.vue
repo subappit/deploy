@@ -7,7 +7,7 @@
     :filter="filter"
     :filter-method="customFilter"
     separator="cell"
-    pagination.sync="pagination"
+    :pagination="pagination"
   >
     <template v-slot:top="props">
       <q-input borderless dense debounce="300" v-model="search" placeholder="Search">
@@ -73,6 +73,9 @@ export default {
   props: ['allRdos', 'filtered'],
   data () {
     return {
+      pagination: {
+        rowsPerPage: 0
+      },
       search: '',
       columns: [
         { name: 'macroCategory', required: true, label: 'Macrocategoria', align: 'center' },
