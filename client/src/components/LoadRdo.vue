@@ -471,7 +471,8 @@ export default {
       data: [],
       isTelephoneNumber: validator.isTelephoneNumber,
       presentationFiles: presentationFiles,
-      fileToShare: []
+      fileToShare: [],
+      html: ''
     }
   },
   methods: {
