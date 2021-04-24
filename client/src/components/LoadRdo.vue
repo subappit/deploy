@@ -471,8 +471,7 @@ export default {
       data: [],
       isTelephoneNumber: validator.isTelephoneNumber,
       presentationFiles: presentationFiles,
-      fileToShare: [],
-      html: ''
+      fileToShare: []
     }
   },
   methods: {
@@ -760,7 +759,6 @@ export default {
   async created () {
     if (this.selectedRdo) {
       await this.getMacroRdo()
-
       await this.loadSelectedRdo()
       this.getData()
     } else {
