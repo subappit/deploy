@@ -85,7 +85,7 @@
                     :disable="true"
                     :options-dense="true"
                     v-model="user.country"
-                    label="Nazione *"
+                    label="Nazione sede*"
                     :options="countries" option-label="description"
                     reactive-rules
                     name="country"
@@ -101,7 +101,7 @@
                     :options="regions" option-label="description"  :options-dense="true"
                     outlined
                     v-model="user.region"
-                    label="Regione *"
+                    label="Regione sede*"
                     name="region"
                     emit-value
                     reactive-rules
@@ -115,7 +115,7 @@
                     class="col-12 col-md-3"
                     :disable="(!(user.region && provinces.length>0)) || (isEditing && !isAdmin)" :readonly="!(user.region && provinces.length>0)"
                     option-label="description" option-dense v-model="user.province" :options="provinces"
-                    label="Provincia *"
+                    label="Provincia sede*"
                     reactive-rules name="region"
                     :rules="[ (val) => isValid('province', val, $v.user) ]"
                     emit-value
@@ -132,7 +132,7 @@
                     outlined
                     map-options
                     emit-value
-                    label="Città *"
+                    label="Città sede*"
                     v-model="user.city"
                     reactive-rules
                     :rules="[ (val) => isValid('city', val, $v.user) ]"
@@ -143,7 +143,7 @@
           <q-input outlined
                    :disable="isEditing && !isAdmin"
                    v-model="user.postalCode"
-                   type="number" label="CAP *"
+                   type="number" label="CAP sede*"
                    class="col-12 col-md-3"
                    name="postalCode"
                    reactive-rules

@@ -6,13 +6,17 @@
         v-model="tab"
         class="text-secondary"
         active-color="primary"
-        indicator-color="accent"
         dense
+        indicator-color="transparent"
         narrow-indicator
         align="justify"
       >
-        <q-tab name="rdos" label="RDO di tuo interesse" />
-        <q-tab name="yourRdos" label="Rdo da te caricate" />
+        <q-tab name="rdos" :ripple="false">
+          <div class="tab-to-select">Rdo di tuo interesse</div>
+        </q-tab>
+        <q-tab name="yourRdos" :ripple="false">
+          <div class="tab-to-select">Rdo da te caricate</div>
+        </q-tab>
       </q-tabs>
 
       <h5 v-if="userLogged.admin" class="text-center no-margin">Lista RDO vista ADMIN</h5>

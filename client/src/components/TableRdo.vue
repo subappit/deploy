@@ -15,6 +15,8 @@
           <q-icon name="search" />
         </template>
       </q-input>
+      <div v-if="allRdos" class="text-center" style="margin: auto; font-size: 1.2rem; color: #165081;">RDO di tuo interesse</div>
+      <div v-else class="text-center" style="margin: auto; font-size: 1.2rem; color: #165081;">RDO da te caricate</div>
       <div  class="q-ml-auto">
         <q-btn v-if="!allRdos"
                push
