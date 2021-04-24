@@ -1,7 +1,7 @@
 <template>
   <q-form @submit.prevent.stop="onSubmit">
     <div class="row justify-center content-center no-padding no-margin q-gutter-x-md q-gutter-y-lg">
-      <h5 class="text-center col-12">Reimposta password</h5>
+      <h5 class="text-center col-12 no-margin q-pt-lg">Reimposta password</h5>
       <q-input v-model="password"
                :type="isPwd ? 'password' : 'text'"
                name="password"
@@ -18,11 +18,10 @@
           />
         </template>
       </q-input>
-      <div class="col-12 col-md-6 q-mt-lg q-pt-lg">
+      <div class="col-12 col-md-6 text-center">
         <q-btn push
                :ripple="false"
                label="Reimposta password"
-               class="text-center"
                color="secondary"
                type='submit'/>
       </div>
@@ -62,6 +61,7 @@ export default {
           }
         }
         await this.resetPassword(obj)
+        await this.$router.push('/')
         this.$q.loading.hide()
       }
     }
