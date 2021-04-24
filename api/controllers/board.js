@@ -39,7 +39,7 @@ exports.findFilteredRdos = async (req, res, next) => {
     queryThird.import = req.query.importsThird
   }
   await deleteExpiredRDO(next)
-  console.log('passo qui')
+
   Rdo.find(queryFirst).sort('createdAt')
     .then((rdos) => {
       rdos.forEach((rdo) => {
@@ -79,7 +79,6 @@ exports.findFilteredRdos = async (req, res, next) => {
 
 exports.findAllRdos = async (req, res, next) => {
   await deleteExpiredRDO(next)
-  console.log('passo qui')
   Rdo.find().sort('createdAt')
     .then((rdos) => {
       res.status(200).json({
