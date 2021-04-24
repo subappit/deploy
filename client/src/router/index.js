@@ -30,6 +30,10 @@ export default function (/* { store, ssrContext } */) {
   Router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
     const publicPages = ['/', '/termCondition', '/cookiePolicy']
+    console.log('to', to.path)
+    if (to.path.includes('forgotPassword')) {
+      publicPages.push(to.path)
+    }
     const authRequired = !publicPages.includes(to.path)
     const loggedIn = JwtService.getToken()
     if (authRequired && !loggedIn) {

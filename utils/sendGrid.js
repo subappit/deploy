@@ -20,5 +20,12 @@ exports.sendGridOptions = {
         + 'L’accesso al portale e la fattura saranno disponibili dopo la conferma dell\'avvenuta contabilizzazione del bonifico sul conto di <span style="color:#29ABF4">Subapp.it s.r.l.s</span><br/>'
         + '<br/>Distinti Saluti,<br/>'
         + '<span style="color:#29ABF4">Subapp.it s.r.l.s</span>'
+  },
+  forgottenPasswordMsg: {
+    to: '', // Change to your recipient,
+    from: 'dario.cascone93@gmail.com', // Change to your verified sender
+    subject: 'SubApp.it: Reimposta password',
+    html: 'Gentile cliente,<br/><br/>'
+        + 'per completare il reimposta password, acceda al link di seguito riportato<br/>'
   }
 }
