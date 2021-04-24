@@ -37,4 +37,7 @@ route.post('/login',
   ],
   authController.login)
 
+route.get('/forgottenPassword', authController.forgottenPassword)
+route.post('/resetPassword', authController.resetPassword)
+
 module.exports = route
