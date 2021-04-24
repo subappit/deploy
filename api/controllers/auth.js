@@ -102,7 +102,6 @@ exports.login = (req, res, next) => {
 }
 exports.forgottenPassword = (req, res, next) => {
   const { email } = req.query
-  console.log(email)
   let findedUser
   User.findOne({ username: email })
     .then((user) => {
@@ -112,12 +111,12 @@ exports.forgottenPassword = (req, res, next) => {
         throw error
       }
       findedUser = user
-      sendGrid.sendGridOptions.forgottenPasswordMsg.html += ''
+      sendGrid.sendGridOptions.forgottenPasswordMsg.html += ` http://localhost:8080/forgotPassword/${user._id}` // TODO cambiare con il dominio quando andrà online
       sendGrid.sendGridOptions.forgottenPasswordMsg.to = user.username
+      console.log(sendGrid.sendGridOptions.forgottenPasswordMsg.html)
       return sgMail.send(sendGrid.sendGridOptions.forgottenPasswordMsg)
     })
     .then(() => {
-      console.log(`Email sent to ${sendGrid.sendGridOptions.msgSignup.to}`)
       res.status(200).json({
         message: 'Ti è stata inviata un\' email con le istruzioni da seguire per il reimposta password',
         user: findedUser._id

@@ -93,8 +93,7 @@ export default {
             email: this.email
           }
         }
-        const { user } = await this.forgottenPassword(obj)
-        this.$router.push('/forgotPassword/' + user).catch(error => console.error(error))
+        await this.forgottenPassword(obj)
         this.$emit('loginSuccess', false)
         this.$q.loading.hide()
       }

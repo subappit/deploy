@@ -1,10 +1,12 @@
 <template>
-  <div style="min-width: 330px" class="q-pa-lg">
-    <q-form @submit.prevent.stop="onSubmit" class="q-gutter-md">
+  <q-form @submit.prevent.stop="onSubmit">
+    <div class="row justify-center content-center no-padding no-margin q-gutter-x-md q-gutter-y-lg">
+      <h5 class="text-center col-12">Reimposta password</h5>
       <q-input v-model="password"
                :type="isPwd ? 'password' : 'text'"
                name="password"
                label="Nuova password"
+               class="col-12 col-md-6"
                outlined
                reactive-rules
                :rules="[ (val) => isValid('password', val, $v) ]">
@@ -16,16 +18,16 @@
           />
         </template>
       </q-input>
-      <div class="q-mt-lg q-pt-lg">
+      <div class="col-12 col-md-6 q-mt-lg q-pt-lg">
         <q-btn push
                :ripple="false"
-               class="full-width"
                label="Reimposta password"
+               class="text-center"
                color="secondary"
                type='submit'/>
       </div>
-    </q-form>
-  </div>
+    </div>
+  </q-form>
 </template>
 
 <script>
