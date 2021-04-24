@@ -1,9 +1,23 @@
 /* eslint-disable */
+
 const Rdo = require('../../models/rdo')
 const User = require('../../models/user')
 const { clearFile } = require('../../utils/utils')
 
-exports.findFilteredRdos = (req, res, next) => {
+const  deleteExpiredRDO = async (next)=> {
+  await Rdo.deleteMany({expirationDate: { $lte: new Date().toUTCString()}})
+    .then(()=> {
+      console.log('Rdo scadute cancellate')
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500
+      }
+      next(err)
+    })
+}
+
+exports.findFilteredRdos = async (req, res, next) => {
   const allFilteredRdo = []
   const queryFirst = {
     'regionOfInterest._id': req.query.regionOfInterestIdFirst,
@@ -24,6 +38,8 @@ exports.findFilteredRdos = (req, res, next) => {
     queryThird['rdos._id'] = req.query.rdoIdThird,
     queryThird.import = req.query.importsThird
   }
+  await deleteExpiredRDO(next)
+  console.log('passo qui')
   Rdo.find(queryFirst).sort('createdAt')
     .then((rdos) => {
       rdos.forEach((rdo) => {
@@ -61,7 +77,9 @@ exports.findFilteredRdos = (req, res, next) => {
     })
 }
 
-exports.findAllRdos = (req, res, next) => {
+exports.findAllRdos = async (req, res, next) => {
+  await deleteExpiredRDO(next)
+  console.log('passo qui')
   Rdo.find().sort('createdAt')
     .then((rdos) => {
       res.status(200).json({
