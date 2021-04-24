@@ -292,10 +292,12 @@ export default {
           if (lowerSearch !== '') {
             s1 = false
             const s1Values = Object.values(row.user)
-            const s1Lower = s1Values.map(x => x.toString().toLowerCase())
+            const s1Lower = s1Values.map((x) => {
+              if (x != null) { return x.toString().toLowerCase() }
+            })
 
             for (let val = 0; val < s1Lower.length; val++) {
-              if (s1Lower[val].includes(lowerSearch)) {
+              if (val != null && s1Lower[val].includes(lowerSearch)) {
                 s1 = true
                 break
               }

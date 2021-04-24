@@ -141,7 +141,22 @@ export default {
 
           if (lowerSearch !== '') {
             s1 = false
-            const s1Values = Object.values(row.rdo)
+            const searchObj = { }
+            Object.entries(row.rdo).forEach((obj) => {
+              if (obj[0] === 'rdos') {
+                searchObj.descMacro = obj[1].descMacro
+                searchObj.subCategory = obj[1].description
+              }
+              if (obj[0] === 'regionOfInterest') {
+                searchObj[obj[0]] = obj[1].description
+              }
+              if (obj[0] === 'import') {
+                searchObj[obj[0]] = obj[1]
+              }
+            })
+
+            const s1Values = Object.values(searchObj)
+
             const s1Lower = s1Values.map(x => x.toString().toLowerCase())
 
             for (let val = 0; val < s1Lower.length; val++) {

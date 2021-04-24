@@ -29,7 +29,7 @@
         <template v-slot:append>
           <q-icon class="desktop-only text-secondary" name="info">
             <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
-              Fornici una breve descrizione dell’appalto
+              Fornisci una breve descrizione dell’appalto
             </q-tooltip>
           </q-icon>
         </template>
@@ -454,11 +454,11 @@ export default {
       startDate: undefined,
       endDate: undefined,
       currentLocale: {
-        days: '_Lunedì_Martedì_Mercoledì_Giovedì_Sabato_Domenica'.split('_'),
-        daysShort: 'Lun_Mar_Mer_Gio_Ven_Sab_Dom'.split('_'),
+        days: 'Lunedì_Martedì_Mercoledì_Giovedì_Sabato_Domenica'.split('_'),
+        daysShort: 'Dom_Lun_Mar_Mer_Gio_Ven_Sab'.split('_'),
         months: 'Gennaio_Febbraio_Marzo_Aprile_Maggio_Giugno_Luglio_Agosto_Settembre_Ottobre_Novembre_Dicembre'.split('_'),
         monthsShort: 'Gen_Feb_Mar_Apr_Mag_Giu_Lug_Ago_Set_Ott_Nov_Dic'.split('_'),
-        firstDayOfWeek: 0
+        firstDayOfWeek: 1
       },
       ribasso: null,
       pagination: {
