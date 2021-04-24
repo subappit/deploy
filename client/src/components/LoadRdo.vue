@@ -649,7 +649,7 @@ export default {
         if (this.fileToShare.includes('presentation')) { presentationUrl = await this.fetchFile({ pathParam: this.userLogged.lendingFile.key }) }
         if (this.fileToShare.includes('soa')) { soaUrl = await this.fetchFile({ pathParam: this.userLogged.soaFile.key }) }
         const infoRibassoEmail = {
-          to: 'antonio.cacciapuoti@live.com',
+          to: this.rdo.user.username,
           from: 'dario.cascone93@gmail.com',
           subject: 'Ricezione offerta per RDO: ' + this.rdo.description,
           html: 'Spett.le ' + this.rdo.contractor + ', <br/>' +
@@ -667,8 +667,7 @@ export default {
             '<br/>Distinti Saluti,<br/>' +
             '<span style="color:#29ABF4">Subapp.it s.r.l.s</span>'
         }
-        console.log(infoRibassoEmail)
-        debugger
+
         await this.sendMail(infoRibassoEmail)
         this.$q.loading.hide()
       }
