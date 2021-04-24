@@ -12,10 +12,10 @@
         align="justify"
       >
         <q-tab name="rdos" :ripple="false">
-          <div class="tab-to-select">Rdo di tuo interesse</div>
+          <span class="tab-to-select">Rdo di tuo interesse</span>
         </q-tab>
         <q-tab name="yourRdos" :ripple="false">
-          <div class="tab-to-select">Rdo da te caricate</div>
+          <span class="tab-to-select">Rdo da te caricate</span>
         </q-tab>
       </q-tabs>
 

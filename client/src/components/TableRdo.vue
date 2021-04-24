@@ -4,6 +4,7 @@
     :columns="columns"
     row-key="name"
     bordered
+    :hide-bottom="true"
     :filter="filter"
     :filter-method="customFilter"
     separator="cell"
