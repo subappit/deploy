@@ -35,6 +35,18 @@ const compCatOptions = [
   }
 ]
 
+const presentationFiles = [
+  { label: 'Certificato o Visura Camerale', value: 'certificate' },
+  { label: 'DURC', value: 'durc' },
+  { label: 'Iscrizione White List o Dich. Antimafia', value: 'whiteList' },
+  { label: 'ISO', value: 'iso' },
+  { label: 'Patentino F-Gas', value: 'fgas' },
+  { label: 'Presentazione Aziendale', value: 'presentation' },
+  { label: 'SOA', value: 'soa' }
+
+]
+
 exports.legalFormOptions = legalFormOptions
 exports.imports = imports
 exports.compCatOptions = compCatOptions
+exports.presentationFiles = presentationFiles

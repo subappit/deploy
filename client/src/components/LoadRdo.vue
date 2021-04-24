@@ -11,25 +11,7 @@
                  reactive-rules name="contractor"
                  :rules="[ (val) => isValid('contractor', val, $v.rdo) ]"/>
 
-      <div v-if="(selectedRdo != null && rdo.user._id != userLogged._id && !userLogged.admin)"
-           class="col-12 col-md-3">
-        <q-input outlined
-                 v-model="ribasso"
-                 class="col-12 col-md-3"
-                 mask="###"
-                 label="Ribasso in percentuale %"
-                 :rules="[ (val) => isValid('ribasso', val, $v) ]">
-        <template v-slot:append>
-          <q-icon class="desktop-only text-secondary" name="info">
-            <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
-              Il ribasso inserito sarà inteso come scontistica da applicare ai prezzi aggiudicati e pubblicati dall'appaltatore. <br>Qualora i prezzi facciano riferimento a più tipologie di lavori, forniture e servizi, è opportuno offrire un ribasso medio
-            </q-tooltip>
-          </q-icon>
-        </template>
-        </q-input>
-      </div>
-
-      <div v-if="!(selectedRdo != null  && rdo.user._id != userLogged._id && !userLogged.admin)"  class="desktop-only col-md-3"></div>
+      <div class="desktop-only col-md-3"></div>
       <div class="desktop-only col-md-3"></div>
 
       <!-- Riga -->
@@ -371,6 +353,8 @@
           row-key="name"
           bordered
           separator="cell"
+          :pagination="pagination"
+          :hide-bottom="true"
         >
           <template>
             <div class="col-2 q-table__title">Lista file</div>
@@ -389,8 +373,35 @@
         </q-table>
       </div>
 
-      <div v-if="selectedRdo != null" class="desktop-only col-md-3"></div>
-      <div v-if="selectedRdo != null" class="desktop-only col-md-3"></div>
+      <div v-if="(selectedRdo != null && rdo.user._id != userLogged._id && !userLogged.admin)"
+           class="col-12 col-md-3">
+        <div>Seleziona i documenti con i quali corredare la tua offerta:</div>
+        <q-option-group
+          :options="getPresentationFiles"
+          label="Notifications"
+          type="checkbox"
+          v-model="fileToShare"
+        />
+
+      </div>
+
+      <div v-if="(selectedRdo != null && rdo.user._id != userLogged._id && !userLogged.admin)"
+           class="col-12 col-md-3">
+        <q-input outlined
+                 v-model="ribasso"
+                 class="col-12 col-md-3"
+                 mask="###"
+                 label="Ribasso in percentuale %"
+                 :rules="[ (val) => isValid('ribasso', val, $v) ]">
+          <template v-slot:append>
+            <q-icon class="desktop-only text-secondary" name="info">
+              <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
+                Il ribasso inserito sarà inteso come scontistica da applicare ai prezzi aggiudicati e pubblicati dall'appaltatore. <br>Qualora i prezzi facciano riferimento a più tipologie di lavori, forniture e servizi, è opportuno offrire un ribasso medio
+              </q-tooltip>
+            </q-icon>
+          </template>
+        </q-input>
+      </div>
 
       <div class="col-12 row justify-center q-pt-xl q-pb-xl no-margin">
         <q-btn  v-if="(selectedRdo == null && rdo.user._id != userLogged._id)"
@@ -419,7 +430,7 @@
 <script>
 import Rdo from 'src/model/rdo'
 import validator from 'src/validations/validator'
-import { imports } from 'src/costants/options'
+import { imports, presentationFiles } from 'src/costants/options'
 import { mapActions, mapGetters } from 'vuex'
 import { date } from 'quasar'
 import { required } from 'vuelidate/lib/validators'
@@ -450,12 +461,17 @@ export default {
         firstDayOfWeek: 0
       },
       ribasso: null,
+      pagination: {
+        rowsPerPage: 0
+      },
       columns: [
         { name: 'description', label: 'File', align: 'center' },
         { name: 'download', label: 'Download', align: 'center' }
       ],
       data: [],
-      isTelephoneNumber: validator.isTelephoneNumber
+      isTelephoneNumber: validator.isTelephoneNumber,
+      presentationFiles: presentationFiles,
+      fileToShare: []
     }
   },
   methods: {
@@ -618,22 +634,41 @@ export default {
     async inviaRibasso () {
       if (!this.$v.$invalid) {
         this.$q.loading.show()
+        let certificateUrl = ''
+        let durcUrl = ''
+        let whiteListUrl = ''
+        let isoFileUrl = ''
+        let fgasUrl = ''
+        let presentationUrl = ''
+        let soaUrl = ''
+        if (this.fileToShare.includes('certificate')) { certificateUrl = await this.fetchFile({ pathParam: this.userLogged.certificateFile.key }) }
+        if (this.fileToShare.includes('durc')) { durcUrl = await this.fetchFile({ pathParam: this.userLogged.durcRegolarityFile.key }) }
+        if (this.fileToShare.includes('whiteList')) { whiteListUrl = await this.fetchFile({ pathParam: this.userLogged.antimafiaFile.key }) }
+        if (this.fileToShare.includes('iso')) { isoFileUrl = await this.fetchFile({ pathParam: this.userLogged.isoFile.key }) }
+        if (this.fileToShare.includes('fgas')) { fgasUrl = await this.fetchFile({ pathParam: this.userLogged.fgasFile.key }) }
+        if (this.fileToShare.includes('presentation')) { presentationUrl = await this.fetchFile({ pathParam: this.userLogged.lendingFile.key }) }
+        if (this.fileToShare.includes('soa')) { soaUrl = await this.fetchFile({ pathParam: this.userLogged.soaFile.key }) }
         const infoRibassoEmail = {
-          to: this.rdo.user.username,
+          to: 'antonio.cacciapuoti@live.com',
           from: 'dario.cascone93@gmail.com',
           subject: 'Ricezione offerta per RDO: ' + this.rdo.description,
           html: 'Spett.le ' + this.rdo.contractor + ', <br/>' +
             'l\'operatore economico <strong>' + this.userLogged.companyName + '</strong> ha inviato la seguente offerta: <br/>' +
             'Ribasso: <strong>' + this.ribasso + '%</strong><br/>' +
             'Note: ' + this.rdo.peculiarity + '<br/>' + this.rdo.requiredDocuments + '<br/><br/>' +
-            'Di seguito trova i link ai file relativi all\'azienda: <br/>' +
-            '<a target="_blank" href="http://localhost:3000/' + this.rdo.user.durcRegolarityFile.path + '">Regolarità Durc</a><br/>' +
-            '<a target="_blank" href="http://localhost:3000/' + this.rdo.user.certificateFile.path + '">Certificato o Visura Camerale</a><br/>' +
-            '<a target="_blank" href="http://localhost:3000/' + this.rdo.user.lendingFile.path + '">Presentazione</a><br/>' +
-            '<a target="_blank" href="http://localhost:3000/' + this.rdo.user.antimafiaFile.path + '">Dichiarazione sostitutiva antimafia</a><br/>' +
+            (this.fileToShare.length > 0 ? 'Di seguito trova i link ai file relativi all\'azienda: <br/>' : '') +
+            (this.fileToShare.includes('certificate') === true ? '<a href="' + certificateUrl.url + '">Certificato o Visura Camerale</a><br/>' : '') +
+            (this.fileToShare.includes('durc') === true ? '<a href="' + durcUrl.url + '">Regolarità Durc</a><br/>' : '') +
+            (this.fileToShare.includes('whiteList') === true ? '<a href="' + whiteListUrl.url + '">Iscrizione White List o Dichiarazione sostitutiva antimafia</a><br/>' : '') +
+            (this.fileToShare.includes('iso') === true ? '<a href="' + isoFileUrl.url + '">ISO</a><br/>' : '') +
+            (this.fileToShare.includes('fgas') === true ? '<a href="' + fgasUrl.url + '">Patentino F-Gas</a><br/>' : '') +
+            (this.fileToShare.includes('presentation') === true ? '<a href="' + presentationUrl.url + '">Presentazione</a><br/>' : '') +
+            (this.fileToShare.includes('soa') === true ? '<a href="' + soaUrl.url + '">SOA</a><br/>' : '') +
             '<br/>Distinti Saluti,<br/>' +
             '<span style="color:#29ABF4">Subapp.it s.r.l.s</span>'
         }
+        console.log(infoRibassoEmail)
+        debugger
         await this.sendMail(infoRibassoEmail)
         this.$q.loading.hide()
       }
@@ -695,7 +730,32 @@ export default {
       regions: 'regions',
       firstSubRdo: 'firstSubRdo',
       countries: 'countries'
-    })
+    }),
+    getPresentationFiles () {
+      const presentationFiles = []
+      if (this.userLogged.certificateFile != null) {
+        presentationFiles.push(this.presentationFiles.find((item) => { return item.value === 'certificate' }))
+      }
+      if (this.userLogged.durcRegolarityFile != null) {
+        presentationFiles.push(this.presentationFiles.find((item) => { return item.value === 'durc' }))
+      }
+      if (this.userLogged.antimafiaFile != null) {
+        presentationFiles.push(this.presentationFiles.find((item) => { return item.value === 'whiteList' }))
+      }
+      if (this.userLogged.isoFile != null) {
+        presentationFiles.push(this.presentationFiles.find((item) => { return item.value === 'iso' }))
+      }
+      if (this.userLogged.fgasFile != null) {
+        presentationFiles.push(this.presentationFiles.find((item) => { return item.value === 'fgas' }))
+      }
+      if (this.userLogged.lendingFile != null) {
+        presentationFiles.push(this.presentationFiles.find((item) => { return item.value === 'presentation' }))
+      }
+      if (this.userLogged.soaFile != null) {
+        presentationFiles.push(this.presentationFiles.find((item) => { return item.value === 'soa' }))
+      }
+      return presentationFiles
+    }
   },
   async created () {
     if (this.selectedRdo) {
