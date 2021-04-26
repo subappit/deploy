@@ -5,9 +5,42 @@ const User = require('../../models/user')
 const { clearFile } = require('../../utils/utils')
 
 const  deleteExpiredRDO = async (next)=> {
-  await Rdo.deleteMany({expirationDate: { $lte: new Date().toUTCString()}})
-    .then(()=> {
-      console.log('Rdo scadute cancellate')
+  let indexToRemove
+  let currentDate = new Date().toISOString()
+
+  await Rdo.find({expirationDate: { $lt: currentDate }})
+    .then(async (rdos)=> {
+      if (rdos.length>0) {
+        for (let rdo of rdos) {
+          clearFile(rdo.cmeFile.Key)
+          rdo.images.forEach((image) => {
+            clearFile(image.Key)
+          })
+          rdo.technicalFiles.forEach((techFile) => {
+            clearFile(techFile.Key)
+          })
+          await User.findById(rdo.user._id)
+            .then((user) => {
+              if (!user) {
+                const error = new Error('Sessione scaduta')
+                error.statusCode = 401
+                throw error
+              }
+              else {
+                user.loadedRdos.forEach((loadedRdo, index) => {
+                  if (loadedRdo._id == rdo._id) {
+                    indexToRemove = index
+                  }
+                })
+                if (indexToRemove != null) {
+                  user.loadedRdos.splice(indexToRemove, 1)
+                }
+                user.save()
+              }
+            })
+        }
+        await Rdo.deleteMany({expirationDate: { $lt: currentDate}})
+      }
     })
     .catch((err) => {
       if (!err.statusCode) {
@@ -39,7 +72,6 @@ exports.findFilteredRdos = async (req, res, next) => {
     queryThird.import = req.query.importsThird
   }
   await deleteExpiredRDO(next)
-
   Rdo.find(queryFirst).sort('createdAt')
     .then((rdos) => {
       rdos.forEach((rdo) => {
