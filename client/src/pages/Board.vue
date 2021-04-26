@@ -95,7 +95,6 @@ export default {
       this.openModal('load-rdo', 'RDO di ' + rdo.contractor, true, this.loadRdoClassObj, false)
     },
     async loadBoard () {
-      this.$q.loading.show()
       if (this.userLogged && !this.userLogged.admin) {
         await this.fetchFilteredRdos(this.getFilters())
         this.boardFilteredRdosLoaded = this.boardFilteredRdos.length > 0
@@ -188,9 +187,10 @@ export default {
     }
   },
   async mounted () {
+    this.$q.loading.show()
     setTimeout(async () => {
       await this.loadBoard()
-    }, 200)
+    }, 700)
   }
 }
 </script>
