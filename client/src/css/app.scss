@@ -42,27 +42,8 @@ input[type=number] {
   .q-tabs__content {
     .q-tab--inactive {
       opacity: 1;
-      .tab-to-select {
-        border: 2px solid $secondary;
-        padding: .5rem 1rem;
-        border-radius: 7px;
-        background-color: $secondary;
-        color: white;
-        transition: all .25s;
-        &:hover {
-          border: 2px solid $accent;
-          background-color: $accent;
-        }
-      }
     }
-    .q-tab--active {
-      .tab-to-select {
-        border-bottom: 2px solid;
-        padding: .5rem 1rem;
-        transition: all .25s;
-      }
-    }
-    .tab-to-select {
+    .q-tab__label {
       font-size: 1.2rem;
     }
     .q-tab {
@@ -73,9 +54,5 @@ input[type=number] {
         }
       }
     }
-    .q-tab__indicator {
-      display: none;
-    }
   }
 }
-
