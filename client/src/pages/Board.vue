@@ -81,7 +81,8 @@ export default {
   methods: {
     ...mapActions([
       'fetchFilteredRdos',
-      'fetchAllRdos'
+      'fetchAllRdos',
+      'fetchUser'
     ]),
     openModal (component, title, isMaximized, classObj) {
       this.modalComponent = component
@@ -97,6 +98,8 @@ export default {
     async loadBoard () {
       if (this.userLogged && !this.userLogged.admin) {
         await this.fetchFilteredRdos(this.getFilters())
+        const obj = { pathParam: this.userLogged._id }
+        await this.fetchUser(obj)
         this.boardFilteredRdosLoaded = this.boardFilteredRdos.length > 0
       } else if (this.userLogged && this.userLogged.admin) {
         await this.fetchAllRdos()

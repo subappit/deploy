@@ -485,7 +485,6 @@ export default {
       'fetchUser',
       'createRdo',
       'uploadFile',
-      'fetchRdos',
       'sendMail',
       'fetchFile'
     ]),
@@ -548,7 +547,6 @@ export default {
         const data = await this.createRdo(obj)
         await this.postFilesAndUpdateRdo(data.rdo)
         await this.fetchUser(obj)
-        await this.fetchRdos()
         this.$emit('loadRdoSuccess', false)
         this.$q.notify({
           type: 'positive',

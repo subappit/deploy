@@ -1,53 +1,60 @@
-/* eslint-disable */
-
+/* eslint-disable eqeqeq,no-underscore-dangle,prefer-const,no-restricted-syntax,no-await-in-loop,no-unused-expressions,no-sequences,max-len,no-param-reassign */
 const Rdo = require('../../models/rdo')
 const User = require('../../models/user')
 const { clearFile } = require('../../utils/utils')
 
-const  deleteExpiredRDO = async (next)=> {
+const removeRdo = async (rdoId, userId) => {
   let indexToRemove
-  let currentDate = new Date().toISOString()
+  const rdo = await Rdo.findById(rdoId)
+  if (!rdo) {
+    const error = new Error('Rdo non trovata')
+    error.statusCode = 500
+    throw error
+  }
+  clearFile(rdo.cmeFile.Key)
+  rdo.images.forEach((image) => {
+    clearFile(image.Key)
+  })
+  rdo.technicalFiles.forEach((techFile) => {
+    clearFile(techFile.Key)
+  })
+  await Rdo.findByIdAndRemove(rdoId)
+  const user = await User.findById(userId)
+  if (!user) {
+    const error = new Error('Sessione scaduta')
+    error.statusCode = 401
+    throw error
+  }
+  user.loadedRdos.forEach((loadedRdo, index) => {
+    if (loadedRdo._id.toString() === rdoId.toString()) {
+      indexToRemove = index
+    }
+  })
+  if (indexToRemove != null) {
+    user.loadedRdos.splice(indexToRemove, 1)
+  }
+  await user.save()
+}
 
-  await Rdo.find({expirationDate: { $lt: currentDate }})
-    .then(async (rdos)=> {
-      if (rdos.length>0) {
-        for (let rdo of rdos) {
-          clearFile(rdo.cmeFile.Key)
-          rdo.images.forEach((image) => {
-            clearFile(image.Key)
-          })
-          rdo.technicalFiles.forEach((techFile) => {
-            clearFile(techFile.Key)
-          })
-          await User.findById(rdo.user._id)
-            .then((user) => {
-              if (!user) {
-                const error = new Error('Sessione scaduta')
-                error.statusCode = 401
-                throw error
-              }
-              else {
-                user.loadedRdos.forEach((loadedRdo, index) => {
-                  if (loadedRdo._id == rdo._id) {
-                    indexToRemove = index
-                  }
-                })
-                if (indexToRemove != null) {
-                  user.loadedRdos.splice(indexToRemove, 1)
-                }
-                user.save()
-              }
-            })
-        }
-        await Rdo.deleteMany({expirationDate: { $lt: currentDate}})
+const deleteExpiredRDO = async (next) => {
+  console.log(new Date())
+  try {
+    const rdos = await Rdo.find({ expirationDate: { $lt: new Date() } })
+    if (rdos.length > 0) {
+      console.log('RDO scadute: ', rdos.length)
+      for (let rdo of rdos) {
+        console.log(`Rimuovendo rdoId ${rdo._id} dello userId: ${rdo.user._id}`)
+        await removeRdo(rdo._id, rdo.user._id)
       }
-    })
-    .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500
-      }
-      next(err)
-    })
+    } else {
+      console.log('Nessuna RDO scaduta.')
+    }
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500
+    }
+    next(err)
+  }
 }
 
 exports.findFilteredRdos = async (req, res, next) => {
@@ -72,41 +79,30 @@ exports.findFilteredRdos = async (req, res, next) => {
     queryThird.import = req.query.importsThird
   }
   await deleteExpiredRDO(next)
-  Rdo.find(queryFirst).sort('createdAt')
-    .then((rdos) => {
-      rdos.forEach((rdo) => {
+  try {
+    const rdosFirst = await Rdo.find(queryFirst).sort('createdAt')
+    rdosFirst.forEach((rdo) => {
+      allFilteredRdo.push(rdo)
+    })
+    if (querySecondNeedeed) {
+      const rdosSecond = await Rdo.find(querySecond).sort('createdAt')
+      rdosSecond.forEach((rdo) => {
         allFilteredRdo.push(rdo)
       })
-      if (querySecondNeedeed) {
-        Rdo.find(querySecond).sort('createdAt')
-          .then((rdos) => {
-            rdos.forEach((rdo) => {
-              allFilteredRdo.push(rdo)
-            })
-            if (queryThirdNeedeed) {
-              Rdo.find(queryThird).sort('createdAt')
-                .then((rdos) => {
-                  rdos.forEach((rdo) => {
-                    allFilteredRdo.push(rdo)
-                  })
-                  return res.status(200).json({
-                    rdos: allFilteredRdo
-                  })
-                })
-            } else {
-              return res.status(200).json({ rdos: allFilteredRdo.flat() })
-            }
-          })
-      } else {
-        return res.status(200).json({ rdos: allFilteredRdo })
-      }
-    })
-    .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500
-      }
-      next(err)
-    })
+    }
+    if (queryThirdNeedeed) {
+      const rdosThird = await Rdo.find(queryThird).sort('createdAt')
+      rdosThird.forEach((rdo) => {
+        allFilteredRdo.push(rdo)
+      })
+    }
+    res.status(200).json({ rdos: allFilteredRdo.flat() })
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500
+    }
+    next(err)
+  }
 }
 
 exports.findAllRdos = async (req, res, next) => {
@@ -146,8 +142,8 @@ exports.insertRdo = (req, res, next) => {
   const { userId } = req.params
   const rdo = new Rdo(body)
   return rdo.save()
-    .then((rdo) => User.findById(userId).then((user) => {
-      user.loadedRdos.push(rdo)
+    .then((rdoUpdated) => User.findById(userId).then((user) => {
+      user.loadedRdos.push(rdoUpdated)
       return user.save()
     }))
     .then(() => {
@@ -203,50 +199,16 @@ exports.updateRdo = (req, res, next) => {
     })
 }
 
-exports.deleteRdo = (req, res, next) => {
+exports.deleteRdo = async (req, res, next) => {
   const { rdoId } = req.params
   const { userId } = req.params
-  let indexToRemove
-  Rdo.findById(rdoId)
-    .then((rdo) => {
-      if (!rdo) {
-        const error = new Error('Rdo non trovata')
-        error.statusCode = 500
-        throw error
-      }
-      clearFile(rdo.cmeFile.Key)
-      rdo.images.forEach((image) => {
-        clearFile(image.Key)
-      })
-      rdo.technicalFiles.forEach((techFile) => {
-        clearFile(techFile.Key)
-      })
-      return Rdo.findByIdAndRemove(rdoId)
-    })
-    .then(() => User.findById(userId))
-    .then((user) => {
-      if (!user) {
-        const error = new Error('Sessione scaduta')
-        error.statusCode = 401
-        throw error
-      }
-      user.loadedRdos.forEach((loadedRdo, index) => {
-        if (loadedRdo._id == rdoId) {
-          indexToRemove = index
-        }
-      })
-      if (indexToRemove != null) {
-        user.loadedRdos.splice(indexToRemove, 1)
-      }
-      return user.save()
-    })
-    .then(() => {
-      res.status(200).json({ message: 'Rdo eliminata con successo!' })
-    })
-    .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500
-      }
-      next(err)
-    })
+  try {
+    await removeRdo(rdoId, userId)
+    res.status(200).json({ message: 'Rdo eliminata con successo!' })
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500
+    }
+    next(err)
+  }
 }
