@@ -37,7 +37,6 @@ const removeRdo = async (rdoId, userId) => {
 }
 
 const deleteExpiredRDO = async (next) => {
-  console.log(new Date())
   try {
     const rdos = await Rdo.find({ expirationDate: { $lt: new Date() } })
     if (rdos.length > 0) {
@@ -160,8 +159,8 @@ exports.insertRdo = (req, res, next) => {
 exports.updateRdo = (req, res, next) => {
   const { rdoId } = req.params
   const { userId } = req.params
-  let findedRdo; let
-    indexToUpdate
+  let findedRdo
+  let indexToUpdate
   Rdo.findByIdAndUpdate(rdoId, req.body, {
     overwrite: false,
     new: true
@@ -177,7 +176,7 @@ exports.updateRdo = (req, res, next) => {
         throw error
       }
       user.loadedRdos.forEach((loadedRdo, index) => {
-        if (loadedRdo._id == rdoId) {
+        if (loadedRdo._id.toString() === rdoId.toString()) {
           indexToUpdate = index
         }
       })
