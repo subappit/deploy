@@ -1,5 +1,5 @@
 <template>
-  <q-page v-if="userLogged">
+  <q-page v-if="userLogged && allLoaded">
     <div class="q-py-lg tab-rdo">
       <q-tabs
         v-if="!userLogged.admin"
@@ -75,7 +75,8 @@ export default {
       classObj: {},
       boardRdosLoaded: true,
       boardFilteredRdosLoaded: true,
-      selectedRdo: null
+      selectedRdo: null,
+      allLoaded: false
     }
   },
   methods: {
@@ -101,9 +102,11 @@ export default {
         const obj = { pathParam: this.userLogged._id }
         await this.fetchUser(obj)
         this.boardFilteredRdosLoaded = this.boardFilteredRdos.length > 0
+        this.allLoaded = true
       } else if (this.userLogged && this.userLogged.admin) {
         await this.fetchAllRdos()
         this.boardRdosLoaded = this.boardRdos.length > 0
+        this.allLoaded = true
       }
       this.$q.loading.hide()
     },
@@ -191,9 +194,12 @@ export default {
   },
   async mounted () {
     this.$q.loading.show()
-    setTimeout(async () => {
-      await this.loadBoard()
-    }, 700)
+    if (!this.userLogged) {
+      const userId = window.localStorage.getItem('userId')
+      const obj = { pathParam: userId }
+      await this.fetchUser(obj)
+    }
+    await this.loadBoard()
   }
 }
 </script>

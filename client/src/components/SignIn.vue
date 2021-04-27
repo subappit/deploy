@@ -850,7 +850,7 @@ export default {
       isTelephoneNumber: validator.isTelephoneNumber,
       isPassword: validator.isPassword,
       currentLocale: {
-        days: 'Lunedì_Martedì_Mercoledì_Giovedì_Sabato_Domenica'.split('_'),
+        days: 'Domenica_Lunedì_Martedì_Mercoledì_Giovedì_Sabato'.split('_'),
         daysShort: 'Dom_Lun_Mar_Mer_Gio_Ven_Sab'.split('_'),
         months: 'Gennaio_Febbraio_Marzo_Aprile_Maggio_Giugno_Luglio_Agosto_Settembre_Ottobre_Novembre_Dicembre'.split('_'),
         monthsShort: 'Gen_Feb_Mar_Apr_Mag_Giu_Lug_Ago_Set_Ott_Nov_Dic'.split('_'),
@@ -1126,8 +1126,8 @@ export default {
         }
         this.$q.loading.show()
         try {
-          this.user.certificateDate = date.extractDate(this.user.certificateDate, 'DD/MM/YYYY')
-          this.user.durcRegolarityDate = date.extractDate(this.user.durcRegolarityDate, 'DD/MM/YYYY')
+          this.user.certificateDate = date.addToDate(date.extractDate(this.user.certificateDate, 'DD/MM/YYYY'), { hours: 2 })
+          this.user.durcRegolarityDate = date.addToDate(date.extractDate(this.user.durcRegolarityDate, 'DD/MM/YYYY'), { hours: 2 })
           let data = {}
           if (!this.isEditing) {
             data = await this.signup(this.user)
