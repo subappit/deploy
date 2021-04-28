@@ -454,7 +454,7 @@ export default {
       startDate: undefined,
       endDate: undefined,
       currentLocale: {
-        days: 'Lunedì_Martedì_Mercoledì_Giovedì_Sabato_Domenica'.split('_'),
+        days: 'Domenica_Lunedì_Martedì_Mercoledì_Giovedì_Sabato'.split('_'),
         daysShort: 'Dom_Lun_Mar_Mer_Gio_Ven_Sab'.split('_'),
         months: 'Gennaio_Febbraio_Marzo_Aprile_Maggio_Giugno_Luglio_Agosto_Settembre_Ottobre_Novembre_Dicembre'.split('_'),
         monthsShort: 'Gen_Feb_Mar_Apr_Mag_Giu_Lug_Ago_Set_Ott_Nov_Dic'.split('_'),
@@ -537,9 +537,9 @@ export default {
         this.$q.loading.show()
         this.rdo.user = this.userLogged
         this.rdo.rdos = this.rdosSubcategories
-        this.rdo.expirationDate = date.extractDate(this.expirationDate, 'DD/MM/YYYY')
-        this.rdo.startDate = date.extractDate(this.startDate, 'DD/MM/YYYY')
-        this.rdo.endDate = date.extractDate(this.endDate, 'DD/MM/YYYY')
+        this.rdo.expirationDate = date.addToDate(date.extractDate(this.expirationDate, 'DD/MM/YYYY'), { hours: 2 })
+        this.rdo.startDate = date.addToDate(date.extractDate(this.startDate, 'DD/MM/YYYY'), { hours: 2 })
+        this.rdo.endDate = date.addToDate(date.extractDate(this.endDate, 'DD/MM/YYYY'), { hours: 2 })
         const obj = {
           pathParam: this.userLogged._id,
           body: this.rdo
