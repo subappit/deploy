@@ -758,7 +758,7 @@
            Al termine, riceverai una mail con le istruzioni da seguire per effettuare il pagamento e completare il processo di registrazione.
           </div>
           <div class="col-12 col-md-9 q-pt-md">
-            Leggi e accetta il <a class="hyperlink"  @click="goToTeC">regolamento</a> per godere dei vantaggi di Subapp.
+            Leggi e accetta la <a class="hyperlink"  @click="goToPrivacy">Privacy</a> di Subapp per proseguire con la registrazione.
           </div>
           <div class="col-12 col-md-9 q-pt-md q-pb-md">
             <div class="q-gutter-sm">
@@ -767,7 +767,7 @@
             </div>
           </div>
           <div class="col-12 col-md-9 q-pt-md">
-            Leggi e accetta i <a class="hyperlink" @click="goToTeC">Termini e Condizioni</a> per proseguire con la registrazione.
+            Leggi e accetta i <a class="hyperlink" @click="goToTeC">Termini e Condizioni</a> di Subapp per proseguire con la registrazione.
           </div>
           <div class="col-12 col-md-9 q-pt-md q-pb-md">
             <div class="q-gutter-sm">
@@ -1073,6 +1073,10 @@ export default {
       this.lendingFile = new File([''], 'Presentazione')
       this.certificateFile = new File([''], 'Visura Camerale')
       this.durcRegolarityFile = new File([''], 'Durc')
+    },
+    goToPrivacy () {
+      const routeData = this.$router.resolve({ name: 'termCondition' })
+      window.open(routeData.href, '_blank')
     },
     goToTeC () {
       const routeData = this.$router.resolve({ name: 'termCondition' })

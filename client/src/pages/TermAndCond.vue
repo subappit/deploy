@@ -1,251 +1,245 @@
 <template>
-  <div class="full-width row wrap justify-center items-start content-start q-gutter-x-md q-gutter-y-xs">
+  <div class="termCondition-page full-width row wrap justify-center items-start content-start q-gutter-x-md q-gutter-y-xs">
     <div class="col-9 self-start">
       <h4 class="row wrap justify-center">Termini e Condizioni</h4>
     </div>
     <div class="col-9 self-start">
-      <h6 class="no-margin">INFORMATIVA SULLA PROTEZIONE DEI DATI PERSONALI</h6>
       <p>
-        La presente informativa è resa, nel rispetto degli artt. 13 e 14 del Regolamento UE 679/2016 (di seguito “Regolamento”), agli utilizzatori (di seguito: “Utenti”
-        oppure “Utente”) del sito internet www.subapp.it e di qualsiasi applicazione mobile ad esso relativa (di seguito: “Sito e App”), di proprietà di Subapp.it S.r.l.
-        Titolare del Trattamento dei dati personali (di seguito: “Titolare”), ed ha lo scopo di descrivere le modalità di gestione di Sito e App con riferimento al trattamento
-        dei dati personali, nonché di consentire agli Utenti di Sito e App di conoscere le finalità e le modalità di trattamento dei dati personali da parte del Titolare in caso
-        di loro conferimento.
+        Ai servizi di SUBAPP si applicano le seguenti condizioni generali oltre a tutte le vigenti disposizioni di legge. Utilizzando la Piattaforma di SUBAPP,
+        l’UTENTE accetta le presenti condizioni che, per gli effetti, saranno vincolanti tra le Parti.
       </p>
     </div>
     <div class="col-9 self-start">
-      <h6 class="no-margin">PRINCIPI APPLICABILI AL TRATTAMENTO DEI DATI PERSONALI</h6>
+      <h6 class="no-margin">Articolo 1. Definizioni</h6>
+      <br>
       <p>
-        Il Titolare, ai sensi e per gli effetti del Regolamento, rende noto che la citata normativa prevede la tutela delle persone fisiche rispetto al trattamento dei dati
-        personali, e che tale trattamento sarà improntato ai principi di correttezza, liceità, trasparenza e di tutela della riservatezza e dei diritti fondamentali.
+        Nelle presenti Condizioni Generali, qualora utilizzati con lettera maiuscola, i seguenti termini avranno il significato loro *infra *attribuito (tanto al singolare che al plurale)
       </p>
     </div>
     <div class="col-9 self-start">
-      <h6 class="no-margin">DEFINIZIONI</h6>
       <p>
-        In relazione all'utilizzo di Sito e App si distinguono le seguenti categorie di Utenti:
-        <br>
-        • IMPRESA: ogni Utente che si serve in qualsiasi modo della Piattaforma, sia esso un APPALTATORE o un SUBAPPALTATORE;
-        <br>
-        I dati personali necessari alla Registrazione all’IMPRESA sono (verificare tutte le info richieste):
-        <br>
-        • Nazione
-        <br>
-        • Ragione sociale (compresa forma giuridica)
-        <br>
-        • Forma giuridica
-        <br>
-        • Codice SDI
-        <br>
-        • Partita IVA
-        <br>
-        • Codice Fiscale
-        <br>
-        • Indirizzo sede legale
-        <br>
-        • Comune
-        <br>
-        • Provincia
-        <br>
-        • CAP
-        <br>
-        • Sito Web
-        <br>
-        • Email PEC
-        <br>
-        • Telefono (centralino)
-        <br>
-        • Email per comunicazioni
-        <br>
-        • Email per ricevere offerte
-        <br>
-        • Username
+        Nelle presenti Condizioni Generali, qualora utilizzati con lettera maiuscola, i seguenti termini avranno il significato loro *infra *attribuito (tanto al singolare che al plurale).
+        <br><br>
+        1.1.  ACCOUNT: l'account sulla Piattaforma che permette all’UTENTE di utilizzare i Servizi;
+        <br><br>
+        1.2.  PUBBLICITÀ: una pubblicità sulla Piattaforma od altra richiesta inviata per mezzo della Piattaforma in cui una commissione viene offerta da un Committente;
+        <br><br>
+        1.3.  CONDIZIONI GENERALI: le presenti condizioni generali, indipendentemente dalla forma in cui esse sono comunicate
+        <br><br>
+        1.4.  SERVIZIO: il Servizio offerto da SUBAPP che consiste nell’utilizzo della Piattaforma
+        <br><br>
+        1.5.  UTENTE: ogni soggetto giuridico o professionista che si serve in qualsiasi modo della Piattaforma, e che potrà assumere la figura sia di APPALTATORE che di SUBAPPALTATORE;
+        <br><br>
+        1.6.  APPALTATORE: ogni soggetto giuridico o professionista che offre l’esecuzione in subappalto di lavori/servizi/forniture a un SUBAPPALTATORE servendosi della Piattaforma
+        <br><br>
+        1.7.  SUBAPPALTATORE: ogni soggetto giuridico o professionista che si offre, per mezzo della Piattaforma, per svolgere lavori/servizi/forniture in subappalto, su incarico di un APPALTATORE;
+        <br><br>
+        1.8.  CONTRATTO: il contratto concluso tra SUBAPP.IT e l’ UTENTE per il Servizio, e del quale le Condizioni Generali costituiscono parte integrante e sostanziale;
+        <br><br>
+        1.9.  Piattaforma: la Piattaforma offerta da SUBAPP per mezzo del sito web www.SUBAPP.it, di un'applicazione o in qualunque altro modo, sulla quale gli UTENTI possono entrare a contatto;
+        <br><br>
+        1.10. SUBAPP: Subapp.it, società a responsabilità limitata semplificata, secondo il diritto ITALIANO, con sede a Villaricca (NA) in Via G. Gigante 222, ed iscritta presso la Camera di Commercio di Napoli con il numero 09754101211.
       </p>
     </div>
     <div class="col-9 self-start">
-      <h6 class="no-margin">FINALITÀ, BASE GIURIDICA DEL TRATTAMENTO E FACOLTATIVITÀ DEL CONFERIMENTO</h6>
+      <h6 class="no-margin">Articolo 2. Generalità</h6>
+      <br>
       <p>
-        I dati personali raccolti dal Titolare attraverso l’utilizzo di Sito e App verranno trattati, con il consenso degli Interessati, per le finalità di seguito descritte:
-        <br>
-        A. consentire all’APPALTATORE di richiedere un’offerta per un Subappalto, valutare i preventivi ricevuti dai vari SUBAPPALTATORI, e scegliere liberamente quello ritenuto più soddisfacente;
-        <br>
-        B. consentire al SUBAPPALTATORE di ricevere richieste di offerta per subappalti, ed inviare i preventivi richiesti
-        <br>
-        C. consentire alle IMPRESE iscritte a Sito e App di comunicare con gli altri Utenti registrati
-        <br>
-        D. fornire alle IMPRESE informazioni di settore e promozioni commerciali di prodotti e servizi distribuiti dal Titolare o da società terze (anche attraverso processi automatizzati come la profilazione).
-        <br>
-        Tali informazioni possono essere fornite all’IMPRESA a mezzo elettronico (mail, sms, mms), cartaceo o tramite contatto diretto con un operatore commerciale SUBAPP.it.
-        Per le finalità di cui alle lettere A, B, e C il Titolare applica, quale base giuridica del trattamento, la necessità di trattare i dati personali ai fini dell’esecuzione del Contratto, in particolare
-        per consentire una gestione completa del processo di richiesta e ottenimento del preventivo e scelta del Professionista, ai sensi dell’art. 6, lett. b) del Regolamento.
-        Per la finalità di cui alla lettera D il Titolare applica, quale base giuridica del trattamento, il consenso espresso dall’Interessato per una o più specifiche finalità, ai sensi dell’art. 6, lett. a) del Regolamento.
-        Il conferimento dei dati per le finalità di cui alle lettere da A a C è facoltativo, ma un eventuale rifiuto comporterà l’impossibilità del Titolare di erogare i servizi oggetto delle lettere sopra indicate.
-        In particolare, per le finalità di cui alle lettere A a C, il consenso, pur essendo facoltativo è strettamente necessario per consentire la corretta gestione del processo di scelta dell’IMPRESA
-        e accettazione del preventivo proposto dalla stessa.
-        Con riferimento alla finalità di cui alla lettera D è possibile annullare in qualsiasi momento l'iscrizione alla ricezione di informazioni e promozioni commerciali, deselezionando le apposite voci presenti nel Profilo Utente.
+        2.1.  Le presenti Condizioni Generali si applicano a tutti i Contratti, in qualunque modo essi siano stati stipulati, tra SUBAPP e l’UTENTE.
+        <br><br>
+        2.2.  Le presenti Condizioni Generali si intenderanno approvate per fatti concludenti dall’UTENTE – e si applicheranno a tutti i successivi Contratti con l’UTENTE – qualora l’ UTENTE ponga qualsiasi attività disciplinata dalle previsioni delle Condizioni Generali ovvero utilizzi i Servizi, la Piattaforma (in qualsiasi modo).
+        <br><br>
+        2.3.  SUBAPP ha il diritto di modificare, in qualsiasi momento, le Condizioni Generali. SUBAPP comunicherà – almeno 30 giorni prima della loro entrata in vigore – le modifiche alle Condizioni Generali all’ UTENTE. Qualora l’ UTENTE non intenda accettare le modifiche, l’ UTENTE dovrà darne comunicazione a SUBAPP entro il suddetto termine di 30 giorni e, in tal caso, i Contratti in essere s’intenderanno automaticamente risolti all’atto della ricezione della comunicazione dell’ UTENTE da parte di SUBAPP; la cessazione dei Contratti lascerà naturalmente fermi e impregiudicati i diritti e obblighi maturati in capo alle parti prima della cessazione medesima.
+        <br><br>
+        2.4.  Le deroghe alle Condizioni Generali saranno solo valide se esplicitamente convenute per iscritto o per e-mail tra SUBAPP e gli UTENTI.
+        <br><br>
+        2.5.  In nessun caso, SUBAPP accetta ovvero saranno applicabili ai rapporti tra SUBAPP e l’ UTENTE le eventuali condizioni generali applicate dall’ UTENTE o inviate dal medesimo a SUBAPP qualora non siano stato espressamente accettate per iscritto da SUBAPP.
+        <br><br>
+        2.6.  Qualora una qualsiasi clausola delle presenti Condizioni Generali venga dichiarata nulla, invalida o inefficace, le altre previsioni resteranno in vigore. SUBAPP formulerà allora una nuova clausola per sostituire la clausola nulla, invalida o inefficace, che rispetti il più possibile la portata e il tenore della clausola originale
       </p>
     </div>
     <div class="col-9 self-start">
-      <h6 class="no-margin">MODALITÀ DI TRATTAMENTO E CONSERVAZIONE DEI DATI PERSONALI</h6>
+      <h6 class="no-margin">Articolo 3. Stipula del Contratto</h6>
+      <br>
       <p>
-        Il Titolare assicura che i dati personali sono trattati nel pieno rispetto del Regolamento, in formato cartaceo e/o elettronico, anche mediante l'ausilio di procedure
-        automatizzate. Il trattamento potrà essere effettuato anche attraverso strumenti automatizzati atti a memorizzare, gestire e trasmettere i dati stessi.
-        I dati raccolti ed oggetto di trattamento saranno protetti con metodologie fisiche e logiche tali da ridurre al minimo i rischi di accesso non consentito, diffusione,
-        perdita e distruzione dei dati, ai sensi degli art. 25 e 32 del Regolamento.
-        Il trattamento dei dati avrà durata non superiore a quanto necessario per soddisfare le finalità per le quali sono stati raccolti.
-        Ai sensi dell’art. 7 comma 3 del Regolamento, l’interessato avrà la facoltà in qualsiasi momento ed in modo facile e veloce di revocare il consenso al trattamento e
-        richiedere la cancellazione dei propri dati personali, inviando comunicazione al Titolare.
-        A seguito della richiesta di cancellazione da parte dell’Utente, tutti i dati personali dello stesso verranno cancellati, fatta salva l’ulteriore conservazione prevista
-        da obblighi normativi. Inoltre, nel caso in cui l’Utente sia stato richiamato, sospeso o sanzionato per comportamenti fraudolenti o sospetti, ovvero qualora un Utente
-        abbia richiesto la cancellazione dopo aver inviato un’offerta, il Titolare si riserva la facoltà di conservare i dati personali relativi a tale Utente per un periodo di
-        2 (due) anni dalla richiesta di cancellazione, al fine di prevenire il verificarsi e/o il ripetersi di eventuali frodi in danno alla Società stessa (Titolare del
-        trattamento dei dati personali).
-        Qualora non pervenga al Titolare una richiesta di cancellazione, i dati personali saranno conservati per un termine non superiore a 10 (dieci) anni, con decorrenza
-        dalla data dell’ultimo accesso a Sito e/o App da parte dell’Utente.
+        3.1.  L’accettazione delle condizioni generali, il sostenimento della quota, e pertanto l’iscrizione al portale, equivalgono alla stipula del Contratto.
       </p>
     </div>
     <div class="col-9 self-start">
-      <h6 class="no-margin">DESTINATARI DEI DATI PERSONALI</h6>
+      <h6 class="no-margin">Articolo 4. Prestazione del Servizio</h6>
+      <br>
       <p>
-        I dati personali raccolti potranno essere trattati da soggetti o categorie di soggetti che agiscono come Responsabili del trattamento dei dati ai sensi dell’art. 28 del Regolamento
-        o che sono autorizzati al trattamento dei dati ai sensi dell’art. 29 del Regolamento.
-        Inoltre, per alcuni servizi, i dati potranno essere comunicati a società che collaborano o utilizzano i servizi del Titolare quali ad esempio Professionisti che offrono i
-        loro servizi tramite Sito e App o altre società (di seguito: “Partner)” con l'unico intento di erogare i servizi richiesti dall'Utente. In questi casi, i Partner sono autonomi
-        titolari, pertanto il Titolare non è responsabile del trattamento dei dati da parte degli stessi. Il Titolare inoltre non è responsabile dei contenuti e del rispetto della
-        normativa in tema di protezione dei dati personali da parte di siti non gestiti dal Titolare.
-        In particolare, i dati forniti dall’Utente potranno essere condivisi dal Titolare con le seguenti terze parti esclusivamente per erogare i servizi richiesti dall'Utente o
-        ottemperare altri obblighi normativi:
-        <br>
-        • Professionisti che offrono i loro servizi tramite Sito e App;
-        <br>
-        • Aziende di Servizi che il Titolare utilizza per gestire, per proprio conto, i dati dell’Utente per scopi quali: l’invio di SMS e messaggi di notifica relativi ai servizi
-        offerti dal Titolare e la verifica della correttezza dell’indirizzo di posta elettronica fornito in fase di registrazione, analisi statistiche, utilizzo di piattaforme di
-        marketing, servizi IT per l’archiviazione dei dati e per l’assistenza clienti;
-        <br>
-        • Fornitori di servizi di pagamento e istituti finanziari. Il Titolare non raccoglie nessun dato di pagamento dell’Utente ma potrebbe condividere alcune informazioni sui
-        servizi acquistati dall’IMPRESA con il fornitore dei servizi di pagamento o lo specifico istituto finanziario in casi specifici quali il rilevamento e la prevenzione di frodi;
-        <br>
-        • Partner commerciali con i quali il Titolare condivide alcuni dati dell’Utente esclusivamente per finalità di marketing e previo consenso dell’Utente stesso.
-        Al di fuori delle suindicate ipotesi, i dati personali non saranno oggetto di comunicazione se non nei confronti di soggetti, enti e Autorità verso cui la comunicazione sia
-        obbligatoria in forza di disposizioni di legge o di regolamento.
+        4.1.  SUBAPP offre una Piattaforma sulla quale APPALTATORI e i SUBAPPALTATORI possono entrare a contatto per lo svolgimento di Subappalti. In tale contatto SUBAPP svolge solo un ruolo di facilitatore e non può in alcun modo essere responsabile per gli atti, il comportamento o l'inadempienza di un UTENTE compiuti per mezzo di o connessi all'uso della Piattaforma o in altro modo.
+        <br><br>
+        4.2.  SUBAPP ha il diritto di modificare in ogni momento il contenuto dei suoi Servizi e / o di terminarli, restando inteso che dette modifiche non avranno effetto sui Servizi in corso di esecuzione.
+        <br><br>
+        4.3.  Ogni Utente è esclusivamente responsabile della correttezza, completezza e contenuto di tali informazioni. Inoltre, e ai soli fini di chiarezza, SUBAPP non sarà in alcun modo responsabile per l’adempimento da parte degli APPALTATORI e dei SUBAPPALTATORI delle rispettive obbligazioni, quali, a mero titolo esemplificativo, e non esaustivo, l’obbligazione di pagamento, il corretto svolgimento di quanto previsto dal Subappalto e il rispetto delle esigenze di qualità poste da SUBAPP.
+        <br><br>
+        4.4.  SUBAPP pubblica le Informazioni fornite dagli Utenti sulla Piattaforma, per quanto il diritto vigente ciò permetta, sulla base "as is" ("come è"), senza procedere ad alcun controllo preventivo delle medesime, escludendo eventuali esplicite o tacite garanzie, promesse o salvaguardia di diritti, di qualunque natura esse siano, fra le quali si comprendono anche (ma non ci si limita a) l'esclusione di garanzie per diritti (anche di proprietà), qualità sufficiente, idoneità ad un certo scopo o uso, e l'esclusione di infrazione a diritti di proprietà o diritti di terzi. Più in particolare, SUBAPP non garantisce: (a) che le informazioni sulla Piattaforma, tra cui si comprendono le informazioni fornite dagli Utenti, siano corrette, complete, adatte ed aggiornate e che non violano, in qualunque modo, alcuna previsione di legge; (b) che la Piattaforma possa funzionare senza interruzioni e l’assenza di virus, trojan horses ed altri vizi e/o errori, né che eventuali difetti possano essere rimediati; e (c) che la Piattaforma e/o i sistemi di SUBAPP non vengano utilizzati in modo illegittimo da terzi.
+        <br><br>
+        4.5.  SUBAPP si limita a mettere a disposizione degli Utenti una Piattaforma per facilitare il contatto tra i medesimi al fine dello svolgimento lavori/forniture/servizi in Subappalto; pertanto e per
+        chiarezza, SUBAPP non svolge alcune attività di somministrazione, intermediazione, ricerca e selezione del personale o supporto alla ricollocazione professionale. Qualora l’ UTENTE dovesse realizzare comportamenti in violazione della legge, SUBAPP non potrà esserne ritenuta in alcun modo responsabile; l’ UTENTE ne sosterrà integralmente la responsabilità e dovrà tenere manlevata ed indenne SUBAPP da qualsiasi conseguenza pregiudizievole dovesse derivarne.
       </p>
     </div>
     <div class="col-9 self-start">
-      <h6 class="no-margin">TRASFERIMENTO DEI DATI A UN PAESE TERZO O A UN'ORGANIZZAZIONE INTERNAZIONALE</h6>
+      <h6 class="no-margin">Articolo 5. Manutenzione</h6>
+      <br>
       <p>
-        I dati personali raccolti tramite il Sito e App, potranno essere trasferiti al di fuori del territorio nazionale, solo ed esclusivamente per l'esecuzione dei servizi richiesti tramite
-        Sito e App e nel rispetto delle specifiche disposizioni previste dal Regolamento.
-        Alcuni dati personali potrebbero essere condivisi con destinatari situati al di fuori dello Spazio Economico Europeo. Il Titolare assicura che il trattamento dei
-        dati personali da parte di questi destinatari avviene nel rispetto del Regolamento.
+        5.1.  SUBAPP ha il diritto di disattivare (temporaneamente) la Piattaforma o di limitare l'uso della stessa, ad esempio nel caso in cui ciò sia necessario o auspicabile per la manutenzione o l'aggiornamento della Piattaforma, senza che ciò possa comportare alcun diritto degli Utenti al risarcimento dei danni da parte di SUBAPP. SUBAPP non è tenuta ad informare gli Utenti, in anticipo, di tali sospensioni o interruzioni.
       </p>
     </div>
     <div class="col-9 self-start">
-      <h6 class="no-margin">RACCOLTA DATI DI NAVIGAZIONE</h6>
+      <h6 class="no-margin">Articolo 6. Utilizzo del Servizio e informazioni</h6>
+      <br>
       <p>
-        I sistemi informatici e le procedure tecniche e software sottostanti il funzionamento di Sito e App acquisiscono, nel corso del loro normale esercizio,
-        alcuni dati personali la cui trasmissione è implicita nei meccanismi di accesso e funzionamento e dei protocolli in uso su Internet.
-        Ogni volta che l’Utente si collega a Sito e App e ogni volta che richiama o richiede un contenuto i dati d’accesso vengono memorizzati presso i nostri sistemi,
-        sotto forma di file di dati tabellari o lineari.
-        Rientrano in questa categoria di dati, ad esempio, gli indirizzi IP, i nomi a dominio dei computer utilizzati dagli utenti che si connettono a Sito e App,
-        la richiesta da parte del browser dell’Utente, sotto forma di indirizzi in notazione URI (Uniform Resource Identifier), la data e l’ora della richiesta al server,
-        il metodo utilizzato nel sottoporre la richiesta al server, la quantità di dati trasmessa, il codice numerico indicante lo stato della risposta data dal server ed
-        altri parametri relativi al sistema operativo e all'ambiente informatico dell'Utente.
-        Questi dati potranno essere utilizzati dal Titolare al fine di ricavare informazioni statistiche anonime sull’uso di Sito e App al fine di individuare le pagine
-        preferite dagli Utenti e fornire dunque contenuti sempre più adeguati e per controllarne il corretto funzionamento. Potranno essere inoltre utilizzati, previo
-        consenso esplicito da parte dell’Utente, per inviare comunicazioni e reminder (ad esempio richiesta di ricontatto telefonico).
-        Su richiesta dell’Autorità, i dati potrebbero essere utilizzati per l’accertamento di responsabilità in caso di ipotetici reati informatici ai danni di Sito e
-        App o dei suoi Utenti.
+        6.1.  L’ UTENTE garantisce che tutti i dati, ivi inclusi, a mero titolo esemplificativo ma non esaustivo, il suo nome/ragione sociale, l’indirizzo di residenza (anche fiscale) ovvero sede sociale, e-mail usate e fornite nel contesto del Servizio siano completi, corretti ed aggiornati e che userà il Servizio unicamente per sé stesso. Inoltre l’ UTENTE garantisce: (a) di essere autorizzato ad usare i Servizi e che l’utilizzo dei servizi non comporta, in alcun modo, violazione delle norme di legge applicabile; di essere iscritto nel registro della Camera di Commercio, che manterrà tale iscrizione durante il Contratto e che la detta iscrizione riguardi il campo in cui l’UTENTE opera. In caso di modifica, SUBAPP comunicherà all’ UTENTE i nuovi requisiti qualitativi prima della loro entrata in vigore, concedendogli un termine ragionevole per adeguarsi e soddisfare a tali nuovi requisiti.
+        <br><br>
+        6.2.  L’ UTENTE caricherà o potrà rispondere alle RDO – con lo scopo di ottenere una proposta di Subappalto da parte di un Appaltatore. L’assenza di offerte non potrà essere imputabile a SUBAPP, e pertanto non darà vita a risarcimenti di alcun tipo.
+        <br><br>
+        6.3.  L’ UTENTE è personalmente responsabile del contenuto dei dati da lui pubblicati sulla Piattaforma. Egli garantisce che il contenuto di tali dati sia corretto, aggiornato e veritiero, che non violi la legislazione e regolamentazione applicabile, e che non sia illegittimo. Inoltre l’ UTENTE garantisce che nel fornire tali dati egli non agisce in modo scorretto o sleale nei confronti degli altri Utenti e che, in nessun modo, non violerà gli interessi ovvero lederà la buona fama di SUBAPP.
+        <br><br>
+        6.4.  In ogni caso, i dati seguenti non potranno essere pubblicati o postati sulla Piattaforma: (a) materiali, dati o informazioni che siano contrari a qualunque norma di legge o regolamento e vigente ovvero alle presenti Condizioni Generali; (b) materiali, dati o informazioni che si riferiscono alla prestazione di Servizi illegali o Servizi che possono causare in qualsiasi modo danni alla proprietà di altri; (c) materiali, dati o informazioni che possano violare diritti di proprietà intellettuale ovvero violare norme in materia di tutela dei dati personali ovvero con cui si violano o possono violare altri diritti di SUBAPP o di terzi; (d) materiali, dati o informazioni che – a giudizio insindacabile di SUBAPP – siano contrari al buon costume o al buon gusto o all’ordine pubblico ovvero siano violenti o incitino alla violenza o all'odio nei confronti di altri; (e) materiali, dati o informazioni in cui in qualsiasi modo si menziona o si rinvia a un Servizio, sito web, app, Piattaforma ovvero ogni altro strumento che sia paragonabile ovvero concorrente del Servizio o Piattaforma; (f) una Pubblicità che ha quale scopo la promozione (in)diretta di un'impresa; (g) materiali provenienti da un'agenzia di lavoro interinale.
+        <br><br>
+        6.5.  SUBAPP si riserva il diritto di cambiare e/o modificare le informazioni fornite dall’ UTENTE. SUBAPP si conserva altresì il diritto – ma non sarà in nessun modo tenuto a esercitare il proprio diritto – di rifiutare la pubblicazione o di eliminare dalla Piattaforma file o informazioni, proposte ed altri dati, ad esempio perché questi sono non veritieri, contrari alla legge o illegittimi ovvero lesivi di diritti di terzi, senza che l’ UTENTE possa far valere alcun diritto di risarcimento dei danni.
+        <br><br>
+        6.6.  I Contratti tra APPALTATORE e SUBAPPALTATORE sono stipulati nel momento che L’APPALTATORE afferma esplicitamente al SUBAPPALTATORE l'accettazione del Contratto. SUBAPP non è parte dei Contratti conclusi tra APPALTATORE e SUBAPPALTATORE. SUBAPP non potrà esercitare – e non eserciterà – pertanto alcun controllo sulla qualità, sicurezza o legalità dei lavori/forniture/servizi, sulla correttezza delle offerte, la capacità dell’ APPALTATORE di far effettuare le Prestazioni e/o la competenza del SUBAPPALTATORE a eseguire le Prestazioni. L’UTENTE terrà indenne e manlevata SUBAPP da ogni e qualsiasi domanda di terzi avente a oggetto quanto precede.
+        <br><br>
+        6.7.  L' uso dei dati (personali) che l’ UTENTE riceve per mezzo della Piattaforma può avvenire unicamente allo scopo per il quale sono stati forniti. Non è consentito all’ UTENTE di utilizzare, elaborare o comunque trattare tali dati per finalità diverse, ivi compreso - ma non limitata a - qualunque forma di comunicazione indesiderata (spam). Non è nemmeno permesso raccogliere i dati personali (compresi gli indirizzi e-mail) degli Utenti a qualsiasi scopo.
       </p>
     </div>
     <div class="col-9 self-start">
-      <h6 class="no-margin">INFORMAZIONE SUI COOKIES, MOTORI DI RICERCA E DATI SULLA POSIZIONE</h6>
+      <h6 class="no-margin">Articolo 8. Privacy</h6>
+      <br>
       <p>
-        I cookies hanno lo scopo di velocizzare l'analisi del traffico su Internet, facilitare agli Utenti l'accesso ai servizi offerti dal Sito e App e fornire pubblicità utile
-        e pertinente ai visitatori. Con l'utilizzo dei cookies non vengono trasmessi né acquisiti dati personali e non vengono utilizzati sistemi di tracciamento degli Utenti.
-        Qualora non desideri che le informazioni da lui fornite vengano raccolte attraverso l’uso di cookie, l’Utente può attuare una semplice procedura presente nel proprio browser
-        che permette di rifiutare la funzione dei cookies.
-        Nel caso in cui la richiesta di offerta sia già stata rimossa da Sito e App, è possibile che la copia cache permanga tra i risultati di ricerca per qualche giorno. I risultati
-        della ricerca non sono gestiti da Sito e App, ma l'utente può segnalare la rimozione della pagina e sollecitare l'aggiornamento della copia cache direttamente al motore di
-        ricerca stesso.
-        Nell’utilizzo di Sito e App con la funzione di rilevamento della posizione attiva, Sito e App potrebbero raccogliere ed elaborare informazioni sulla posizione attuale
-        dell’Utente. Questi dati vengono trattati in forma anonima, in un formato che non consente di identificare personalmente l'Utente, e utilizzati al solo fine di facilitare
-        la fruizione di alcune funzioni di Sito e App basate sulla posizione. I servizi di localizzazione possono essere attivati o disattivati dall'Utente in qualunque momento
-        accedendo alle impostazioni del proprio dispositivo.
-
+        8.1  SUBAPP elabora i dati personali degli Utenti ai fini dell'esecuzione dei Servizi e delle attività accessorie ai Servizi medesimi, sempre nel rispetto della Legge sulla protezione dei dati personali e legislazione consecutiva per la protezione dei dati personali.
+        <br><br>
+        8.2  Alla elaborazione dei dati personali di applica la dichiarazione sulla Privacy di SUBAPP, come pubblicata sulla Piattaforma.
       </p>
     </div>
     <div class="col-9 self-start">
-      <h6 class="no-margin">DIRITTI DELL'INTERESSATO</h6>
+      <h6 class="no-margin">Articolo 9. Account e comunicazione di informazioni</h6>
+      <br>
       <p>
-        Ai sensi degli artt. dal 15 al 22 del Regolamento, l’ IMPRESA, quale soggetto interessato, ha la facoltà di esercitare specifici diritti inerenti i suoi dati personali. In particolare, l’Interessato ha diritto di ottenere:
-        <br>
-        1. la conferma dell’esistenza o meno di dati personali che lo riguardano, anche se non ancora registrati, in forma concisa, trasparente, intelligibile e facilmente accessibile, con un linguaggio semplice e chiaro;
-        <br>
-        2. l’indicazione:
-        <br>
-        a. dell’origine dei dati personali;
-        <br>
-        b. delle finalità e modalità di trattamento;
-        <br>
-        c. dei legittimi interessi perseguiti dal Titolare o da terzi;
-        <br>
-        d. degli eventuali destinatari o le eventuali categorie di destinatari dei dati personali;
-        <br>
-        e. dell’eventuale intenzione del titolare di trasferire dati personali a un paese terzo o a un'organizzazione internazionale;
-        <br>
-        f. del periodo di conservazione dei dati personali;
-        <br>
-        g. della logica applicata, nonché l'importanza e le conseguenze previste di tale trattamento per l'interessato, in caso di trattamento effettuato con l’ausilio di strumenti elettronici nell’ambito di un processo automatico di raccolta e/o profilazione;
-        <br>
-        h. degli estremi identificativi del Titolare, dei Responsabili, dell’eventuale Rappresentante designato e del Responsabile della protezione dei Dati (c.d. DPO);
-        <br>
-        i. dei soggetti e delle categorie di soggetti ai quali i dati personali possono essere comunicati o che possono venirne a conoscenza in qualità di rappresentante designato nel territorio dello Stato, di responsabili o incaricati;
-        <br>
-        3. la possibilità di proporre un reclamo ad un’Autorità di controllo;
-        <br>
-        4. l’aggiornamento, la rettificazione ovvero, quando vi ha interesse, l’integrazione dei dati;
-        <br>
-        5. la cancellazione, la trasformazione in forma anonima o il blocco dei dati trattati in violazione della legge, compresi quelli di cui non è necessaria la conservazione in relazione agli scopi per i quali i dati sono stati raccolti o successivamente trattati;
-        <br>
-        6. la limitazione al trattamento;
-        <br>
-        7. la portabilità dei dati personali che lo riguardano ad altro Titolare del trattamento;
-        <br>
-        8. la revoca del trattamento;
-        <br>
-        9. l’attestazione che le operazioni di cui alle lettere a) e b) sono state portate a conoscenza, anche per quanto riguarda il loro contenuto, di coloro ai quali i dati sono stati comunicati o diffusi, eccettuato il caso in cui tale adempimento si rivela impossibile
-        o comporta un impiego di mezzi manifestatamente sproporzionato rispetto al diritto tutelato;
-        <br>
-        10. l’opposizione, in tutto o in parte, per motivi legittimi, al trattamento dei dati personali che lo riguardano, ancorché pertinenti allo scopo della raccolta.
+        9.1.  Per poter usare i Servizi di SUBAPP, l' UTENTE deve creare un ACCOUNT secondo quanto descritto e meglio previsto sulla Piattaforma, indicando i dati ivi richiesti.
+        <br><br>
+        9.2.  SUBAPP può chiedere, di volta in volta, all’ UTENTE di fornire informazioni aggiuntive. L’UTENTE fornirà dette informazioni non appena richiesto da SUBAPP. Nel caso in cui l’UTENTE non fornisca le informazioni aggiuntive entro 14 (quattordici) giorni dalla relativa richiesta di SUBAPP, quest'ultima avrà il diritto di bloccare l'ACCOUNT dell’UTENTE finché tali informazioni non siano state fornite.
+        <br><br>
+        9.3.  Un ACCOUNT viene aperto e reso operativo solo quando SUBAPP, dopo aver verificato il pagamento della quota, convalida l’ UTENTE. Con la convalida l’ UTENTE potrà pubblicare le Richieste Di Offerta con il proprio ACCOUNT o rispondere alle Richieste di Offerta di altri Utenti.
+        <br><br>
+        9.4.  Per avere accesso all’ACCOUNT, dopo la convalida, l’UTENTE dovrà utilizzare la password scelta in fase di registrazione. Tale password è strettamente personale e non è permesso all’ UTENTE concederne l'uso a terzi. L’ UTENTE sarà responsabile di qualsiasi utilizzo effettuato tramite il proprio ACCOUNT e terrà indenne e manlevata SUBAPP da qualsivoglia domanda di risarcimento di danni da parte di terzi e da qualsivoglia altra domanda relativa e/o, comunque, connessa all’utilizzo del Servizio fatto tramite l’ACCOUNT dell’ UTENTE medesimo.
+        <br><br>
+        9.5.  SUBAPP potrà: a) bloccare la ricezione e l’invio di RDO qualora non vengano aggiornati i documenti scaduti, o in attesa di rinnovo della quota; b) Cancellare l’ACCOUNT in caso di violazioni del regolamento, o dopo 3 mesi dal mancato rinnovo dell’iscrizione.
       </p>
     </div>
     <div class="col-9 self-start">
-      <h6 class="no-margin">TITOLARE DEL TRATTAMENTO E RESPONSABILE DELLA PROTEZIONE DEI DATI</h6>
+      <h6 class="no-margin">Articolo 10. Diritti di proprietà intellettuale</h6>
+      <br>
       <p>
-        Per esercitare i diritti al punto precedente, l'interessato potrà rivolgersi in ogni momento al Titolare e/o al Responsabile della Protezione dei Dati per eventuali comunicazioni in merito al trattamento dei propri Dati Personali, o per conoscere l’elenco aggiornato degli eventuali Responsabili del Trattamento nominati dalla Società, inviando comunicazione ai contatti di seguito riportati:
-        <br><strong>Il Titolare del Trattamento</strong><br>
-        SubApp.it S.r.l.<br>
-        Via G. Gigante 222<br>
-        80010 Villaricca (NA), Italia<br>
-        privacy@subapp.it
-        <br><strong>Il Responsabile della Protezione dei Dati</strong><br>
-        Avv. ….. (da inserire)<br>
-        privacy@subapp.it<br>
-        <br><strong>Cancellazione account</strong><br>
-        L'Utente potrà procedere in qualsiasi momento alla cancellazione del proprio Profilo scrivendo al Team di assistenza (assistenza@subapp.it)
+        10.1.  Tutti i diritti di proprietà intellettuale o industriale relativi a ovvero connessi alla Piattaforma sono di proprietà esclusiva di SUBAPP ovvero di soggetti che hanno fornito in licenza a SUBAPP tali diritti di proprietà intellettuale o industriale, con la sola esclusione del materiale fornito dagli Utenti.
+        <br><br>
+        10.2.  Non è permesso all’ UTENTE mettere a disposizione dei terzi, in qualsiasi modo, la Piattaforma ovvero qualunque contenuto della stessa senza il permesso scritto di SUBAPP, né di riprodurlo, diffonderlo, inviarlo o di elaborarne il contenuto in qualunque modo in un altro documento o in altri materiali. Ciò significa fra l'altro che l’UTENTE non potrà scaricare e riusare in tutto o in parte il contenuto di uno o più banche dati, e /o di richiedere e scaricare ripetutamente e sistematicamente in tutto o in parte tali banche dati per riusarne i dati ai sensi della Legge sulle Banche dati senza previo consenso scritto di SUBAPP.
+        <br><br>
+        10.3.  L’ UTENTE garantisce che le informazioni pubblicate sulla Piattaforma non costituiscano violazione di diritti (anche di proprietà intellettuale o industriale) di terzi. L’ UTENTE terrà indenne e manlevata SUBAPP da ogni e tutte le eventuali domande di qualsivoglia terzo e, comunque, connesse alle informazioni da lui pubblicate sulla Piattaforma, ivi compresa qualsiasi domanda basata sull'asserzione che le informazioni pubblicate costituiscano violazione di qualsiasi diritto (anche di proprietà intellettuale o industriale) di terzi.
       </p>
     </div>
     <div class="col-9 self-start">
-      <h6 class="no-margin">MODIFICHE</h6>
+      <h6 class="no-margin">Articolo 11. Esclusione</h6>
+      <br>
       <p>
-        La presente informativa potrebbe essere soggetta a modifiche. Affinché l’IMPRESA sia sempre aggiornata, il Titolare lo invita a visitare periodicamente questa pagina.
-        Inoltre, qualora tali modifiche abbiano un impatto sui dati relativi all' IMPRESA (ad esempio qualora il Titolare intenda trattare i dati personali dell’IMPRESA per
-        finalità diverse da quelle precedentemente comunicate nella presente Informativa), il Titolare informerà l'Utente
-        prima che tali modifiche abbiano effetto, le pubblicandole con la massima evidenza sul proprio Sito e App.
+        11.1.  SUBAPP si riserva il diritto di – liberamente e a suo insindacabile giudizio – risolvere il Contratto e di non consentire all’ UTENTE alcun ulteriore utilizzo della Piattaforma e del Servizio, fra l'altro bloccando il suo ACCOUNT e/o chiudendolo, senza la restituzione di qualsiasi pagamento eventuale effettuato dall’ UTENTE a SUBAPP, in presenza di grave inadempimento da parte dell’ UTENTE. A mero titolo esemplificativo e non esaustivo, è facoltà di SUBAPP di risolvere il Contratto ovvero di eliminare l’account dell’ UTENTE per inadempimento di quest’ultimo, nel caso in cui: (a) l’ UTENTE non adempia, in tutto o in parte,
+        alle presenti Condizioni Generali; (b) l’ UTENTE violi i diritti (anche di proprietà intellettuale o industriale) di terzi; (c) SUBAPP abbia il fondato sospetto che l’ UTENTE abbia commesso frode, truffa, contraffazione ovvero altri reati; (g) l’ UTENTE agisca in modo contrario alle norme di legge di volta in volta applicabile; (h) l’ UTENTE non soddisfi (più) le esigenze ovvero i requisiti qualitativi richiesti da SUBAPP; (i) l’ UTENTE utilizzi, a insindacabile giudizio di SUBAPP, con i collaboratori di SUBAPP, un linguaggio offensivo, diffamatorio, volgare, osceno o razzista;
+      </p>
+    </div>
+    <div class="col-9 self-start">
+      <h6 class="no-margin">Articolo 12. Forza maggiore</h6>
+      <br>
+      <p>
+        12.1. Qualora l’esecuzione degli obblighi di cui alle presenti Condizioni Generali ovvero al Contratto sia ritardata e/o impedita da cause di forza maggiore, SUBAPP non potrà essere ritenuta, in alcun modo, responsabile per l’eventuale ritardo e/o inadempimento delle proprie obbligazione. Per "forza maggiore" si intendono qualsiasi evento e/o fatto indipendente dalla volontà di SUBAPP, avente carattere imprevedibile e straordinario, anche attribuibile a fornitori ovvero qualsivoglia terzo e dei quali SUBAPP si serva, ovvero in caso di hacks, mancato funzionamento di internet e/o mancata connessione e problematiche riconducibili al
+        malfunzionamento di SERVER, sia interni che esterni
+      </p>
+    </div>
+    <div class="col-9 self-start">
+      <h6 class="no-margin">Articolo 13. Responsabilità di SUBAPP</h6>
+      <br>
+      <p>
+        13.1.  SUBAPP è esclusivamente responsabile di danni diretti sofferti dall’ UTENTE. Per danni diretti si intendono soltanto i costi che l’ UTENTE ha dovuto ragionevolmente sostenere per eliminare il danno sofferto.
+        <br><br>
+        13.2.  La responsabilità totale di SUBAPP non potrà in alcun modo superare, il minore tra (a) il corrispettivo complessivamente pagato dall’ UTENTE a SUBAPP per il Servizio nei dodici mesi precedenti al verificarsi dell'evento che ha causato il danno, con un massimo, e (b) 500 (cinquecento) euro.
+        <br><br>
+        13.3.  Viene esclusa ogni responsabilità di SUBAPP per danni indiretti, ivi compresi ma non limitati a danni consequenziali, utili mancati e fatturato mancato. Più in particolare, SUBAPP non sarà responsabile di danni sofferti dall’ UTENTE causati da terzi, anche se questi ultimi si sono serviti della Piattaforma e/o dei Servizi. Pertanto non saranno imputabili a SUBAPP i danni derivanti da furto di dati personali operato da hacker.
+        <br><br>
+        13.4.  Nulla di quanto contemplato nel presente Contratto limita la responsabilità di SUBAPP in caso di dolo o colpa grave di quest’ultima, ovvero in tutti i casi in cui tale limitazione di responsabilità è esclusa da norme inderogabili di legge.
+      </p>
+    </div>
+    <div class="col-9 self-start">
+      <h6 class="no-margin">Articolo 14. Rinvii</h6>
+      <br>
+      <p>
+        14.1.  La Piattaforma contiene rinvii (ad esempio, per mezzo di un hyperlink, banner o button) ai siti web di terzi. SUBAPP non ha alcun controllo su tali siti web e non è responsabile del contenuto degli stessi né della politica di tali siti, fra cui quella di privacy.
+      </p>
+    </div>
+    <div class="col-9 self-start">
+      <h6 class="no-margin">Articolo 15. Protezione dei sistemi</h6>
+      <br>
+      <p>
+        15.1. SUBAPP si impegna a fare quanto ragionevolmente possibile per proteggere i propri sistemi dalla perdita e/o ogni forma di uso illegittimo. A tale scopo, SUBAPP prenderà le idonee misure tecniche e organizzative, tenendo fra l'altro conto dello stato della tecnica.
+      </p>
+    </div>
+    <div class="col-9 self-start">
+      <h6 class="no-margin">Articolo 16. Comunicazione di Infrazione</h6>
+      <br>
+      <p>
+        16.2.  Qualora un UTENTE ritenga che alcuna informazione da inserire sulla Piattaforma ovvero già pubblicata sulla Piattaforma sia illegittima, può comunicarlo a SUBAPP contattando l’assistenza. A seconda dei dati indicati dall’ UTENTE, SUBAPP prenderà in esame la comunicazione. Questa dovrà contenere le informazioni necessarie per la valutazione da parte di SUBAPP e il Fornitore si impegna fin d’ora a fornire a SUBAPP le ulteriori informazioni richieste dalla medesima. Se dalla comunicazione risulta che il materiale contestato è chiaramente illegittimo, esso verrà eliminato da SUBAPP. Effettuando tale comunicazione, l’ UTENTE si impegna a tenere indenne e manlevata SUBAPP da ogni e qualsivoglia domanda di terzi relativa o comunque connessa all'eliminazione dei materiali, ivi incluso qualsivoglia danno e costo che SUBAPP dovesse sostenere in conseguenza di tali, ivi compreso - ma non limitato al solo – risarcimento dei costi per l'assistenza legale.
+      </p>
+    </div>
+    <div class="col-9 self-start">
+      <h6 class="no-margin">Articolo 17. Durata e terminazione dei Contratti a durata indeterminata</h6>
+      <br>
+      <p>
+        17.1. Salvo che sia previsto diversamente ovvero diversamente concordato tra le parti, il Contratto tra SUBAPP e l’ UTENTE è a tempo determinato.
+        <br><br>
+        17.2. L’ UTENTE potrà recedere dal Contratto in qualsiasi momento inviando una e-mail a assistenza@subapp.it con l'oggetto ‘Cancellazione Account'. Nel caso in cui SUBAPP offra una modalità di recesso per mezzo dell’Account medesimo, il recesso potrà essere effettuato anche utilizzando tale funzionalità.
+        <br><br>
+        17.3. SUBAPP ha il diritto di recedere dal Contratto, in ogni momento, mediante preventiva comunicazione scritta da inviarsi almeno 1 mese prima della data di effetti del relativo recesso. SUBAPP comunicherà tale recesso per mezzo dell'Account o per e-mail.
+        <br><br>
+        17.4. Nel caso in cui l’ UTENTE si trovi in stato di insolvenza anche di fatto, ovvero depositi istanza di concordato preventivo, ovvero sospenda la gestione o lo svolgimento della propria attività di impresa ovvero agisca in violazione alle presenti Condizioni Generali od ad altre clausole del Contratto, SUBAPP ha il diritto di risolvere il Contratto con decorrenza immediata e senza che a ciò sia richiesta alcuna constatazione di inadempienza, fatti comunque salvi gli ulteriori diritti di legge e di contratto di SUBAPP.
+        <br><br>
+        17.5. In caso di risoluzione o recesso del Contratto, per qualunque motivo, non fa venire meno l’obbligo dell’ UTENTE al pagamento degli importi già maturati e dovuti a SUBAPP.
+      </p>
+    </div>
+    <div class="col-9 self-start">
+      <h6 class="no-margin">Articolo 18. Tariffe e retribuzioni</h6>
+      <br>
+      <p>
+        18.1.  L’ UTENTE è tenuto a corrispondere a SUBAPP un corrispettivo annuale. L’importo è fisso, salvo rivalutazioni commerciali. Senza il pagamento di tale quota, SUBAPP non convaliderà le credenziali per l’accesso, o nel caso di rinnovi, sarà cancellato l’account.
+        <br><br>
+        18.2.  SUBAPP non ha l’obbligo di procedere alla Restituzione.
+        <br><br>
+        18.3.  Tutti i prezzi e tariffe praticati da SUBAPP sono in euro (€) e non comprendono IVA ed altre tasse ed imposte previste dalle autorità, tranne sia stato esplicitamente convenuto per iscritto.
+        <br><br>
+        18.4.  SUBAPP ha il diritto di modificare in ogni momento le sue tariffe o la sua struttura tariffaria. Le modifiche verranno comunicate tramite la Piattaforma, e varranno a partire da nuove iscrizioni o rinnovi successivi a tale data.
+      </p>
+    </div>
+    <div class="col-9 self-start">
+      <h6 class="no-margin">Articolo 19. Pagamento</h6>
+      <br>
+      <p>
+        19.1.  La quota, una volta contabilizzata, verrà fatturata da SUBAPP all’ UTENTE secondo quanto infra definito. Le credenziali saranno validate solo alla lettura dell’avvenuto bonifico.
+      </p>
+    </div>
+    <div class="col-9 self-start">
+      <h6 class="no-margin">Articolo 20. Legge regolatrice e risoluzione delle controversie</h6>
+      <br>
+      <p>
+        20.1.  Alle presenti Condizioni Generali, ai Contratti tra SUBAPP e l’ UTENTE, ad ogni utilizzo della Piattaforma e a tutte le controversie (per qualunque causa e motivo) si applicherà il diritto italiano
+        <br><br>
+        20.2. Per qualsiasi controversia insorta tra le parti in relazione all’applicazione, interpretazione ed esecuzione delle presenti Condizioni Generali, il Contratto e/o l'utilizzo della Piattaforma, per qualunque causa o motivo, saranno sottoposte alla competenza esclusiva del Foro di Napoli Nord, Italia
+        <br><br><br>
+        Villaricca, maggio 2021
+        <br><br><br><br><br><br><br><br><br>
       </p>
     </div>
   </div>
-
 </template>
 
 <script>
