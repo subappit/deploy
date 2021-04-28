@@ -201,10 +201,10 @@ export default {
   mounted () {
     if (!this.allRdos) {
       this.getData(this.userLogged.loadedRdos)
-      this.columns.push({ name: 'appaltatore', required: true, label: 'Appaltatore', align: 'center' })
       this.columns.push({ name: 'deleteRdo', required: true, label: 'Elimina RDO', align: 'center' })
     } else {
       if (this.userLogged.admin) {
+        this.columns.push({ name: 'appaltatore', required: true, label: 'Appaltatore', align: 'center' })
         this.columns.push({ name: 'deleteRdo', required: true, label: 'Elimina RDO', align: 'center' })
       }
       const filteredRdos = !this.filtered ? this.boardRdos.filter((rdo) => { return rdo.user._id !== this.userLogged._id }) : this.boardFilteredRdos.filter((rdo) => { return rdo.user._id !== this.userLogged._id })
