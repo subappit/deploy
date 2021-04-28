@@ -16,8 +16,8 @@
           <q-icon name="search" />
         </template>
       </q-input>
-      <div v-if="allRdos" class="text-center" style="margin: auto; font-size: 1.2rem; color: #165081;">RDO di tuo interesse</div>
-      <div v-else class="text-center" style="margin: auto; font-size: 1.2rem; color: #165081;">RDO da te caricate</div>
+      <div v-if="allRdos && !userLogged.admin" class="text-center" style="margin: auto; font-size: 1.2rem; color: #165081;">RDO di tuo interesse</div>
+      <div v-if="!allRdos" class="text-center" style="margin: auto; font-size: 1.2rem; color: #165081;">RDO da te caricate</div>
       <div  class="q-ml-auto">
         <q-btn v-if="!allRdos"
                push
@@ -99,7 +99,9 @@ export default {
       'fetchAllRdos'
     ]),
     getData (data) {
-      if (this.data.length > 0) this.data = []
+      if (this.data && this.data.length > 0) {
+        this.data = []
+      }
       data.forEach((rdo) => {
         const obj = {
           rdo: rdo
@@ -194,10 +196,13 @@ export default {
     }
   },
   mounted () {
-    if (!this.allRdos || this.userLogged.admin) {
+    if (!this.allRdos) {
       this.getData(this.userLogged.loadedRdos)
       this.columns.push({ name: 'deleteRdo', required: true, label: 'Elimina RDO', align: 'center' })
     } else {
+      if (this.userLogged.admin) {
+        this.columns.push({ name: 'deleteRdo', required: true, label: 'Elimina RDO', align: 'center' })
+      }
       const filteredRdos = !this.filtered ? this.boardRdos.filter((rdo) => { return rdo.user._id !== this.userLogged._id }) : this.boardFilteredRdos.filter((rdo) => { return rdo.user._id !== this.userLogged._id })
       this.getData(filteredRdos)
     }

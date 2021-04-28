@@ -257,6 +257,7 @@
               <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
                 Inserire riepiloghi prezzi o computi già scontati del ribasso praticato al Committente, e sui quali sarà formulato il ribasso da parte dei soggetti interessati. <br>
                 Qualora i prezzi facciano riferimento a più tipologie di lavori, forniture e servizi, si riceverà un ribasso medio.
+                <br>Selezionare contemporaneamente uno o più file.
               </q-tooltip>
             </q-icon>
           </template>
@@ -281,7 +282,7 @@
           <template v-slot:append>
             <q-icon class="desktop-only text-secondary" name="info">
               <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
-                Inserisci foto dello stato dei luoghi
+                Inserisci foto dello stato dei luoghi.<br>Selezionare contemporaneamente uno o più file.
               </q-tooltip>
             </q-icon>
           </template>
@@ -305,7 +306,7 @@
           <template v-slot:append>
             <q-icon class="desktop-only text-secondary" name="info">
               <q-tooltip anchor="top middle" self="bottom middle" content-class="bg-accent" content-style="font-size: 13px" :offset="[10, 10]">
-               Potrai inserire altri file tecnici, utili alla formulazione dell'offerta (es. progetti, relazioni, etc...)
+               Potrai inserire altri file tecnici, utili alla formulazione dell'offerta (es. progetti, relazioni, etc...)<br>Selezionare contemporaneamente uno o più file.
               </q-tooltip>
             </q-icon>
           </template>

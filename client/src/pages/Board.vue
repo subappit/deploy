@@ -9,10 +9,10 @@
         indicator-color="accent"
         dense
         narrow-indicator
-        align="justify"
+        align="center"
       >
-        <q-tab :ripple="false" name="rdos" label="RDO di tuo interesse" />
-        <q-tab :ripple="false" name="yourRdos" label="Rdo da te caricate" />
+        <q-tab :ripple="false" name="rdos" label="RDO di tuo interesse" class="q-mr-lg"/>
+        <q-tab :ripple="false" name="yourRdos" label="Rdo da te caricate" class="q-ml-lg" />
       </q-tabs>
 
       <h5 v-if="userLogged.admin" class="text-center no-margin">Lista RDO vista ADMIN</h5>
@@ -196,8 +196,10 @@ export default {
     this.$q.loading.show()
     if (!this.userLogged) {
       const userId = window.localStorage.getItem('userId')
-      const obj = { pathParam: userId }
-      await this.fetchUser(obj)
+      if (userId) {
+        const obj = { pathParam: userId }
+        await this.fetchUser(obj)
+      }
     }
     await this.loadBoard()
   }
