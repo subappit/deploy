@@ -59,6 +59,9 @@
         <q-td :auto-width="true" key="viewRdo" :props="props">
           <q-icon style="font-size: 2rem;" name="search" @click="openRdo(props.row.rdo)" class="text-accent cursor-pointer"></q-icon>
         </q-td>
+        <q-td v-if="!allRdos || userLogged.admin" :auto-width="true" key="appaltatore" :props="props">
+          {{ props.row.rdo.contractor }}
+        </q-td>
         <q-td v-if="!allRdos || userLogged.admin" :auto-width="true" key="deleteRdo" :props="props">
           <q-icon style="font-size: 2rem;" name="delete_forever" class="text-negative cursor-pointer" @click="cancelRdo(props.row.rdo)"></q-icon>
         </q-td>
@@ -198,6 +201,7 @@ export default {
   mounted () {
     if (!this.allRdos) {
       this.getData(this.userLogged.loadedRdos)
+      this.columns.push({ name: 'appaltatore', required: true, label: 'Appaltatore', align: 'center' })
       this.columns.push({ name: 'deleteRdo', required: true, label: 'Elimina RDO', align: 'center' })
     } else {
       if (this.userLogged.admin) {
