@@ -59,7 +59,7 @@
         <q-td :auto-width="true" key="viewRdo" :props="props">
           <q-icon style="font-size: 2rem;" name="search" @click="openRdo(props.row.rdo)" class="text-accent cursor-pointer"></q-icon>
         </q-td>
-        <q-td v-if="!allRdos || userLogged.admin" :auto-width="true" key="appaltatore" :props="props">
+        <q-td v-if="userLogged.admin" :auto-width="true" key="appaltatore" :props="props">
           {{ props.row.rdo.contractor }}
         </q-td>
         <q-td v-if="!allRdos || userLogged.admin" :auto-width="true" key="deleteRdo" :props="props">

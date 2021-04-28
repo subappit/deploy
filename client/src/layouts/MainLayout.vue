@@ -97,7 +97,7 @@
             <div class="info">
               <div>Subapp.it s.r.l.s. - P.IVA: 09754101211 | Copyright © 2021 - Tutti i diritti riservati</div>
               <div>
-                <a>
+                <a class="cursor-pointer" @click="$router.push('termCondition')">
                   Termini e Condizioni
                 </a>
                 |
