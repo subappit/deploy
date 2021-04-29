@@ -108,3 +108,11 @@ div.q-card::-webkit-scrollbar-thumb
     order: 24;
   }
 }
+
+.input-ribasso.q-field--outlined .q-field__control:not(.text-negative) {
+  &:before {
+    border: 3px solid $accent;
+  }
+}
+
+

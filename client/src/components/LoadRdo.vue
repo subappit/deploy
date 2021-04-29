@@ -389,7 +389,7 @@
       <div v-if="(selectedRdo != null && rdo.user._id != userLogged._id && !userLogged.admin)"
            class="col-12 col-md-3">
         <q-input outlined
-                 class="col-12 col-md-3"
+                 class="input-ribasso col-12 col-md-3"
                  v-model="ribasso"
                  label-color="primary"
                  mask="###"
